@@ -1,0 +1,21 @@
+.venv/
+activations/
+__pycache__/
+*.pt
+*.safetensors
+*.npy
+.DS_Store
+
+# Local Hugging Face cache (HF_HOME), set by scripts/smoke_test.py
+.hf_cache/
+
+.pytest_cache/
+
+# Handoffs, reviews and their reports stay local: never commit them (see CLAUDE.md).
+handoffs/
+
+# Claude Code session tooling stays local too: never commit it.
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+scripts/run-handoff.sh

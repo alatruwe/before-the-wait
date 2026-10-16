@@ -1,0 +1,300 @@
+# before-the-wait: pre-registration (DRAFT)
+
+**Status:** public DRAFT, open for feedback.
+- **Feedback window:** opens when the design post is published on LessWrong, closes seven days later. Dates: [TBD at posting].
+- **Freeze:** happens when the window has closed, the pilot-count numbers are set, and no [DECIDE] slot is left. The freeze is a tagged commit (`prereg-freeze`). After it, changes go only to the deviations log (§16).
+- **Decision IDs** (F, D1, D2…) refer to `decisions.md`.
+
+**Slot legend**
+- **[DECIDE]**: open. Decided before freeze.
+- **[FROM PILOT]**: computed by the stated rule from pilot counts only (30 pilot traces). No probe or rival output is involved.
+- **No marker:** already decided (see `decisions.md`), or a requirement that follows directly from a decision.
+
+---
+
+## 0. Changelog (draft period)
+
+Changes before freeze, including those prompted by feedback.
+
+| Date | Section | Change | Raised by |
+|---|---|---|---|
+| | | | |
+
+---
+
+## 1. Question and scope
+
+**Question.** In DeepSeek-R1-Distill-Qwen-1.5B solving GSM8K problems, do the model's internals forecast a "wait" further ahead than everything visible from outside: the text so far, the model's visible uncertainty, and position? If so, at which distances? (F)
+
+**Scope.**
+- One model, one dataset.
+- The label set is the FrictionMap v1 marker lexicon (13 markers). It is expected to be mostly "wait" on this model: Zhu et al. report "wait" as 97.2% of hits on their own 17-keyword list (this model, MATH500, Appendix B), and that list shares only "wait" with the v1 lexicon. The actual share per marker is counted in the pilot and reported; it does not change the label set.
+- Claims are about this model only.
+
+**Not tested here:**
+- Any closed model's internals.
+- Answer correctness (D5).
+- Whether "wait" marks genuine reconsideration. The primary label is marker *emission*; the audit in §12 measures the gap.
+
+---
+
+## 2. Hypotheses
+
+**Gate (a wiring check, not a hypothesis).** At distance 1, the pipeline recovers what the model itself predicts (§11). (D3, D4c-3)
+
+**H1–H4 (confirmatory), one per band** b ∈ {2–5, 6–10, 11–20, 21–40} tokens before an onset:
+- **H_b:** a linear probe on the residual stream separates "wait coming at distance b" from matched "no wait coming" positions better than the combined outside rival.
+- Each band gets its own verdict (§11). (D3, D4b)
+
+**Predictions, recorded before any data, not used in any decision:** [DECIDE]
+
+---
+
+## 3. Units
+
+- **Example:** one token position in a reasoning trace.
+- **Event:** one "wait" onset (§5). Minimum counts are in events (D4a).
+- **Independence unit:** one problem. Splits and resampling work on whole problems (D4a, D4c-2).
+
+---
+
+## 4. Model, generation, data
+
+**Model.** `deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B`, revision [pinned at setup], dtype [DECIDE], on an Apple M4 Pro (MPS).
+
+**Generation.** These must be identical to the pilot's.
+
+| Setting | Value |
+|---|---|
+| Prompt and chat template | [DECIDE] |
+| Temperature | [DECIDE] |
+| Top-p | [DECIDE] |
+| Max new tokens | [DECIDE] |
+| Samples per problem | [DECIDE] |
+| Generation seed | [DECIDE] |
+
+**Activations.**
+- Extracted with a teacher-forced pass over the *generated token ids*, reused exactly. The text is never re-tokenized.
+- Same weights and dtype as generation.
+
+**Dataset.** GSM8K (D2), split [DECIDE: test / train / both], problems drawn by seeded random sample.
+- **Trace count:** [FROM PILOT: the smallest N whose projected test-onset counts reach the minimum in bands 2–5, 6–10 and 11–20], capped at [DECIDE].
+- **MATH500 switch:** if [FROM PILOT] projects GSM8K can't reach the minimum at the cap, switch to MATH500 under the same rules. (D2)
+- **Exclusions:**
+  - pilot problems: [DECIDE: exclude / include]
+  - traces that hit the length cap: [DECIDE]
+  - looping traces: [DECIDE: definition and handling]
+  - Every exclusion is counted and reported.
+- **Split by problem:** train / validation / test ≈ 50 / 15 / 35, final ratio [FROM PILOT], split seed [DECIDE]. (D4c-2)
+- **Accuracy:** the `\boxed{}` answer is checked against GSM8K's, per trace. Reported as context only. (D5)
+
+---
+
+## 5. Labels
+
+**Lexicon.** FrictionMap v1 `_LEXICON` (13 markers), verbatim, with the same regex semantics as `src/frictionmap/clusters.py` in github.com/alatruwe/frictionmap at commit [pinned at setup]. Applied to the reasoning text between `<think>` and `</think>`. Frozen; no additions. (D1) Other markers this model uses are counted in an exploratory appendix only.
+
+**Onset token.** The first generated token whose span covers the marker's first character.
+
+**Clustering.** [DECIDE: every hit is an onset / later markers in the same paragraph merge into the first / markers within N tokens merge]
+- Merged markers are not onsets.
+- No position before a merged marker can be a negative (§6).
+
+**Distance.** For each token t, d(t) = (index of the next onset) − t. Tokens inside a marker span are excluded.
+
+---
+
+## 6. Examples
+
+| Class | Definition |
+|---|---|
+| Gate positive | d(t) = 1 |
+| Band positive | d(t) ∈ band: 2–5, 6–10, 11–20 or 21–40 (D3) |
+| Negative | No marker of any kind (onset or merged) within the next 100 tokens (D4c-1) |
+| Excluded (gray zone) | d(t) ∈ 41–100 |
+
+- **Quiet-zone fallback:** 100 → 60 tokens if [DECIDE: count rule, e.g. fewer than X available negatives per positive in a band].
+- **Matching:**
+  - Each positive is paired with a negative of the same token kind. Kinds: [FROM PILOT: categories of tokens preceding onsets].
+  - Ratio: [DECIDE]. Source: [DECIDE: same trace when available / any trace in the same split].
+- **End of reasoning:** tokens within 100 tokens of the end of reasoning are [DECIDE: negatives if the trace ended naturally / excluded].
+- **Same examples for everyone:** the probe and every rival use exactly the same examples.
+
+**Why matching:** positions right before a "wait" are mostly sentence ends and line breaks. With unmatched negatives, any method could win just by detecting the end of a sentence.
+
+---
+
+## 7. Probe
+
+- **Input:** the residual stream (hidden-state output) of each of the 28 layers at token t.
+- **Model:** logistic regression with L2 regularization, one per layer per band. Standardization and regularization grid: §17.
+- **Training:** each band's positives plus its matched negatives from train problems.
+- **Layer selection:** per band, by validation AUROC. The chosen layer is scored on test **once**. (D4c-2)
+
+---
+
+## 8. Outside rival: the primary comparison (D4b)
+
+One logistic regression on the combined features below, trained on the same train examples and tuned on the same validation set, with a grid of comparable size.
+
+| Feature group | Content | Open |
+|---|---|---|
+| Text | TF-IDF over token-id n-grams of the preceding tokens | n-gram range [DECIDE]; window [DECIDE: fixed / tuned on validation from a stated set] |
+| Visible uncertainty | Entropy of the model's next-token distribution at t | Summaries over the previous w tokens [DECIDE: include, which] |
+| Position | Token index t; tokens since the previous onset; tokens since the last paragraph break | — |
+
+**Causal-only rule.** Every rival feature uses tokens up to t only. Nothing that depends on later tokens: no trace length, no relative position.
+
+**Exploratory:** each feature group alone against the probe.
+
+**Conditional stronger text rival** (built only for bands with a positive verdict):
+- Hidden states of [DECIDE: model] reading the same token ids, with the same probe recipe and layer-selection rule.
+- **Claim level 1:** beats the combined rival.
+- **Claim level 2:** also beats this one.
+
+---
+
+## 9. Sanity controls
+
+| Control | Expected | Keep? |
+|---|---|---|
+| Shuffled labels (train labels permuted within each band) | AUROC ≈ 0.5 | [DECIDE] |
+| Random direction | — | [DECIDE] |
+
+---
+
+## 10. Metrics
+
+- **Primary:** AUROC per band on test examples. **Lift** = probe AUROC − combined-rival AUROC.
+- **Uncertainty:** bootstrap over whole test problems, resample count in §17, as a **98.75% interval** (95% with a 4-band correction). (D3, D4a)
+- **Also reported for every band:** counts of onsets, positives, negatives and problems; AUPRC [DECIDE: report / drop; with 1:1 matching the classes are balanced by construction].
+
+---
+
+## 11. Decision rules
+
+### Gate (D4c-3)
+Run on [DECIDE: validation / test] problems at d = 1.
+1. **The model's own odds separate the classes.** Score = the summed probability of the token ids that begin a lexicon marker ([FROM PILOT]). It must reach AUROC ≥ [DECIDE: final floor, provisional 0.75; checked on pilot data].
+2. **The probe gets close.** Best-layer probe AUROC ≥ (model-odds AUROC − 0.05).
+
+**Failure:** stop, fix, log in §16, rerun. Nothing at d > 1 is computed until the gate passes.
+
+### Per band (D4a)
+δ = [DECIDE: final value; provisional 0.05; anchors in Appendix A]. "Interval" means the 98.75% interval on the lift.
+
+| Verdict | Condition |
+|---|---|
+| Positive | Lower end > 0 **and** upper end ≥ δ |
+| Null | Upper end < δ (includes "real but under δ") |
+| Inconclusive | Lower end ≤ 0 **and** upper end ≥ δ |
+
+- **Minimum events:** [FROM PILOT: the number of test onsets per band at which the projected interval width allows a null at δ].
+  - A band below the minimum can only be positive or inconclusive, and the writeup says so.
+- **Secondary:** verdicts at δ = 0.03 and 0.08. Reported, never the headline.
+- **Claim:** the set of bands with a positive verdict. Every band's verdict and interval are reported.
+
+---
+
+## 12. Hand audit and add-on (D1)
+
+- **Sample:** 100 onsets, simple random draw (seed [DECIDE]) from test-split traces.
+- **Timing:** after freeze, before any probe score exists. Labels are committed and hashed before probe scoring.
+- **Question:** binary, real vs. false, where a real hit [DECIDE: *overturns* a prior statement / *re-examines* a prior statement].
+- **Output:**
+  - Precision with a 95% interval.
+  - A descriptive side-by-side with the lexicon's earlier precision on Claude coding sessions (FrictionMap). Not a test.
+- **Guard:** audit labels never change training or evaluation labels.
+- **Add-on (exploratory):**
+  - Compares probe scores before real vs. false hits, at [DECIDE: which band(s) or distances].
+  - Expected direction, stated in advance: [DECIDE].
+  - Runs only if both groups have at least 20 hits. Otherwise it's logged as not runnable.
+
+---
+
+## 13. Exploratory analyses
+
+No verdicts; labeled exploratory everywhere they appear.
+
+1. Exact-distance curve: probe AUROC and lift at every distance 1–40, every layer (D3).
+2. Each outside rival group alone vs. the probe (D4b).
+3. Per-trace plots: probe score token by token on 10 traces (seed [DECIDE]), with the text alongside. Done after the confirmatory results (D3).
+4. The add-on (§12).
+5. Where each band falls relative to paragraph breaks.
+6. Counts of other markers this model uses.
+7. Accuracy, as context (D5).
+
+---
+
+## 14. Outcomes and the null-result path
+
+| Pattern | Reads as |
+|---|---|
+| Gate fails after fixes | The pipeline can't recover what the model itself predicts. No band results reported; the failure is written up. |
+| All bands positive | The inside carries information about an upcoming "wait" that the outside cues lack, as far as 21–40 tokens ahead |
+| Near bands positive, far bands null | The inside runs ahead of the outside cues, within the furthest positive band |
+| On/off (positive, null, positive) | The signal may be tied to moments, not distances. Per-trace plots are the lead; a follow-up confirms. |
+| All null | For this model, at 2–40 tokens, the text plus visible uncertainty plus position carry what the inside carries about an upcoming "wait" |
+| Mixed null / inconclusive | Each band reported as is; no pooling |
+| All inconclusive | Not enough data to tell; n reported |
+
+**Not allowed after seeing any test result:**
+- changing the bands, δ, the layer rule, the label set, the dataset or the rival features
+- promoting an exploratory analysis to confirmatory
+- adding traces to rescue an inconclusive band
+
+Anything like that is a new, separately pre-registered follow-up.
+
+---
+
+## 15. Data contact before freeze
+
+**Allowed:** generating traces, counting, reading traces by eye, the model's own odds at d = 1.
+**Not allowed:** any probe, any rival, anything at d > 1. (D6)
+
+| Date | What was touched | What was seen |
+|---|---|---|
+| | Pilot: 15 GSM8K + 15 MATH500 traces (planned) | |
+| | Pilot: extraction check + model's own odds at d = 1 (planned) | |
+
+---
+
+## 16. Deviations log (after freeze)
+
+| Timestamp | Section | Deviation | Reason | Any results seen before it? |
+|---|---|---|---|---|
+| | | | | |
+
+---
+
+## 17. Technical settings
+
+| Setting | Value |
+|---|---|
+| Probe input standardization | [DECIDE] |
+| Probe regularization grid | [DECIDE] |
+| Rival regularization grid | [DECIDE] |
+| Bootstrap resamples | [DECIDE] |
+| Seeds: problem sample, split, audit, per-trace plots | [DECIDE] |
+
+---
+
+## Appendix A: anchors for δ
+
+| Source | Setting | Number | Use |
+|---|---|---|---|
+| Hidden Error Awareness (Yuan et al.), Table 5 | Qwen2.5-3B, MATH-500, predicting correctness from the first reasoning step | Probe 0.787 vs. TF-IDF + logistic regression text classifier 0.590 → gap 0.197 | The only published inside-vs-text gap found. Different target, weaker rival than here |
+| ReflCtrl (Yan et al.), Table 2 | DS-Llama-8B, GSM8K, step before a reflection step vs. other steps | Entropy d = 0.38 (mean) / 0.50 (max) → AUROC ≈ 0.61 / 0.64 | What one outside cue gets alone |
+
+**Caveat.** HEA gives n = 200 in Table 5 and n = 89 in Table 4 for the same result, and doesn't state the text classifier's evaluation split.
+
+**Justification paragraph:** [DECIDE: written at freeze]
+
+## Appendix B: references
+
+- Zhu et al., arXiv 2506.12217
+- Troitskii et al., arXiv 2510.04128
+- Venhoff et al., arXiv 2506.18167
+- Ward et al., arXiv 2507.12638
+- Yan et al. (ReflCtrl), arXiv 2512.13979
+- Yuan et al. (Hidden Error Awareness), arXiv 2605.09502
