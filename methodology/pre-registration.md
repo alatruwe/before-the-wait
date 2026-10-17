@@ -29,6 +29,7 @@ Changes before freeze, including those prompted by feedback.
 | 2026-10-17 | §4 | Trace-count rule now requires all four bands to reach the minimum (was three; band 21–40 fell 30 short at N = 143), adds a 20% margin rounded up to ten, and sets the cap at 1,000. N = 190. | Adeline, after the handoff 04 report |
 | 2026-10-17 | §6, §11 | Clarified after the count script: the minimum counts onsets, not positions (§3 already said so); band positions outside the reasoning span or inside a marker span are excluded; "largest band" named as 21–40. | Claude Code reading of handoff 04 |
 | 2026-10-17 | §4, §6, §11 | The rules that turn pilot counts into the trace count, split, quiet zone, matching kinds, gate-input set and minimum events written in; values to be computed by script. | Planning session (rules stated in chat before the pilot report) |
+| 2026-10-17 | §4 | Switch rule now reads "final N (after margin and rounding)" against the cap. | Claude Code reading of handoff 05 |
 
 ---
 
@@ -89,7 +90,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Dataset.** GSM8K (D2), split [DECIDE: test / train / both], problems drawn by seeded random sample.
 - **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of the four bands, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous onset (or the reasoning start, for a first onset) lies more than the band's upper bound tokens back (pilot gap distribution), and m the minimum events (§11). The final count is that N inflated by 20% and rounded up to the nearest ten, because o is estimated from 13 pilot traces. Capped at 1,000. (Adeline, 2026-10-17: all four bands required, since band 21–40 reached 308 of 338 at the three-band N of 143 and 14 more traces buy its null back; margin and cap set the same day.) **Computed (handoff 04 rerun): N_rule = 157, N = 190 GSM8K traces.**
-- **MATH500 switch:** if N exceeds the cap, switch to MATH500 and recompute N with its pilot values (o = 175/12, its own e_b). (D2)
+- **MATH500 switch:** if the final N (after margin and rounding) exceeds the cap, switch to MATH500 and recompute N with its pilot values (o = 175/12, its own e_b). (D2)
 - **Exclusions:**
   - pilot problems: [DECIDE: exclude / include]
   - looping traces: **excluded.** A trace loops if any window of 30 consecutive generated token ids inside the reasoning span occurs 3 or more times verbatim. Their hits are near-duplicate examples. (Adeline, 2026-10-17. Pilot: 5 of 30; 4 of those also hit the length cap, 1 finished normally. Looping and truncation are independent flags.)
