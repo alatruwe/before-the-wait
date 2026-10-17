@@ -473,3 +473,71 @@ should be planned off the median rather than the mean, and the three truncated
 GSM8K traces (91, 55 and 36 hits) should be checked for looping before their
 onsets are counted as ordinary events.
 
+
+
+---
+
+# Addendum — D10 and D11 applied (2026-10-17)
+
+D10: looping traces excluded from all onset-level outputs. D11: onsets
+by the paragraph rule — the first hit in a paragraph is the onset, later
+hits in that paragraph merge into it.
+
+## D10 exclusions
+
+- traces excluded for looping: **5** (gsm8k_201, gsm8k_1077, math500_151, math500_210, math500_488)
+- traces kept: **25**
+
+## D11 — hits to onsets (paragraph rule)
+
+| group | traces | hits | onsets | merged | onsets per trace |
+|---|---|---|---|---|---|
+| gsm8k | 13 | 146 | **114** | 32 | 8.8 |
+| math500 | 12 | 239 | **175** | 64 | 14.6 |
+| pooled | 25 | 385 | **289** | 96 | 11.6 |
+
+## Per-marker shares of onsets (paragraph rule)
+
+**gsm8k** (114 onsets)
+
+| value | count | share |
+|---|---|---|
+| `wait` | 72 | 63.2% |
+| `hmm` | 30 | 26.3% |
+| `hold on` | 4 | 3.5% |
+| `let me think` | 4 | 3.5% |
+| `actually` | 3 | 2.6% |
+| `no,` | 1 | 0.9% |
+
+**math500** (175 onsets)
+
+| value | count | share |
+|---|---|---|
+| `wait` | 137 | 78.3% |
+| `hmm` | 25 | 14.3% |
+| `let me think` | 10 | 5.7% |
+| `actually` | 2 | 1.1% |
+| `hold on` | 1 | 0.6% |
+
+**pooled** (289 onsets)
+
+| value | count | share |
+|---|---|---|
+| `wait` | 209 | 72.3% |
+| `hmm` | 55 | 19.0% |
+| `let me think` | 14 | 4.8% |
+| `actually` | 5 | 1.7% |
+| `hold on` | 5 | 1.7% |
+| `no,` | 1 | 0.3% |
+
+## Window rule (parked — counted once, for the record)
+
+Not used anywhere in this experiment. A hit is an onset unless the
+previous hit in the same trace, merged or not, is within N tokens
+(difference <= N), per the pre-registration's fixed wording.
+
+| N | onsets, non-looped traces |
+|---|---|
+| 5 | 324 |
+| 10 | 301 |
+| 20 | 275 |

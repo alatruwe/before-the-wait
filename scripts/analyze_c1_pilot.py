@@ -30,10 +30,13 @@ from before_the_wait.generate import (  # noqa: E402
     THINK_CLOSE,
     THINK_OPEN,
 )
+from before_the_wait.label import merge_onsets  # noqa: E402
 from before_the_wait.summarize import (  # noqa: E402
     ONSET_COLUMNS,
+    PARAGRAPH_ONSET_COLUMNS,
     TRACE_COLUMNS,
     analyze_trace,
+    build_addendum,
     build_summary,
 )
 
@@ -142,10 +145,43 @@ def main() -> None:
         lines.append("None — every trace matched its gold answer.")
     lines += ["", CONCLUSION, ""]
 
+    # --- Part A (handoff 03): D10 exclusion + D11 paragraph-rule onsets ---
+    looped = [r for r in results if r.row["looped"]]
+    kept = [r for r in results if not r.row["looped"]]
+    merged = {
+        (r.row["dataset"], r.row["index"]): merge_onsets(r.onsets, "paragraph")
+        for r in kept
+    }
+    window_counts = {
+        n: sum(
+            1
+            for r in kept
+            for _, m in merge_onsets(r.onsets, "window", n=n)
+            if m is None
+        )
+        for n in (5, 10, 20)
+    }
+
+    with (RESULTS / "c1_onsets_paragraph.csv").open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=PARAGRAPH_ONSET_COLUMNS)
+        w.writeheader()
+        for r in kept:
+            for o, m in merged[(r.row["dataset"], r.row["index"])]:
+                row = asdict(o)
+                row["merged_into"] = "" if m is None else m
+                w.writerow(row)
+
+    lines.append(build_addendum(kept, looped, merged, window_counts))
+
     (RESULTS / "c1_summary.md").write_text("\n".join(lines))
     print(f"\nwrote {RESULTS / 'c1_traces.csv'}")
     print(f"wrote {RESULTS / 'c1_onsets.csv'}")
-    print(f"wrote {RESULTS / 'c1_summary.md'}")
+    print(f"wrote {RESULTS / 'c1_onsets_paragraph.csv'}")
+    print(f"wrote {RESULTS / 'c1_summary.md'} (with D10/D11 addendum)")
+    n_onsets = sum(1 for k in merged for _, m in merged[k] if m is None)
+    print(f"\nD10: {len(looped)} looped traces excluded, {len(kept)} kept")
+    print(f"D11: paragraph-rule onsets (non-looped) = {n_onsets}")
+    print(f"     window-rule onsets (non-looped)    = {window_counts}")
 
 
 if __name__ == "__main__":

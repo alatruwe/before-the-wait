@@ -98,6 +98,56 @@ class Onset:
     same_paragraph_as_prev_hit: bool | None
 
 
+def merge_onsets(
+    onsets: list[Onset], rule: str = "paragraph", n: int = 10
+) -> list[tuple[Onset, int | None]]:
+    """Apply D11: collapse hits into onsets. Returns (hit, merged_into) pairs.
+
+    `merged_into` is None for a hit that *is* an onset, otherwise the token
+    index of the onset it merged into.
+
+    `paragraph` (D11, primary): the first hit in a paragraph is the onset;
+    later hits in the same paragraph merge into it — into the paragraph's
+    first hit, not the immediately preceding one.
+
+    `window` (parked, counted once for the record): a hit is an onset unless
+    the previous hit in the same trace, merged or not, is within `n` tokens —
+    difference <= n. This is the pre-registration's wording as fixed on
+    2026-10-17; note `<=`, not `<`.
+
+    Hits must be from one trace and in token order.
+    """
+    if rule not in ("paragraph", "window"):
+        raise ValueError(f"unknown merge rule: {rule}")
+
+    out: list[tuple[Onset, int | None]] = []
+    current_onset: int | None = None
+    prev_token_index: int | None = None
+
+    for o in onsets:
+        if rule == "paragraph":
+            # same_paragraph_as_prev_hit is None for the first hit in a trace.
+            is_onset = not o.same_paragraph_as_prev_hit
+        else:
+            is_onset = prev_token_index is None or (o.token_index - prev_token_index) > n
+
+        if is_onset:
+            current_onset = o.token_index
+            out.append((o, None))
+        else:
+            out.append((o, current_onset))
+        prev_token_index = o.token_index  # previous HIT, merged or not
+
+    return out
+
+
+def exclude_looped(
+    trace_keys: list[tuple[str, int]], looped: set[tuple[str, int]]
+) -> list[tuple[str, int]]:
+    """Apply D10: drop looping traces from onset-level outputs."""
+    return [k for k in trace_keys if k not in looped]
+
+
 @dataclass
 class HardCheckFailure:
     dataset: str

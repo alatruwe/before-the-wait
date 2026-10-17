@@ -147,6 +147,80 @@ def _describe(values: list[float]) -> str:
     )
 
 
+PARAGRAPH_ONSET_COLUMNS = ONSET_COLUMNS + ["merged_into"]
+
+
+def build_addendum(
+    kept: list[TraceResult],
+    looped: list[TraceResult],
+    merged: dict[tuple[str, int], list[tuple[Onset, int | None]]],
+    window_counts: dict[int, int],
+) -> str:
+    """Addendum: D10 exclusions and D11 hits -> onsets, per dataset and pooled."""
+    out = [
+        "",
+        "---",
+        "",
+        "# Addendum — D10 and D11 applied (2026-10-17)",
+        "",
+        "D10: looping traces excluded from all onset-level outputs. D11: onsets",
+        "by the paragraph rule — the first hit in a paragraph is the onset, later",
+        "hits in that paragraph merge into it.",
+        "",
+        "## D10 exclusions",
+        "",
+        f"- traces excluded for looping: **{len(looped)}** "
+        f"({', '.join(f'{r.row['dataset']}_{r.row['index']}' for r in looped)})",
+        f"- traces kept: **{len(kept)}**",
+        "",
+    ]
+
+    groups: list[tuple[str, list[TraceResult]]] = []
+    by_ds: dict[str, list[TraceResult]] = {}
+    for r in kept:
+        by_ds.setdefault(r.row["dataset"], []).append(r)
+    groups += sorted(by_ds.items())
+    groups.append(("pooled", kept))
+
+    out += ["## D11 — hits to onsets (paragraph rule)", "",
+            "| group | traces | hits | onsets | merged | onsets per trace |",
+            "|---|---|---|---|---|---|"]
+    for name, group in groups:
+        keys = [(r.row["dataset"], r.row["index"]) for r in group]
+        pairs = [p for k in keys for p in merged[k]]
+        hits = len(pairs)
+        onsets = sum(1 for _, m in pairs if m is None)
+        out.append(
+            f"| {name} | {len(group)} | {hits} | **{onsets}** | {hits - onsets} | "
+            f"{onsets / len(group):.1f} |"
+        )
+    out.append("")
+
+    out += ["## Per-marker shares of onsets (paragraph rule)", ""]
+    for name, group in groups:
+        keys = [(r.row["dataset"], r.row["index"]) for r in group]
+        onsets = [o for k in keys for o, m in merged[k] if m is None]
+        counts = Counter(o.marker for o in onsets)
+        out += [f"**{name}** ({len(onsets)} onsets)", ""]
+        out += _share_table(counts, len(onsets))
+        out.append("")
+
+    out += [
+        "## Window rule (parked — counted once, for the record)",
+        "",
+        "Not used anywhere in this experiment. A hit is an onset unless the",
+        "previous hit in the same trace, merged or not, is within N tokens",
+        "(difference <= N), per the pre-registration's fixed wording.",
+        "",
+        "| N | onsets, non-looped traces |",
+        "|---|---|",
+    ]
+    for n in sorted(window_counts):
+        out.append(f"| {n} | {window_counts[n]} |")
+    out.append("")
+    return "\n".join(out)
+
+
 def build_summary(
     results: list[TraceResult], by_dataset: dict[str, list[TraceResult]], meta: dict[str, Any]
 ) -> str:
