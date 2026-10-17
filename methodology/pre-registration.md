@@ -18,7 +18,17 @@ Changes before freeze, including those prompted by feedback.
 
 | Date | Section | Change | Raised by |
 |---|---|---|---|
-| | | | |
+| 2026-10-16 | §1 | "Effectively 'wait'" reworded: Zhu's 97.2% is over Zhu's own 17-keyword list, not this lexicon; the share for these labels is measured in the pilot. | Claude Code review of handoff 01 |
+| 2026-10-16 | §4 | Generation settings recorded as decided (fixed by dispatching the pilot). | Adeline |
+| 2026-10-16 | §15 | Pilot data-contact row added. | Adeline |
+| 2026-10-17 | §4 | D10: looping traces excluded; truncated-but-not-looping traces kept and flagged. | Adeline |
+| 2026-10-17 | §5 | D11: onsets defined by the paragraph rule. | Adeline |
+| 2026-10-17 | §4, §5 | Pilot counts corrected before push: 4 truncated-without-looping (not 3); window-rule count stated with its exact definition (503 at ≤ 10, not 534). | Claude Code verification of handoff 03 |
+| 2026-10-17 | §5 | Window-rule onsets moved from a pre-declared sensitivity check to parked (not tested in this experiment). | Adeline |
+| 2026-10-17 | §11, §15 | Gate: pilot check recorded (model odds 0.962); probe margin set to 0.10 (was 0.05); c3 data-contact row added. | Adeline, after the c3 report |
+| 2026-10-17 | §4 | Trace-count rule now requires all four bands to reach the minimum (was three; band 21–40 fell 30 short at N = 143), adds a 20% margin rounded up to ten, and sets the cap at 1,000. N = 190. | Adeline, after the handoff 04 report |
+| 2026-10-17 | §6, §11 | Clarified after the count script: the minimum counts onsets, not positions (§3 already said so); band positions outside the reasoning span or inside a marker span are excluded; "largest band" named as 21–40. | Claude Code reading of handoff 04 |
+| 2026-10-17 | §4, §6, §11 | The rules that turn pilot counts into the trace count, split, quiet zone, matching kinds, gate-input set and minimum events written in; values to be computed by script. | Planning session (rules stated in chat before the pilot report) |
 
 ---
 
@@ -78,7 +88,7 @@ Changes before freeze, including those prompted by feedback.
 - Same weights and dtype as generation.
 
 **Dataset.** GSM8K (D2), split [DECIDE: test / train / both], problems drawn by seeded random sample.
-- **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of bands 2–5, 6–10 and 11–20, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous onset (or the reasoning start, for a first onset) lies more than the band's upper bound tokens back (pilot gap distribution), and m the minimum events (§11). Band 21–40 is reported whatever its count. Computed by script in the count handoff and recorded here. Capped at [DECIDE].
+- **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of the four bands, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous onset (or the reasoning start, for a first onset) lies more than the band's upper bound tokens back (pilot gap distribution), and m the minimum events (§11). The final count is that N inflated by 20% and rounded up to the nearest ten, because o is estimated from 13 pilot traces. Capped at 1,000. (Adeline, 2026-10-17: all four bands required, since band 21–40 reached 308 of 338 at the three-band N of 143 and 14 more traces buy its null back; margin and cap set the same day.) **Computed (handoff 04 rerun): N_rule = 157, N = 190 GSM8K traces.**
 - **MATH500 switch:** if N exceeds the cap, switch to MATH500 and recompute N with its pilot values (o = 175/12, its own e_b). (D2)
 - **Exclusions:**
   - pilot problems: [DECIDE: exclude / include]
@@ -96,7 +106,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Onset token.** The first generated token whose span covers the marker's first character.
 
-**Clustering.** Paragraph rule: the first hit in a paragraph (text between `\n\n` delimiters) is the onset; later hits in the same paragraph merge into it and are not onsets. The unit is the model's own reasoning step; an onset is the step at which it turns into a reconsideration. (Adeline, 2026-10-17.) **Not tested here:** a window rule (a hit is an onset unless the previous hit in the same trace has an onset-token index within 10 of its own, difference ≤ 10) is parked; see `decisions.md`. Pilot counts: 192 of 619 within-trace hits share a paragraph with an earlier hit; the paragraph rule yields 457 onsets from 649 hits (the parked window rule would yield 503).
+**Clustering.** Paragraph rule: the first hit in a paragraph (text between `\n\n` delimiters) is the onset; later hits in the same paragraph merge into it and are not onsets. The unit is the model's own reasoning step; an onset is the step at which it turns into a reconsideration. (Adeline, 2026-10-17.) **Not tested here:** a window rule (a hit is an onset unless the previous hit in the same trace has an onset-token index within 10 of its own, difference ≤ 10) is parked; see `decisions.md`. Pilot counts: 192 of 619 within-trace hits share a paragraph with an earlier hit; on all 30 pilot traces the paragraph rule yields 457 onsets from 649 hits (the parked window rule would yield 503); on the 25 non-looped traces kept under D10, 289 onsets from 385 hits (window rule: 301). Any onset count cited elsewhere states which base it uses.
 - Merged markers are not onsets.
 - No position before a merged marker can be a negative (§6).
 
@@ -112,8 +122,9 @@ Changes before freeze, including those prompted by feedback.
 | Band positive | d(t) ∈ band: 2–5, 6–10, 11–20 or 21–40 (D3) |
 | Negative | No marker of any kind (onset or merged) within the next 100 tokens (D4c-1) |
 | Excluded (gray zone) | d(t) ∈ 41–100 |
+| Excluded | positions outside the reasoning span (a band position before the reasoning start), and positions inside any marker span, onset or merged |
 
-- **Quiet-zone fallback:** 100 tokens, unless for any token kind the pilot count of negative positions (no marker in the next 100 tokens) is smaller than the pilot count of positive positions of that kind in the largest band; then 60. Computed in the count handoff.
+- **Quiet-zone fallback:** 100 tokens, unless for any token kind the pilot count of negative positions (no marker in the next 100 tokens) is smaller than the pilot count of positive positions of that kind in band 21–40; then 60. Computed in the count handoff.
 - **Matching:**
   - Each positive is paired with a negative of the same token kind, the kind of the token *at* the position. Candidate kinds: newline, period, comma, other_punct, digit, word, other. A kind stands on its own if at least 20 pilot positive positions (across all bands) fall in it; rarer kinds merge into `other`. Computed in the count handoff.
   - Ratio: [DECIDE]. Source: [DECIDE: same trace when available / any trace in the same split].
@@ -189,7 +200,7 @@ Run on [DECIDE: validation / test] problems at d = 1.
 | Null | Upper end < δ (includes "real but under δ") |
 | Inconclusive | Lower end ≤ 0 **and** upper end ≥ δ |
 
-- **Minimum events:** m = the smallest number of test-split onsets per band such that the half-width of the 98.75% interval on the lift is ≤ δ, using the Hanley–McNeil standard error of an AUROC of 0.70 on m positives and m matched negatives for each of the two AUROCs, combined with an assumed correlation of 0.5 between them (so SE_lift = SE of one AUROC). The assumed AUROC and correlation are stated, conservative, and fixed before any probe exists. Computed by script in the count handoff and recorded here.
+- **Minimum events:** m counts **onsets**, not positions: one onset contributes several positive positions to a band (4 in 2–5, 20 in 21–40), and those are near-duplicates that do not count separately. m = the smallest number of test-split onsets per band such that the half-width of the 98.75% interval on the lift is ≤ δ, using the Hanley–McNeil standard error of an AUROC of 0.70 on m positives and m matched negatives for each of the two AUROCs, combined with an assumed correlation of 0.5 between them (so SE_lift = SE of one AUROC). The assumed AUROC and correlation are stated, conservative, and fixed before any probe exists. Computed by script in the count handoff and recorded here.
   - A band below the minimum can only be positive or inconclusive, and the writeup says so.
 - **Secondary:** verdicts at δ = 0.03 and 0.08. Reported, never the headline.
 - **Claim:** the set of bands with a positive verdict. Every band's verdict and interval are reported.
