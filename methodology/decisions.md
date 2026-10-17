@@ -18,6 +18,10 @@ Each design decision, with its date and the reason behind it. The rules themselv
 | D5 | Answer correctness is not a hypothesis. Accuracy is reported as context only. | 2026-10-11 | It's a different question, wrong answers are few on GSM8K, and trace length confounds it. |
 | D6 | The design is posted publicly for feedback before freeze. Changes are logged with who raised them. Before freeze, only generation, counting, reading traces and the model's own odds at distance 1 touch data. | 2026-10-11 | Feedback can change the design while no analysis has been run. |
 
+| D10 | Looping traces (a 30-token window of generated ids repeated 3+ times verbatim) are excluded. Traces that hit the length cap without looping are kept and flagged. | 2026-10-17 | A verbatim loop produces near-duplicate events that inflate counts and let a probe memorize. Paraphrased circling produces distinct events. Pilot: 5 of 30 loop (4 at the length cap, 1 finished normally); 4 more hit the cap without looping; 9 of 30 affected in all. Looping is not a subset of truncation, so both flags are kept. |
+
+| D11 | Onsets are defined by the paragraph rule: the first hit in a paragraph is the onset, later hits in the same paragraph merge into it. A 10-token window rule is a pre-declared exploratory sensitivity check. | 2026-10-17 | The model delimits its own reasoning steps with blank lines, so the rule is structural and needs no tuned number. Pilot: 192 of 619 within-trace hits share a paragraph with an earlier hit, and nearly half of those are within 3 tokens ("Wait, hold on"). The rule is conservative: it merges some later reconsiderations in the same step, which costs count, not bias. |
+
 ## Parked, with revival conditions
 
 | Item | Revival condition |

@@ -82,8 +82,8 @@ Changes before freeze, including those prompted by feedback.
 - **MATH500 switch:** if [FROM PILOT] projects GSM8K can't reach the minimum at the cap, switch to MATH500 under the same rules. (D2)
 - **Exclusions:**
   - pilot problems: [DECIDE: exclude / include]
-  - traces that hit the length cap: [DECIDE]
-  - looping traces: [DECIDE: definition and handling]
+  - looping traces: **excluded.** A trace loops if any window of 30 consecutive generated token ids inside the reasoning span occurs 3 or more times verbatim. Their hits are near-duplicate examples. (Adeline, 2026-10-17. Pilot: 5 of 30; 4 of those also hit the length cap, 1 finished normally. Looping and truncation are independent flags.)
+  - traces that hit the length cap without looping: **kept**, flagged `truncated`; positions without a full 100-token lookahead cannot be negatives (§6). (Adeline, 2026-10-17. Pilot: 4 of 30. In total 9 of 30 pilot traces are looped, truncated, or both.)
   - Every exclusion is counted and reported.
 - **Split by problem:** train / validation / test ≈ 50 / 15 / 35, final ratio [FROM PILOT], split seed [DECIDE]. (D4c-2)
 - **Accuracy:** the `\boxed{}` answer is checked against GSM8K's, per trace. Reported as context only. (D5)
@@ -96,7 +96,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Onset token.** The first generated token whose span covers the marker's first character.
 
-**Clustering.** [DECIDE: every hit is an onset / later markers in the same paragraph merge into the first / markers within N tokens merge]
+**Clustering.** Paragraph rule: the first hit in a paragraph (text between `\n\n` delimiters) is the onset; later hits in the same paragraph merge into it and are not onsets. The unit is the model's own reasoning step; an onset is the step at which it turns into a reconsideration. (Adeline, 2026-10-17.) **Sensitivity, exploratory:** verdicts recomputed under a window rule: a hit is an onset unless the previous hit in the same trace (merged or not) has an onset-token index within 10 of its own (difference ≤ 10). Pilot counts: 192 of 619 within-trace hits share a paragraph with an earlier hit; the paragraph rule yields 457 onsets from 649 hits; the window rule as stated yields 503 (4 hits sit at exactly 10 tokens, so `< 10` would give 507).
 - Merged markers are not onsets.
 - No position before a merged marker can be a negative (§6).
 
