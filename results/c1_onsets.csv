@@ -1,0 +1,1264 @@
+dataset,index,token_index,marker,char_start,prev_token_text,prev_token_kind,paragraph_initial,tokens_since_prev_hit,tokens_to_next_hit,same_paragraph_as_prev_hit,onset_mid_token
+gsm8k,108,31,actually,139, he,word,False,,47,,True
+gsm8k,108,78,hmm,328,"?
+
+",newline,True,47,72,False,False
+gsm8k,108,150,actually,613, he,word,False,72,22,False,True
+gsm8k,108,172,actually,687, he,word,False,22,266,True,True
+gsm8k,108,438,actually,1468, he,word,False,266,,False,True
+gsm8k,201,112,hmm,438,?,other_punct,False,,40,,True
+gsm8k,201,152,wait,594,".
+
+",newline,True,40,140,False,False
+gsm8k,201,292,wait,1066,"?
+
+",newline,True,140,60,False,False
+gsm8k,201,352,hmm,1274,?,other_punct,False,60,136,True,True
+gsm8k,201,488,wait,1726,".
+
+",newline,True,136,128,False,False
+gsm8k,201,616,wait,2146,"?
+
+",newline,True,128,145,False,False
+gsm8k,201,761,wait,2660,"?
+
+",newline,True,145,133,False,False
+gsm8k,201,894,wait,3108,"?
+
+",newline,True,133,31,False,False
+gsm8k,201,925,hmm,3215,"?
+
+",newline,True,31,147,False,False
+gsm8k,201,1072,wait,3696,"?
+
+",newline,True,147,78,False,False
+gsm8k,201,1150,wait,3941,But,word,False,78,141,False,True
+gsm8k,201,1291,wait,4412,But,word,False,141,84,False,True
+gsm8k,201,1375,wait,4706,".
+
+",newline,True,84,118,False,False
+gsm8k,201,1493,wait,5093,But,word,False,118,115,False,True
+gsm8k,201,1608,wait,5515,".
+
+",newline,True,115,20,False,False
+gsm8k,201,1628,wait,5605,".
+
+",newline,True,20,201,False,False
+gsm8k,201,1829,wait,6306,But,word,False,201,29,False,True
+gsm8k,201,1858,wait,6417,But,word,False,29,52,False,True
+gsm8k,201,1910,wait,6584,".
+
+",newline,True,52,20,False,False
+gsm8k,201,1930,wait,6650,"?
+
+",newline,True,20,174,False,False
+gsm8k,201,2104,wait,7185,But,word,False,174,88,False,True
+gsm8k,201,2192,wait,7472,"?
+
+",newline,True,88,86,False,False
+gsm8k,201,2278,wait,7767,".
+
+",newline,True,86,9,False,False
+gsm8k,201,2287,wait,7806,".
+
+",newline,True,9,227,False,False
+gsm8k,201,2514,wait,8591,".
+
+",newline,True,227,157,False,False
+gsm8k,201,2671,wait,9026,".
+
+",newline,True,157,53,False,False
+gsm8k,201,2724,wait,9201,But,word,False,53,38,False,True
+gsm8k,201,2762,wait,9337,".
+
+",newline,True,38,2,False,False
+gsm8k,201,2764,"no,",9343,",",comma,False,2,120,True,True
+gsm8k,201,2884,wait,9720,".
+
+",newline,True,120,32,False,False
+gsm8k,201,2916,wait,9836,".
+
+",newline,True,32,47,False,False
+gsm8k,201,2963,wait,9982,".
+
+",newline,True,47,367,False,False
+gsm8k,201,3330,wait,10936,".
+
+",newline,True,367,497,False,False
+gsm8k,201,3827,wait,11636,But,word,False,497,88,False,True
+gsm8k,201,3915,wait,11929,".
+
+",newline,True,88,160,False,False
+gsm8k,201,4075,wait,12343,"?
+
+",newline,True,160,,False,False
+gsm8k,273,123,hmm,505,".
+
+",newline,True,,318,,False
+gsm8k,273,441,wait,1468,".
+
+",newline,True,318,405,False,False
+gsm8k,273,846,wait,2553,".
+
+",newline,True,405,2,False,False
+gsm8k,273,848,hold on,2559,",",comma,False,2,9,True,True
+gsm8k,273,857,hmm,2598,.,period,False,9,35,True,True
+gsm8k,273,892,wait,2715,".
+
+",newline,True,35,16,False,False
+gsm8k,273,908,wait,2777,".
+
+",newline,True,16,100,False,False
+gsm8k,273,1008,wait,2996,".
+
+",newline,True,100,19,False,False
+gsm8k,273,1027,hmm,3080,.,period,False,19,6,True,True
+gsm8k,273,1033,wait,3104,".
+
+",newline,True,6,65,False,False
+gsm8k,273,1098,wait,3324,".
+
+",newline,True,65,197,False,False
+gsm8k,273,1295,wait,3833,".
+
+",newline,True,197,7,False,False
+gsm8k,273,1302,wait,3865,"?
+
+",newline,True,7,53,False,False
+gsm8k,273,1355,wait,4055,"?
+
+",newline,True,53,2,False,False
+gsm8k,273,1357,let me think,4061,",",comma,False,2,166,True,True
+gsm8k,273,1523,wait,4428,".
+
+",newline,True,166,8,False,False
+gsm8k,273,1531,wait,4463,"?
+
+",newline,True,8,187,False,False
+gsm8k,273,1718,wait,4961,".
+
+",newline,True,187,165,False,False
+gsm8k,273,1883,wait,5456,".
+
+",newline,True,165,199,False,False
+gsm8k,273,2082,wait,6158,".
+
+",newline,True,199,,False,False
+gsm8k,356,27,hmm,131,.,period,False,,307,,True
+gsm8k,356,334,wait,1185,".
+
+",newline,True,307,38,False,False
+gsm8k,356,372,hmm,1299,.,period,False,38,7,True,True
+gsm8k,356,379,hold on,1329,But,word,False,7,101,False,True
+gsm8k,356,480,wait,1688,".
+
+",newline,True,101,,False,False
+gsm8k,472,69,hmm,309,".
+
+",newline,True,,313,,False
+gsm8k,472,382,wait,1310,"
+
+",newline,True,313,63,False,False
+gsm8k,472,445,hold on,1522,But,word,False,63,,False,True
+gsm8k,551,48,hmm,206,.,period,False,,208,,True
+gsm8k,551,256,hmm,986,.,period,False,208,186,False,True
+gsm8k,551,442,wait,1585,".
+
+",newline,True,186,157,False,False
+gsm8k,551,599,wait,2072,".
+
+",newline,True,157,167,False,False
+gsm8k,551,766,hmm,2504,".
+
+",newline,True,167,,False,False
+gsm8k,607,86,hmm,347,.,period,False,,125,,True
+gsm8k,607,211,wait,781, But,word,False,125,51,False,True
+gsm8k,607,262,let me think,980,".
+
+",newline,True,51,132,False,False
+gsm8k,607,394,hmm,1403,.,period,False,132,53,False,True
+gsm8k,607,447,wait,1516,".
+
+",newline,True,53,132,False,False
+gsm8k,607,579,wait,1890,".
+
+",newline,True,132,55,False,False
+gsm8k,607,634,hold on,2057,But,word,False,55,142,False,True
+gsm8k,607,776,wait,2557,".
+
+",newline,True,142,8,False,False
+gsm8k,607,784,hmm,2590,.,period,False,8,142,True,True
+gsm8k,607,926,wait,3038,".
+
+",newline,True,142,216,False,False
+gsm8k,607,1142,wait,3757,".
+
+",newline,True,216,42,False,False
+gsm8k,607,1184,let me think,3958,"?
+
+",newline,True,42,371,False,False
+gsm8k,607,1555,wait,5055,But,word,False,371,,False,True
+gsm8k,840,48,hmm,204,.,period,False,,152,,True
+gsm8k,840,200,hmm,691," ?
+
+",newline,True,152,82,False,False
+gsm8k,840,282,hmm,934," ?
+
+",newline,True,82,194,False,False
+gsm8k,840,476,wait,1491,".
+
+",newline,True,194,,False,False
+gsm8k,909,48,hmm,172,"?""",other_punct,False,,203,,True
+gsm8k,909,251,wait,1008,".
+
+",newline,True,203,2,False,False
+gsm8k,909,253,actually,1014,",",comma,False,2,2,True,True
+gsm8k,909,255,hold on,1024,",",comma,False,2,294,True,True
+gsm8k,909,549,wait,1842,".
+
+",newline,True,294,210,False,False
+gsm8k,909,759,wait,2456,".
+
+",newline,True,210,63,False,False
+gsm8k,909,822,wait,2626,".
+
+",newline,True,63,2,False,False
+gsm8k,909,824,hold on,2632,",",comma,False,2,3,True,True
+gsm8k,909,827,hold on,2641,",",comma,False,3,60,True,True
+gsm8k,909,887,wait,2786,".
+
+",newline,True,60,14,False,False
+gsm8k,909,901,wait,2839,".
+
+",newline,True,14,58,False,False
+gsm8k,909,959,wait,2935,".
+
+",newline,True,58,11,False,False
+gsm8k,909,970,"no,",2979,",",comma,False,11,90,True,True
+gsm8k,909,1060,wait,3190,".
+
+",newline,True,90,,False,False
+gsm8k,1054,81,hmm,291," 
+
+",newline,True,,163,,False
+gsm8k,1054,244,hmm,820,.,period,False,163,62,False,True
+gsm8k,1054,306,wait,930,".
+
+",newline,True,62,,False,False
+gsm8k,1077,12,wait,50, will,word,False,,5,,True
+gsm8k,1077,17,hmm,70,.,period,False,5,11,True,True
+gsm8k,1077,28,wait,112, to,word,False,11,94,True,True
+gsm8k,1077,122,wait,522, total,word,False,94,156,True,True
+gsm8k,1077,278,wait,1111, But,word,False,156,338,False,True
+gsm8k,1077,616,wait,2429, can,word,False,338,15,False,True
+gsm8k,1077,631,wait,2506, But,word,False,15,14,True,True
+gsm8k,1077,645,wait,2562, Paul,word,False,14,25,True,True
+gsm8k,1077,670,wait,2673, total,word,False,25,12,True,True
+gsm8k,1077,682,actually,2740, he,word,False,12,24,True,True
+gsm8k,1077,706,hold on,2857,But,word,False,24,15,False,True
+gsm8k,1077,721,hmm,2928,.,period,False,15,32,True,True
+gsm8k,1077,753,wait,3071,?,other_punct,False,32,22,True,True
+gsm8k,1077,775,wait,3157, is,word,False,22,14,False,True
+gsm8k,1077,789,wait,3215, to,word,False,14,159,True,True
+gsm8k,1077,948,wait,3950, Paul,word,False,159,5,True,True
+gsm8k,1077,953,hmm,3972,"?""
+
+",newline,True,5,20,False,False
+gsm8k,1077,973,wait,4061, is,word,False,20,16,True,True
+gsm8k,1077,989,wait,4134, will,word,False,16,44,True,True
+gsm8k,1077,1033,wait,4356,".
+
+",newline,True,44,15,False,False
+gsm8k,1077,1048,wait,4427, total,word,False,15,22,True,True
+gsm8k,1077,1070,wait,4533, the,word,False,22,46,True,True
+gsm8k,1077,1116,wait,4755, is,word,False,46,38,False,True
+gsm8k,1077,1154,wait,4935,".
+
+",newline,True,38,2,False,False
+gsm8k,1077,1156,let me think,4941,",",comma,False,2,128,True,True
+gsm8k,1077,1284,wait,5401, exact,word,False,128,3,True,True
+gsm8k,1077,1287,wait,5416,".
+
+",newline,True,3,15,False,False
+gsm8k,1077,1302,wait,5472,'s,word,False,15,38,True,True
+gsm8k,1077,1340,wait,5650,",",comma,False,38,14,True,True
+gsm8k,1077,1354,wait,5711, is,word,False,14,2,True,True
+gsm8k,1077,1356,wait,5721,".
+
+",newline,True,2,21,False,False
+gsm8k,1077,1377,wait,5821, he,word,False,21,91,True,True
+gsm8k,1077,1468,wait,6120, to,word,False,91,44,True,True
+gsm8k,1077,1512,wait,6283, to,word,False,44,11,False,True
+gsm8k,1077,1523,wait,6330,".
+
+",newline,True,11,29,False,False
+gsm8k,1077,1552,wait,6469, the,word,False,29,12,True,True
+gsm8k,1077,1564,wait,6528,'s,word,False,12,2,True,True
+gsm8k,1077,1566,wait,6538,".
+
+",newline,True,2,19,False,False
+gsm8k,1077,1585,wait,6622, is,word,False,19,14,False,True
+gsm8k,1077,1599,wait,6680, to,word,False,14,159,True,True
+gsm8k,1077,1758,wait,7415, Paul,word,False,159,5,True,True
+gsm8k,1077,1763,hmm,7437,"?""
+
+",newline,True,5,5,False,False
+gsm8k,1077,1768,wait,7451, is,word,False,5,40,True,True
+gsm8k,1077,1808,wait,7631,"?
+
+",newline,True,40,19,False,False
+gsm8k,1077,1827,wait,7718, is,word,False,19,9,True,True
+gsm8k,1077,1836,wait,7757, the,word,False,9,31,True,True
+gsm8k,1077,1867,wait,7917, exact,word,False,31,23,False,True
+gsm8k,1077,1890,wait,8027, the,word,False,23,8,True,True
+gsm8k,1077,1898,wait,8069,".
+
+",newline,True,8,45,False,False
+gsm8k,1077,1943,wait,8286, so,word,False,45,37,True,True
+gsm8k,1077,1980,wait,8472, the,word,False,37,10,False,True
+gsm8k,1077,1990,wait,8520,".
+
+",newline,True,10,72,False,False
+gsm8k,1077,2062,wait,8836,But,word,False,72,73,False,True
+gsm8k,1077,2135,wait,9101, will,word,False,73,59,False,True
+gsm8k,1077,2194,wait,9323,".
+
+",newline,True,59,48,False,False
+gsm8k,1077,2242,wait,9482,"?
+
+",newline,True,48,207,False,False
+gsm8k,1077,2449,wait,10242,".
+
+",newline,True,207,2,False,False
+gsm8k,1077,2451,hold on,10248,",",comma,False,2,33,True,True
+gsm8k,1077,2484,wait,10374,".
+
+",newline,True,33,164,False,False
+gsm8k,1077,2648,wait,10990,".
+
+",newline,True,164,64,False,False
+gsm8k,1077,2712,wait,11174,".
+
+",newline,True,64,4,False,False
+gsm8k,1077,2716,wait,11184,.,period,False,4,129,True,True
+gsm8k,1077,2845,wait,11575,".
+
+",newline,True,129,62,False,False
+gsm8k,1077,2907,wait,11805,".
+
+",newline,True,62,11,False,False
+gsm8k,1077,2918,wait,11851,".
+
+",newline,True,11,263,False,False
+gsm8k,1077,3181,wait,12819, the,word,False,263,12,False,True
+gsm8k,1077,3193,wait,12865, is,word,False,12,16,True,True
+gsm8k,1077,3209,wait,12938,".
+
+",newline,True,16,24,False,False
+gsm8k,1077,3233,wait,13061,",",comma,False,24,12,True,True
+gsm8k,1077,3245,wait,13117,'s,word,False,12,28,True,True
+gsm8k,1077,3273,wait,13267, the,word,False,28,21,False,True
+gsm8k,1077,3294,wait,13357,".
+
+",newline,True,21,8,False,False
+gsm8k,1077,3302,wait,13390, is,word,False,8,9,True,True
+gsm8k,1077,3311,wait,13427, be,word,False,9,6,True,True
+gsm8k,1077,3317,wait,13450, the,word,False,6,38,True,True
+gsm8k,1077,3355,wait,13610,".
+
+",newline,True,38,50,False,False
+gsm8k,1077,3405,wait,13846,".
+
+",newline,True,50,21,False,False
+gsm8k,1077,3426,wait,13952, total,word,False,21,84,True,True
+gsm8k,1077,3510,wait,14358, the,word,False,84,8,False,True
+gsm8k,1077,3518,wait,14403,".
+
+",newline,True,8,2,False,False
+gsm8k,1077,3520,let me think,14409,",",comma,False,2,126,True,True
+gsm8k,1077,3646,wait,14891, so,word,False,126,35,False,True
+gsm8k,1077,3681,wait,15036, to,word,False,35,19,False,True
+gsm8k,1077,3700,wait,15120,".
+
+",newline,True,19,47,False,False
+gsm8k,1077,3747,wait,15357, is,word,False,47,15,False,True
+gsm8k,1077,3762,wait,15423,".
+
+",newline,True,15,63,False,False
+gsm8k,1077,3825,let me think,15704,But,word,False,63,86,False,True
+gsm8k,1077,3911,wait,16006,".
+
+",newline,True,86,36,False,False
+gsm8k,1077,3947,wait,16126,.,period,False,36,6,True,True
+gsm8k,1077,3953,wait,16154,".
+
+",newline,True,6,10,False,False
+gsm8k,1077,3963,wait,16209,".
+
+",newline,True,10,,False,False
+gsm8k,1085,38,hmm,135,?,other_punct,False,,2,,True
+gsm8k,1085,40,let me think,140,",",comma,False,2,127,True,True
+gsm8k,1085,167,wait,630,".
+
+",newline,True,127,114,False,False
+gsm8k,1085,281,hmm,1017,.,period,False,114,206,False,True
+gsm8k,1085,487,wait,1734,.,period,False,206,2,False,True
+gsm8k,1085,489,"no,",1740,",",comma,False,2,8,True,True
+gsm8k,1085,497,actually,1768,.,period,False,8,98,True,True
+gsm8k,1085,595,let me think,2149,",",comma,False,98,174,False,True
+gsm8k,1085,769,wait,2774,".
+
+",newline,True,174,2,False,False
+gsm8k,1085,771,hold on,2780,",",comma,False,2,,True,True
+gsm8k,1121,48,hmm,192,.,period,False,,180,,True
+gsm8k,1121,228,wait,806,".
+
+",newline,True,180,,False,False
+gsm8k,1148,49,hmm,225,.,period,False,,2,,True
+gsm8k,1148,51,let me think,230,",",comma,False,2,211,True,True
+gsm8k,1148,262,hmm,1013,.,period,False,211,12,False,True
+gsm8k,1148,274,let me think,1042,?,other_punct,False,12,57,True,True
+gsm8k,1148,331,wait,1172,".
+
+",newline,True,57,413,False,False
+gsm8k,1148,744,wait,2695,".
+
+",newline,True,413,180,False,False
+gsm8k,1148,924,hmm,3347,".
+
+",newline,True,180,,False,False
+gsm8k,1201,41,hmm,155,.,period,False,,78,,True
+gsm8k,1201,119,hmm,475,.,period,False,78,23,False,True
+gsm8k,1201,142,wait,542,?,other_punct,False,23,2,True,True
+gsm8k,1201,144,"no,",548,",",comma,False,2,61,True,True
+gsm8k,1201,205,hmm,721,.,period,False,61,18,False,True
+gsm8k,1201,223,let me think,799,.,period,False,18,89,True,True
+gsm8k,1201,312,hmm,1082,.,period,False,89,74,False,True
+gsm8k,1201,386,wait,1271,".
+
+",newline,True,74,20,False,False
+gsm8k,1201,406,hold on,1336, But,word,False,20,47,True,True
+gsm8k,1201,453,let me think,1550,".
+
+",newline,True,47,26,False,False
+gsm8k,1201,479,hmm,1664,?,other_punct,False,26,133,True,True
+gsm8k,1201,612,hmm,2236,.,period,False,133,139,False,True
+gsm8k,1201,751,wait,2627,".
+
+",newline,True,139,93,False,False
+gsm8k,1201,844,hold on,2855,But,word,False,93,111,False,True
+gsm8k,1201,955,wait,3156,".
+
+",newline,True,111,128,False,False
+gsm8k,1201,1083,wait,3706,".
+
+",newline,True,128,132,False,False
+gsm8k,1201,1215,wait,4221,".
+
+",newline,True,132,120,False,False
+gsm8k,1201,1335,"no,",4557,",",comma,False,120,52,False,True
+gsm8k,1201,1387,wait,4692,".
+
+",newline,True,52,108,False,False
+gsm8k,1201,1495,wait,5003,".
+
+",newline,True,108,8,False,False
+gsm8k,1201,1503,let me think,5032,",",comma,False,8,23,True,True
+gsm8k,1201,1526,wait,5103,But,word,False,23,144,False,True
+gsm8k,1201,1670,wait,5469,".
+
+",newline,True,144,8,False,False
+gsm8k,1201,1678,let me think,5500,",",comma,False,8,217,True,True
+gsm8k,1201,1895,wait,6400,".
+
+",newline,True,217,106,False,False
+gsm8k,1201,2001,wait,6834,".
+
+",newline,True,106,217,False,False
+gsm8k,1201,2218,wait,7618,".
+
+",newline,True,217,2,False,False
+gsm8k,1201,2220,"no,",7624,",",comma,False,2,2,True,True
+gsm8k,1201,2222,actually,7628,",",comma,False,2,251,True,True
+gsm8k,1201,2473,wait,8627,".
+
+",newline,True,251,23,False,False
+gsm8k,1201,2496,hmm,8733,"?""
+
+",newline,True,23,156,False,False
+gsm8k,1201,2652,wait,9360,".
+
+",newline,True,156,40,False,False
+gsm8k,1201,2692,wait,9544,"?""
+
+",newline,True,40,162,False,False
+gsm8k,1201,2854,hmm,10204,".
+
+",newline,True,162,8,False,False
+gsm8k,1201,2862,wait,10232,".
+
+",newline,True,8,2,False,False
+gsm8k,1201,2864,let me think,10238,",",comma,False,2,118,True,True
+gsm8k,1201,2982,wait,10687,",",comma,False,118,2,False,True
+gsm8k,1201,2984,let me think,10693,",",comma,False,2,224,True,True
+gsm8k,1201,3208,wait,11565,".
+
+",newline,True,224,22,False,False
+gsm8k,1201,3230,wait,11667,"?""
+
+",newline,True,22,116,False,False
+gsm8k,1201,3346,wait,12091,".
+
+",newline,True,116,160,False,False
+gsm8k,1201,3506,wait,12758,".
+
+",newline,True,160,18,False,False
+gsm8k,1201,3524,hmm,12829,".
+
+",newline,True,18,8,False,False
+gsm8k,1201,3532,wait,12860,".
+
+",newline,True,8,2,False,False
+gsm8k,1201,3534,let me think,12866,",",comma,False,2,110,True,True
+gsm8k,1201,3644,wait,13323,".
+
+",newline,True,110,58,False,False
+gsm8k,1201,3702,wait,13593,".
+
+",newline,True,58,52,False,False
+gsm8k,1201,3754,wait,13818,".
+
+",newline,True,52,138,False,False
+gsm8k,1201,3892,wait,14376,",",comma,False,138,2,False,True
+gsm8k,1201,3894,let me think,14382,",",comma,False,2,25,True,True
+gsm8k,1201,3919,wait,14495,"?""
+
+",newline,True,25,21,False,False
+gsm8k,1201,3940,wait,14589,".
+
+",newline,True,21,75,False,False
+gsm8k,1201,4015,hmm,14882,".
+
+",newline,True,75,12,False,False
+gsm8k,1201,4027,wait,14918,".
+
+",newline,True,12,32,False,False
+gsm8k,1201,4059,actually,15077, might,word,False,32,,True,True
+math500,50,401,wait,1517,But,word,False,,368,,True
+math500,50,769,wait,2422,",",comma,False,368,46,False,True
+math500,50,815,wait,2516,.,period,False,46,8,False,True
+math500,50,823,wait,2547,".
+
+",newline,True,8,673,False,False
+math500,50,1496,wait,4085,".
+
+",newline,True,673,17,False,False
+math500,50,1513,wait,4131,".
+
+",newline,True,17,3,False,False
+math500,50,1516,hold on,4141, but,word,False,3,12,True,True
+math500,50,1528,wait,4182,"?
+
+",newline,True,12,112,False,False
+math500,50,1640,wait,4471,".
+
+",newline,True,112,128,False,False
+math500,50,1768,wait,4821,"?
+
+",newline,True,128,2,False,False
+math500,50,1770,"no,",4827,",",comma,False,2,20,True,True
+math500,50,1790,wait,4911,".
+
+",newline,True,20,383,False,False
+math500,50,2173,wait,5844,".
+
+",newline,True,383,3,False,False
+math500,50,2176,hold on,5854, but,word,False,3,90,True,True
+math500,50,2266,wait,6124,But,word,False,90,38,False,True
+math500,50,2304,wait,6247,"?
+
+",newline,True,38,267,False,False
+math500,50,2571,wait,6866,".
+
+",newline,True,267,56,False,False
+math500,50,2627,let me think,7097,But,word,False,56,24,False,True
+math500,50,2651,wait,7179,"?
+
+",newline,True,24,,False,False
+math500,68,80,hmm,227,"]
+
+",newline,True,,194,,False
+math500,68,274,wait,878, But,word,False,194,165,False,True
+math500,68,439,wait,1409,".
+
+",newline,True,165,14,False,False
+math500,68,453,let me think,1480,.,period,False,14,127,True,True
+math500,68,580,hmm,1849,).,period,False,127,32,False,True
+math500,68,612,wait,1955,".
+
+",newline,True,32,64,False,False
+math500,68,676,wait,2144,".
+
+",newline,True,64,216,False,False
+math500,68,892,wait,2658, but,word,False,216,123,False,True
+math500,68,1015,wait,3031,But,word,False,123,63,False,True
+math500,68,1078,wait,3205,".
+
+",newline,True,63,230,False,False
+math500,68,1308,hmm,3686,.,period,False,230,16,False,True
+math500,68,1324,wait,3746,.,period,False,16,17,True,True
+math500,68,1341,wait,3798,"?
+
+",newline,True,17,38,False,False
+math500,68,1379,wait,3897,".
+
+",newline,True,38,59,False,False
+math500,68,1438,wait,4042,".
+
+",newline,True,59,3,False,False
+math500,68,1441,let me think,4052, but,word,False,3,114,True,True
+math500,68,1555,wait,4371,".
+
+",newline,True,114,54,False,False
+math500,68,1609,hmm,4549,?,other_punct,False,54,150,False,True
+math500,68,1759,wait,4982,?,other_punct,False,150,58,False,True
+math500,68,1817,wait,5149,".
+
+",newline,True,58,72,False,False
+math500,68,1889,wait,5340,.,period,False,72,39,False,True
+math500,68,1928,wait,5445,"?
+
+",newline,True,39,62,False,False
+math500,68,1990,wait,5613,.,period,False,62,104,False,True
+math500,68,2094,wait,5840,".
+
+",newline,True,104,2,False,False
+math500,68,2096,let me think,5846,",",comma,False,2,128,True,True
+math500,68,2224,wait,6162,".
+
+",newline,True,128,29,False,False
+math500,68,2253,wait,6273,".
+
+",newline,True,29,134,False,False
+math500,68,2387,wait,6563,").
+
+",newline,True,134,111,False,False
+math500,68,2498,wait,6787,".
+
+",newline,True,111,89,False,False
+math500,68,2587,wait,6972,".
+
+",newline,True,89,216,False,False
+math500,68,2803,hmm,7318,".
+
+",newline,True,216,51,False,False
+math500,68,2854,let me think,7489,But,word,False,51,,False,True
+math500,89,38,hmm,101,.,period,False,,893,,True
+math500,89,931,wait,2458,".
+
+",newline,True,893,704,False,False
+math500,89,1635,wait,3868,.,period,False,704,113,False,True
+math500,89,1748,wait,4094,.,period,False,113,2,False,True
+math500,89,1750,wait,4100,",",comma,False,2,8,True,True
+math500,89,1758,wait,4131,".
+
+",newline,True,8,121,False,False
+math500,89,1879,wait,4386,).,period,False,121,,True,True
+math500,151,199,hmm,471,.,period,False,,4,,True
+math500,151,203,let me think,482,.,period,False,4,82,True,True
+math500,151,285,actually,774,'s,word,False,82,36,False,True
+math500,151,321,wait,955,".
+
+",newline,True,36,2,False,False
+math500,151,323,actually,961,",",comma,False,2,174,True,True
+math500,151,497,wait,1698,But,word,False,174,46,False,True
+math500,151,543,actually,1908,".
+
+",newline,True,46,177,False,False
+math500,151,720,wait,2455,).,period,False,177,2,False,True
+math500,151,722,actually,2461,",",comma,False,2,95,True,True
+math500,151,817,hold on,2801,But,word,False,95,268,False,True
+math500,151,1085,wait,3573,".
+
+",newline,True,268,3,False,False
+math500,151,1088,actually,3582, so,word,False,3,45,True,True
+math500,151,1133,hmm,3696,.,period,False,45,13,True,True
+math500,151,1146,wait,3712,.,period,False,13,150,True,True
+math500,151,1296,wait,4207,".
+
+",newline,True,150,3,False,False
+math500,151,1299,hold on,4217, but,word,False,3,30,True,True
+math500,151,1329,wait,4339,"?
+
+",newline,True,30,117,False,False
+math500,151,1446,wait,4738,But,word,False,117,2,False,True
+math500,151,1448,let me think,4744,",",comma,False,2,141,True,True
+math500,151,1589,wait,5256,But,word,False,141,195,False,True
+math500,151,1784,actually,5807,'s,word,False,195,25,False,True
+math500,151,1809,wait,5906,".
+
+",newline,True,25,2,False,False
+math500,151,1811,"no,",5912,",",comma,False,2,2,True,True
+math500,151,1813,actually,5916,",",comma,False,2,38,True,True
+math500,151,1851,wait,6066,.,period,False,38,2,True,True
+math500,151,1853,"no,",6072,",",comma,False,2,34,True,True
+math500,151,1887,hmm,6194,.,period,False,34,73,True,True
+math500,151,1960,let me think,6496,But,word,False,73,258,False,True
+math500,151,2218,wait,7164,".
+
+",newline,True,258,391,False,False
+math500,151,2609,wait,8212,".
+
+",newline,True,391,,False,False
+math500,210,108,hmm,413,.,period,False,,189,,True
+math500,210,297,wait,1011,).,period,False,189,2,False,True
+math500,210,299,hold on,1017,",",comma,False,2,233,True,True
+math500,210,532,wait,1630, But,word,False,233,57,False,True
+math500,210,589,wait,1883,?,other_punct,False,57,4,True,True
+math500,210,593,wait,1893,.,period,False,4,2,True,True
+math500,210,595,let me think,1899,",",comma,False,2,4,True,True
+math500,210,599,wait,1914,".
+
+",newline,True,4,118,False,False
+math500,210,717,wait,2350,"?
+
+",newline,True,118,2,False,False
+math500,210,719,hold on,2356,",",comma,False,2,108,True,True
+math500,210,827,actually,2833,",",comma,False,108,37,True,True
+math500,210,864,wait,2987,".
+
+",newline,True,37,75,False,False
+math500,210,939,wait,3298,".
+
+",newline,True,75,58,False,False
+math500,210,997,wait,3535,".
+
+",newline,True,58,86,False,False
+math500,210,1083,wait,3898,".
+
+",newline,True,86,171,False,False
+math500,210,1254,wait,4391,But,word,False,171,53,False,True
+math500,210,1307,wait,4601,".
+
+",newline,True,53,96,False,False
+math500,210,1403,however,4906,.,period,False,96,52,False,True
+math500,210,1455,wait,5134,But,word,False,52,148,False,True
+math500,210,1603,wait,5721,".
+
+",newline,True,148,71,False,False
+math500,210,1674,wait,6008,".
+
+",newline,True,71,199,False,False
+math500,210,1873,wait,6710,".
+
+",newline,True,199,82,False,False
+math500,210,1955,let me think,7074,But,word,False,82,95,False,True
+math500,210,2050,wait,7472,".
+
+",newline,True,95,2,False,False
+math500,210,2052,let me think,7478,",",comma,False,2,75,True,True
+math500,210,2127,wait,7778,".
+
+",newline,True,75,150,False,False
+math500,210,2277,wait,8205, But,word,False,150,35,False,True
+math500,210,2312,wait,8329,".
+
+",newline,True,35,69,False,False
+math500,210,2381,wait,8516,".
+
+",newline,True,69,103,False,False
+math500,210,2484,wait,8943,.,period,False,103,122,False,True
+math500,210,2606,wait,9265,".
+
+",newline,True,122,50,False,False
+math500,210,2656,wait,9482,".
+
+",newline,True,50,226,False,False
+math500,210,2882,wait,10376,".
+
+",newline,True,226,194,False,False
+math500,210,3076,wait,11068,".
+
+",newline,True,194,355,False,False
+math500,210,3431,wait,12027,But,word,False,355,140,False,True
+math500,210,3571,wait,12534,".
+
+",newline,True,140,19,False,False
+math500,210,3590,wait,12615,".
+
+",newline,True,19,42,False,False
+math500,210,3632,wait,12771,".
+
+",newline,True,42,59,False,False
+math500,210,3691,wait,13027,".
+
+",newline,True,59,2,False,False
+math500,210,3693,"no,",13033,",",comma,False,2,87,True,True
+math500,210,3780,wait,13373,But,word,False,87,160,False,True
+math500,210,3940,wait,13882,".
+
+",newline,True,160,59,False,False
+math500,210,3999,wait,14124,".
+
+",newline,True,59,33,False,False
+math500,210,4032,wait,14270,".
+
+",newline,True,33,,False,False
+math500,227,41,hmm,183,.,period,False,,131,,True
+math500,227,172,let me think,711,".
+
+",newline,True,131,232,False,False
+math500,227,404,wait,1630,".
+
+",newline,True,232,,False,False
+math500,263,44,hmm,195,.,period,False,,2,,True
+math500,263,46,let me think,200,",",comma,False,2,223,True,True
+math500,263,269,hmm,1000,")
+
+",newline,True,223,102,False,False
+math500,263,371,wait,1196,".
+
+",newline,True,102,138,False,False
+math500,263,509,wait,1628,").
+
+",newline,True,138,2,False,False
+math500,263,511,hold on,1634,",",comma,False,2,178,True,True
+math500,263,689,let me think,2148,",",comma,False,178,128,False,True
+math500,263,817,wait,2523,")
+
+",newline,True,128,53,False,False
+math500,263,870,hmm,2664,")
+
+",newline,True,53,406,False,False
+math500,263,1276,wait,3838,".
+
+",newline,True,406,,False,False
+math500,280,65,hmm,230,.,period,False,,140,,True
+math500,280,205,wait,728,").
+
+",newline,True,140,27,False,False
+math500,280,232,hmm,790,").
+
+",newline,True,27,465,False,False
+math500,280,697,wait,2187,").
+
+",newline,True,465,2,False,False
+math500,280,699,hold on,2193,",",comma,False,2,363,True,True
+math500,280,1062,wait,3091,".
+
+",newline,True,363,2,False,False
+math500,280,1064,hold on,3097,",",comma,False,2,51,True,True
+math500,280,1115,wait,3263, but,word,False,51,158,False,True
+math500,280,1273,hmm,3636,".
+
+",newline,True,158,86,False,False
+math500,280,1359,wait,3947,").
+
+",newline,True,86,321,False,False
+math500,280,1680,wait,5004,".
+
+",newline,True,321,,False,False
+math500,287,69,hmm,280,.,period,False,,15,,True
+math500,287,84,let me think,367,.,period,False,15,94,True,True
+math500,287,178,wait,752,But,word,False,94,186,False,True
+math500,287,364,wait,1358,".
+
+",newline,True,186,227,False,False
+math500,287,591,wait,2028,".
+
+",newline,True,227,2,False,False
+math500,287,593,hold on,2034,",",comma,False,2,160,True,True
+math500,287,753,hmm,2629,".
+
+",newline,True,160,68,False,False
+math500,287,821,wait,2859,"?
+
+",newline,True,68,103,False,False
+math500,287,924,wait,3292,".
+
+",newline,True,103,143,False,False
+math500,287,1067,wait,3619,".
+
+",newline,True,143,147,False,False
+math500,287,1214,wait,3989,".
+
+",newline,True,147,3,False,False
+math500,287,1217,let me think,3999, but,word,False,3,104,True,True
+math500,287,1321,hmm,4270,.,period,False,104,7,True,True
+math500,287,1328,wait,4294,".
+
+",newline,True,7,2,False,False
+math500,287,1330,hold on,4300,",",comma,False,2,40,True,True
+math500,287,1370,wait,4492,.,period,False,40,2,True,True
+math500,287,1372,"no,",4498,",",comma,False,2,2,True,True
+math500,287,1374,actually,4502,",",comma,False,2,158,True,True
+math500,287,1532,hmm,5011,.,period,False,158,28,False,True
+math500,287,1560,wait,5135,.,period,False,28,19,True,True
+math500,287,1579,wait,5212,".
+
+",newline,True,19,210,False,False
+math500,287,1789,hmm,5872,.,period,False,210,9,False,True
+math500,287,1798,wait,5909,".
+
+",newline,True,9,38,False,False
+math500,287,1836,wait,6091,".
+
+",newline,True,38,163,False,False
+math500,287,1999,actually,6768, but,word,False,163,34,False,True
+math500,287,2033,wait,6916,".
+
+",newline,True,34,113,False,False
+math500,287,2146,wait,7250,".
+
+",newline,True,113,60,False,False
+math500,287,2206,wait,7545,".
+
+",newline,True,60,53,False,False
+math500,287,2259,wait,7696,.,period,False,53,173,True,True
+math500,287,2432,wait,8231,"?
+
+",newline,True,173,169,False,False
+math500,287,2601,actually,8758, but,word,False,169,113,False,True
+math500,287,2714,wait,9059,But,word,False,113,87,False,True
+math500,287,2801,wait,9328,".
+
+",newline,True,87,48,False,False
+math500,287,2849,wait,9503,".
+
+",newline,True,48,383,False,False
+math500,287,3232,wait,10600,".
+
+",newline,True,383,122,False,False
+math500,287,3354,wait,10926,But,word,False,122,2,False,True
+math500,287,3356,hold on,10932,",",comma,False,2,57,True,True
+math500,287,3413,let me think,11168,But,word,False,57,201,False,True
+math500,287,3614,wait,11612,".
+
+",newline,True,201,3,False,False
+math500,287,3617,let me think,11622, but,word,False,3,76,True,True
+math500,287,3693,wait,11961,.,period,False,76,43,False,True
+math500,287,3736,wait,12141,"?
+
+",newline,True,43,2,False,False
+math500,287,3738,actually,12147,",",comma,False,2,,True,True
+math500,300,35,hmm,163,"?""",other_punct,False,,20,,True
+math500,300,55,let me think,272,.,period,False,20,193,True,True
+math500,300,248,wait,1103, But,word,False,193,6,False,True
+math500,300,254,hold on,1125,"?
+
+",newline,True,6,60,False,False
+math500,300,314,wait,1393,But,word,False,60,254,False,True
+math500,300,568,wait,2668,".
+
+",newline,True,254,5,False,False
+math500,300,573,actually,2686, that,word,False,5,100,True,True
+math500,300,673,let me think,3196,.,period,False,100,69,False,True
+math500,300,742,wait,3531, But,word,False,69,2,False,True
+math500,300,744,hold on,3537,",",comma,False,2,15,True,True
+math500,300,759,wait,3608,"?
+
+",newline,True,15,152,False,False
+math500,300,911,wait,4239,.,period,False,152,27,False,True
+math500,300,938,wait,4318,".
+
+",newline,True,27,2,False,False
+math500,300,940,hold on,4324,",",comma,False,2,11,True,True
+math500,300,951,wait,4379,.,period,False,11,8,True,True
+math500,300,959,wait,4411,".
+
+",newline,True,8,2,False,False
+math500,300,961,actually,4417,",",comma,False,2,61,True,True
+math500,300,1022,let me think,4604,But,word,False,61,208,False,True
+math500,300,1230,wait,5288,?,other_punct,False,208,2,False,True
+math500,300,1232,"no,",5294,",",comma,False,2,7,True,True
+math500,300,1239,wait,5317,".
+
+",newline,True,7,182,False,False
+math500,300,1421,wait,5900,But,word,False,182,2,False,True
+math500,300,1423,hold on,5906,",",comma,False,2,64,True,True
+math500,300,1487,wait,6170,?,other_punct,False,64,111,False,True
+math500,300,1598,wait,6475,".
+
+",newline,True,111,81,False,False
+math500,300,1679,wait,6754,But,word,False,81,125,False,True
+math500,300,1804,let me think,7362,But,word,False,125,113,False,True
+math500,300,1917,wait,7913,".
+
+",newline,True,113,3,False,False
+math500,300,1920,hold on,7923, but,word,False,3,8,True,True
+math500,300,1928,let me think,7951,",",comma,False,8,132,True,True
+math500,300,2060,wait,8500,").
+
+",newline,True,132,2,False,False
+math500,300,2062,"no,",8506,",",comma,False,2,2,True,True
+math500,300,2064,wait,8510,",",comma,False,2,2,True,True
+math500,300,2066,wait,8516,.,period,False,2,47,True,True
+math500,300,2113,wait,8604,".
+
+",newline,True,47,,False,False
+math500,339,141,hmm,495,").
+
+",newline,True,,12,,False
+math500,339,153,wait,548,...,period,False,12,2,True,True
+math500,339,155,"no,",554,",",comma,False,2,2,True,True
+math500,339,157,actually,558,",",comma,False,2,103,True,True
+math500,339,260,wait,974,".
+
+",newline,True,103,1007,False,False
+math500,339,1267,wait,3734,").
+
+",newline,True,1007,,False,False
+math500,348,24,hmm,76,).,period,False,,18,,True
+math500,348,42,let me think,167,.,period,False,18,71,True,True
+math500,348,113,wait,433,But,word,False,71,248,False,True
+math500,348,361,hmm,1172,"]
+
+",newline,True,248,283,False,False
+math500,348,644,wait,1864,.,period,False,283,11,False,True
+math500,348,655,hmm,1880,.,period,False,11,294,True,True
+math500,348,949,wait,2528,".
+
+",newline,True,294,,False,False
+math500,362,68,hmm,339,.,period,False,,4,,True
+math500,362,72,let me think,350,",",comma,False,4,357,True,True
+math500,362,429,wait,1839,".
+
+",newline,True,357,246,False,False
+math500,362,675,wait,2775,".
+
+",newline,True,246,3,False,False
+math500,362,678,hold on,2785, but,word,False,3,68,True,True
+math500,362,746,let me think,3165,",",comma,False,68,203,False,True
+math500,362,949,let me think,4128,",",comma,False,203,100,False,True
+math500,362,1049,wait,4478,".
+
+",newline,True,100,175,False,False
+math500,362,1224,hmm,5020,".
+
+",newline,True,175,,False,False
+math500,372,55,hmm,211,.,period,False,,283,,True
+math500,372,338,wait,1126,?,other_punct,False,283,2,False,True
+math500,372,340,"no,",1132,",",comma,False,2,109,True,True
+math500,372,449,actually,1398,'s,word,False,109,15,True,True
+math500,372,464,wait,1457,".
+
+",newline,True,15,70,False,False
+math500,372,534,actually,1695, but,word,False,70,59,True,True
+math500,372,593,wait,1886,?,other_punct,False,59,99,False,True
+math500,372,692,hmm,2233,".
+
+",newline,True,99,79,False,False
+math500,372,771,wait,2563,.,period,False,79,2,True,True
+math500,372,773,"no,",2569,",",comma,False,2,20,True,True
+math500,372,793,wait,2646,".
+
+",newline,True,20,2,False,False
+math500,372,795,hold on,2652,",",comma,False,2,141,True,True
+math500,372,936,wait,3221,".
+
+",newline,True,141,114,False,False
+math500,372,1050,wait,3636, But,word,False,114,57,False,True
+math500,372,1107,wait,3823, But,word,False,57,40,True,True
+math500,372,1147,wait,3971,".
+
+",newline,True,40,9,False,False
+math500,372,1156,let me think,4010,.,period,False,9,183,True,True
+math500,372,1339,wait,4675,".
+
+",newline,True,183,100,False,False
+math500,372,1439,wait,5141,".
+
+",newline,True,100,99,False,False
+math500,372,1538,wait,5568,".
+
+",newline,True,99,171,False,False
+math500,372,1709,wait,6185,".
+
+",newline,True,171,97,False,False
+math500,372,1806,wait,6547,".
+
+",newline,True,97,42,False,False
+math500,372,1848,wait,6685,But,word,False,42,145,False,True
+math500,372,1993,wait,7163,".
+
+",newline,True,145,81,False,False
+math500,372,2074,wait,7465,".
+
+",newline,True,81,7,False,False
+math500,372,2081,let me think,7490,?,other_punct,False,7,105,True,True
+math500,372,2186,wait,7866, But,word,False,105,93,False,True
+math500,372,2279,wait,8162,But,word,False,93,59,False,True
+math500,372,2338,wait,8368,".
+
+",newline,True,59,39,False,False
+math500,372,2377,wait,8495,".
+
+",newline,True,39,2,False,False
+math500,372,2379,"no,",8501,",",comma,False,2,30,True,True
+math500,372,2409,wait,8613,".
+
+",newline,True,30,119,False,False
+math500,372,2528,wait,8983,".
+
+",newline,True,119,2,False,False
+math500,372,2530,hold on,8989,",",comma,False,2,17,True,True
+math500,372,2547,wait,9067,"?
+
+",newline,True,17,10,False,False
+math500,372,2557,let me think,9114,.,period,False,10,115,True,True
+math500,372,2672,wait,9581, but,word,False,115,4,False,True
+math500,372,2676,wait,9592,".
+
+",newline,True,4,2,False,False
+math500,372,2678,actually,9598,",",comma,False,2,121,True,True
+math500,372,2799,wait,10030,".
+
+",newline,True,121,143,False,False
+math500,372,2942,wait,10454,".
+
+",newline,True,143,77,False,False
+math500,372,3019,wait,10711, but,word,False,77,2,False,True
+math500,372,3021,hold on,10717,",",comma,False,2,3,True,True
+math500,372,3024,wait,10727,".
+
+",newline,True,3,2,False,False
+math500,372,3026,"no,",10733,",",comma,False,2,58,True,True
+math500,372,3084,wait,10924,".
+
+",newline,True,58,2,False,False
+math500,372,3086,let me think,10930,",",comma,False,2,101,True,True
+math500,372,3187,wait,11272,".
+
+",newline,True,101,171,False,False
+math500,372,3358,wait,11825,".
+
+",newline,True,171,23,False,False
+math500,372,3381,hmm,11906,.,period,False,23,5,True,True
+math500,372,3386,wait,11922,".
+
+",newline,True,5,72,False,False
+math500,372,3458,wait,12156,".
+
+",newline,True,72,167,False,False
+math500,372,3625,wait,12699,".
+
+",newline,True,167,8,False,False
+math500,372,3633,wait,12735,.,period,False,8,65,True,True
+math500,372,3698,wait,12970,".
+
+",newline,True,65,170,False,False
+math500,372,3868,wait,13459,"?
+
+",newline,True,170,178,False,False
+math500,372,4046,wait,14068,".
+
+",newline,True,178,,False,False
+math500,488,46,hmm,165,.,period,False,,4,,True
+math500,488,50,let me think,176,",",comma,False,4,276,True,True
+math500,488,326,hmm,1052,.,period,False,276,16,False,True
+math500,488,342,hmm,1080,.,period,False,16,142,True,True
+math500,488,484,wait,1340,").
+
+",newline,True,142,112,False,False
+math500,488,596,hold on,1622,But,word,False,112,188,False,True
+math500,488,784,wait,2197,".
+
+",newline,True,188,290,False,False
+math500,488,1074,let me think,3020,",",comma,False,290,324,False,True
+math500,488,1398,wait,4075,?,other_punct,False,324,2,False,True
+math500,488,1400,"no,",4081,",",comma,False,2,141,True,True
+math500,488,1541,"no,",4577, But,word,False,141,34,False,True
+math500,488,1575,wait,4694,".
+
+",newline,True,34,384,False,False
+math500,488,1959,wait,5668,.,period,False,384,2,False,True
+math500,488,1961,hold on,5674,",",comma,False,2,18,True,True
+math500,488,1979,wait,5725,.,period,False,18,8,True,True
+math500,488,1987,wait,5757,"?
+
+",newline,True,8,58,False,False
+math500,488,2045,hmm,5902,.,period,False,58,13,True,True
+math500,488,2058,wait,5952,"?
+
+",newline,True,13,82,False,False
+math500,488,2140,wait,6107,".
+
+",newline,True,82,10,False,False
+math500,488,2150,wait,6158,.,period,False,10,47,True,True
+math500,488,2197,wait,6268,".
+
+",newline,True,47,2,False,False
+math500,488,2199,"no,",6274,",",comma,False,2,2,True,True
+math500,488,2201,hold on,6278,",",comma,False,2,3,True,True
+math500,488,2204,"no,",6287,",",comma,False,3,70,True,True
+math500,488,2274,wait,6449,".
+
+",newline,True,70,3,False,False
+math500,488,2277,wait,6459, but,word,False,3,82,True,True
+math500,488,2359,wait,6680,".
+
+",newline,True,82,8,False,False
+math500,488,2367,hmm,6711,?,other_punct,False,8,14,True,True
+math500,488,2381,wait,6775,".
+
+",newline,True,14,65,False,False
+math500,488,2446,wait,6924,"?
+
+",newline,True,65,2,False,False
+math500,488,2448,let me think,6930,",",comma,False,2,96,True,True
+math500,488,2544,actually,7185, but,word,False,96,81,False,True
+math500,488,2625,wait,7435,".
+
+",newline,True,81,57,False,False
+math500,488,2682,wait,7602,.,period,False,57,2,True,True
+math500,488,2684,"no,",7608,",",comma,False,2,105,True,True
+math500,488,2789,wait,7858,".
+
+",newline,True,105,25,False,False
+math500,488,2814,wait,7968,".
+
+",newline,True,25,139,False,False
+math500,488,2953,wait,8342,".
+
+",newline,True,139,34,False,False
+math500,488,2987,actually,8422, but,word,False,34,81,True,True
+math500,488,3068,wait,8592,?,other_punct,False,81,2,True,True
+math500,488,3070,"no,",8598,",",comma,False,2,9,True,True
+math500,488,3079,wait,8622,.,period,False,9,2,True,True
+math500,488,3081,"no,",8628,",",comma,False,2,44,True,True
+math500,488,3125,wait,8722,".
+
+",newline,True,44,83,False,False
+math500,488,3208,wait,8906,".
+
+",newline,True,83,39,False,False
+math500,488,3247,wait,9017,.,period,False,39,2,True,True
+math500,488,3249,"no,",9023,",",comma,False,2,54,True,True
+math500,488,3303,wait,9148,?,other_punct,False,54,7,True,True
+math500,488,3310,wait,9170,".
+
+",newline,True,7,2,False,False
+math500,488,3312,"no,",9176,",",comma,False,2,97,True,True
+math500,488,3409,wait,9386,".
+
+",newline,True,97,87,False,False
+math500,488,3496,wait,9595,.,period,False,87,2,True,True
+math500,488,3498,"no,",9601,",",comma,False,2,149,True,True
+math500,488,3647,wait,9951,".
+
+",newline,True,149,88,False,False
+math500,488,3735,wait,10184,".
+
+",newline,True,88,13,False,False
+math500,488,3748,wait,10247,".
+
+",newline,True,13,183,False,False
+math500,488,3931,wait,10717,.,period,False,183,2,False,True
+math500,488,3933,"no,",10723,",",comma,False,2,13,True,True
+math500,488,3946,wait,10750,.,period,False,13,2,True,True
+math500,488,3948,"no,",10756,",",comma,False,2,9,True,True
+math500,488,3957,wait,10780,.,period,False,9,6,True,True
+math500,488,3963,wait,10805,".
+
+",newline,True,6,2,False,False
+math500,488,3965,"no,",10811,",",comma,False,2,,True,True
