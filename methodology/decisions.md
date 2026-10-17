@@ -20,7 +20,7 @@ Each design decision, with its date and the reason behind it. The rules themselv
 
 | D10 | Looping traces (a 30-token window of generated ids repeated 3+ times verbatim) are excluded. Traces that hit the length cap without looping are kept and flagged. | 2026-10-17 | A verbatim loop produces near-duplicate events that inflate counts and let a probe memorize. Paraphrased circling produces distinct events. Pilot: 5 of 30 loop (4 at the length cap, 1 finished normally); 4 more hit the cap without looping; 9 of 30 affected in all. Looping is not a subset of truncation, so both flags are kept. |
 
-| D11 | Onsets are defined by the paragraph rule: the first hit in a paragraph is the onset, later hits in the same paragraph merge into it. A 10-token window rule is a pre-declared exploratory sensitivity check. | 2026-10-17 | The model delimits its own reasoning steps with blank lines, so the rule is structural and needs no tuned number. Pilot: 192 of 619 within-trace hits share a paragraph with an earlier hit, and nearly half of those are within 3 tokens ("Wait, hold on"). The rule is conservative: it merges some later reconsiderations in the same step, which costs count, not bias. |
+| D11 | Onsets are defined by the paragraph rule: the first hit in a paragraph is the onset, later hits in the same paragraph merge into it. No alternative onset rule is tested in this experiment. | 2026-10-17 | The model delimits its own reasoning steps with blank lines, so the rule is structural and needs no tuned number. Pilot: 192 of 619 within-trace hits share a paragraph with an earlier hit, and nearly half of those are within 3 tokens ("Wait, hold on"). The rule is conservative: it merges some later reconsiderations in the same step, which costs count, not bias. |
 
 ## Parked, with revival conditions
 
@@ -31,3 +31,4 @@ Each design decision, with its date and the reason behind it. The rules themselv
 | Incremental comparison (the probe added on top of the rival) | A band where the probe is well above chance but doesn't beat the rival |
 | Replication on DeepSeek-R1-Distill-Qwen-7B | A positive result on the 1.5B model |
 | Probe score as a predictor of answer correctness | A positive band and at least 50 wrong answers in the test set |
+| Window-rule onsets (merge hits within 10 tokens) as an alternative to the paragraph rule | A positive band, and a reader or the writeup needs to know whether the verdict depends on the onset rule |

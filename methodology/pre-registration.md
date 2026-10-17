@@ -78,14 +78,14 @@ Changes before freeze, including those prompted by feedback.
 - Same weights and dtype as generation.
 
 **Dataset.** GSM8K (D2), split [DECIDE: test / train / both], problems drawn by seeded random sample.
-- **Trace count:** [FROM PILOT: the smallest N whose projected test-onset counts reach the minimum in bands 2–5, 6–10 and 11–20], capped at [DECIDE].
-- **MATH500 switch:** if [FROM PILOT] projects GSM8K can't reach the minimum at the cap, switch to MATH500 under the same rules. (D2)
+- **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of bands 2–5, 6–10 and 11–20, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous onset (or the reasoning start, for a first onset) lies more than the band's upper bound tokens back (pilot gap distribution), and m the minimum events (§11). Band 21–40 is reported whatever its count. Computed by script in the count handoff and recorded here. Capped at [DECIDE].
+- **MATH500 switch:** if N exceeds the cap, switch to MATH500 and recompute N with its pilot values (o = 175/12, its own e_b). (D2)
 - **Exclusions:**
   - pilot problems: [DECIDE: exclude / include]
   - looping traces: **excluded.** A trace loops if any window of 30 consecutive generated token ids inside the reasoning span occurs 3 or more times verbatim. Their hits are near-duplicate examples. (Adeline, 2026-10-17. Pilot: 5 of 30; 4 of those also hit the length cap, 1 finished normally. Looping and truncation are independent flags.)
   - traces that hit the length cap without looping: **kept**, flagged `truncated`; positions without a full 100-token lookahead cannot be negatives (§6). (Adeline, 2026-10-17. Pilot: 4 of 30. In total 9 of 30 pilot traces are looped, truncated, or both.)
   - Every exclusion is counted and reported.
-- **Split by problem:** train / validation / test ≈ 50 / 15 / 35, final ratio [FROM PILOT], split seed [DECIDE]. (D4c-2)
+- **Split by problem:** train / validation / test = 50 / 15 / 35, unless N × (1 − ℓ) × o × 0.15 < 100 projected validation onsets, in which case 45 / 20 / 35. Split seed [DECIDE]. (D4c-2)
 - **Accuracy:** the `\boxed{}` answer is checked against GSM8K's, per trace. Reported as context only. (D5)
 
 ---
@@ -96,7 +96,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Onset token.** The first generated token whose span covers the marker's first character.
 
-**Clustering.** Paragraph rule: the first hit in a paragraph (text between `\n\n` delimiters) is the onset; later hits in the same paragraph merge into it and are not onsets. The unit is the model's own reasoning step; an onset is the step at which it turns into a reconsideration. (Adeline, 2026-10-17.) **Sensitivity, exploratory:** verdicts recomputed under a window rule: a hit is an onset unless the previous hit in the same trace (merged or not) has an onset-token index within 10 of its own (difference ≤ 10). Pilot counts: 192 of 619 within-trace hits share a paragraph with an earlier hit; the paragraph rule yields 457 onsets from 649 hits; the window rule as stated yields 503 (4 hits sit at exactly 10 tokens, so `< 10` would give 507).
+**Clustering.** Paragraph rule: the first hit in a paragraph (text between `\n\n` delimiters) is the onset; later hits in the same paragraph merge into it and are not onsets. The unit is the model's own reasoning step; an onset is the step at which it turns into a reconsideration. (Adeline, 2026-10-17.) **Not tested here:** a window rule (a hit is an onset unless the previous hit in the same trace has an onset-token index within 10 of its own, difference ≤ 10) is parked; see `decisions.md`. Pilot counts: 192 of 619 within-trace hits share a paragraph with an earlier hit; the paragraph rule yields 457 onsets from 649 hits (the parked window rule would yield 503).
 - Merged markers are not onsets.
 - No position before a merged marker can be a negative (§6).
 
@@ -113,9 +113,9 @@ Changes before freeze, including those prompted by feedback.
 | Negative | No marker of any kind (onset or merged) within the next 100 tokens (D4c-1) |
 | Excluded (gray zone) | d(t) ∈ 41–100 |
 
-- **Quiet-zone fallback:** 100 → 60 tokens if [DECIDE: count rule, e.g. fewer than X available negatives per positive in a band].
+- **Quiet-zone fallback:** 100 tokens, unless for any token kind the pilot count of negative positions (no marker in the next 100 tokens) is smaller than the pilot count of positive positions of that kind in the largest band; then 60. Computed in the count handoff.
 - **Matching:**
-  - Each positive is paired with a negative of the same token kind. Kinds: [FROM PILOT: categories of tokens preceding onsets].
+  - Each positive is paired with a negative of the same token kind, the kind of the token *at* the position. Candidate kinds: newline, period, comma, other_punct, digit, word, other. A kind stands on its own if at least 20 pilot positive positions (across all bands) fall in it; rarer kinds merge into `other`. Computed in the count handoff.
   - Ratio: [DECIDE]. Source: [DECIDE: same trace when available / any trace in the same split].
 - **End of reasoning:** tokens within 100 tokens of the end of reasoning are [DECIDE: negatives if the trace ended naturally / excluded].
 - **Same examples for everyone:** the probe and every rival use exactly the same examples.
@@ -175,8 +175,8 @@ One logistic regression on the combined features below, trained on the same trai
 
 ### Gate (D4c-3)
 Run on [DECIDE: validation / test] problems at d = 1.
-1. **The model's own odds separate the classes.** Score = the summed probability of the token ids that begin a lexicon marker ([FROM PILOT]). It must reach AUROC ≥ [DECIDE: final floor, provisional 0.75; checked on pilot data].
-2. **The probe gets close.** Best-layer probe AUROC ≥ (model-odds AUROC − 0.05).
+1. **The model's own odds separate the classes.** Score = the summed probability over the set of generated token ids that begin a lexicon-marker hit in the experiment's own traces (recomputed from the labels, not fixed from the pilot; the pilot set after D10/D11 was 12 ids). It must reach AUROC ≥ [DECIDE: final floor; provisional 0.75. Pilot check (c3, 2026-10-17): 0.962, 95% interval 0.947–0.977, on 289 paragraph-rule onsets with exact same-kind negatives].
+2. **The probe gets close.** Best-layer probe AUROC ≥ (model-odds AUROC − 0.10). (Adeline, 2026-10-17. The clause exists to catch wiring errors, which show as drops of 0.2 or more; with model odds at 0.96 on the pilot, a 0.05 margin would have demanded a 0.91 probe and invited tuning a merely-short probe until it passed.)
 
 **Failure:** stop, fix, log in §16, rerun. Nothing at d > 1 is computed until the gate passes.
 
@@ -189,7 +189,7 @@ Run on [DECIDE: validation / test] problems at d = 1.
 | Null | Upper end < δ (includes "real but under δ") |
 | Inconclusive | Lower end ≤ 0 **and** upper end ≥ δ |
 
-- **Minimum events:** [FROM PILOT: the number of test onsets per band at which the projected interval width allows a null at δ].
+- **Minimum events:** m = the smallest number of test-split onsets per band such that the half-width of the 98.75% interval on the lift is ≤ δ, using the Hanley–McNeil standard error of an AUROC of 0.70 on m positives and m matched negatives for each of the two AUROCs, combined with an assumed correlation of 0.5 between them (so SE_lift = SE of one AUROC). The assumed AUROC and correlation are stated, conservative, and fixed before any probe exists. Computed by script in the count handoff and recorded here.
   - A band below the minimum can only be positive or inconclusive, and the writeup says so.
 - **Secondary:** verdicts at δ = 0.03 and 0.08. Reported, never the headline.
 - **Claim:** the set of bands with a positive verdict. Every band's verdict and interval are reported.
@@ -255,7 +255,7 @@ Anything like that is a new, separately pre-registered follow-up.
 | Date | What was touched | What was seen |
 |---|---|---|
 | 2026-10-16 | Pilot: 15 GSM8K + 15 MATH500 traces generated with the §4 settings; lexicon hits counted; traces read by eye. Commit `fef6791`. | Counts only (`results/c1_summary.md`): 649 hits, 10.1 per 1k reasoning tokens; 8 traces hit the 4096 cap, 5 loop; "wait" 64.9% of hits; 47% of hits paragraph-initial; 68% of gaps ≥ 20 tokens; negatives pool 25,867 at 100 tokens. No hidden states, no probes. |
-| | Pilot: extraction check + model's own odds at d = 1 (planned) | |
+| 2026-10-17 | c3: teacher-forced hidden states on the 25 non-looped pilot traces; read at onset − 1 and at matched negatives (no marker in the next 100 tokens) only, plus 50 marker-unrelated positions for the extraction check. Model's own odds and a logit lens per layer. No classifier trained. Commit `ee566de`. | Gate input: model-odds AUROC 0.962 (0.947–0.977) pooled; the marker becomes readable in the model's own vocabulary from layer ~23 of 28; nothing at distances 2–100 was read. |
 
 ---
 
