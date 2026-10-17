@@ -16,8 +16,9 @@ The test compares linear probes on the residual stream (simple classifiers readi
 
 - [`methodology/pre-registration.md`](methodology/pre-registration.md): the full design.
 - [`methodology/decisions.md`](methodology/decisions.md): each design decision, with its date and reason.
+- [`results/count_calculations.md`](results/count_calculations.md): the pilot-derived numbers — N = 190 traces, m = 338 onsets per band.
 
-The design freezes at a tagged commit, `prereg-freeze`. After that, changes go only to the pre-registration's deviations log. No traces have been generated yet; data contact before freeze is logged in §15 of the pre-registration.
+The design freezes at a tagged commit, `prereg-freeze`. After that, changes go only to the pre-registration's deviations log. A 30-trace pilot (c1) and a distance-1 check (c3) have run; no probe or rival has been trained, and every data contact before freeze is logged in §15 of the pre-registration.
 
 Feedback is welcome: please open an issue. The window opens when the design post goes up on LessWrong and closes seven days later; the dates will be recorded here and in the pre-registration at posting.
 
@@ -37,8 +38,9 @@ Feedback is welcome: please open an issue. The window opens when the design post
 | `scripts/` | Runnable scripts. `smoke_test.py` checks the environment |
 | `tests/` | `pytest` tests |
 | `notes/` | Working notes. `environment.md` records the machine, package versions and pinned hashes |
-| `notebooks/`, `results/` | Analysis notebooks and results (empty for now) |
-| `traces/` | Generated reasoning traces (empty for now) |
+| `notebooks/` | Analysis notebooks |
+| `results/` | Pilot results: `c1_summary.md` (counts), `c3_gate.md` and `c3_logit_lens.png` (gate input at distance 1), `count_calculations.md` (trace count, minimum events, split) |
+| `traces/` | Generated reasoning traces; `traces/pilot/` holds the 30 pilot traces |
 
 Model weights, the Hugging Face cache and activations are never committed.
 
