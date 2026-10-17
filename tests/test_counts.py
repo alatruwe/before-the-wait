@@ -4,6 +4,7 @@ from __future__ import annotations
 import pytest
 
 from before_the_wait.counts import (
+    apply_margin,
     hanley_mcneil_se,
     marker_token_span,
     minimum_events,
@@ -59,6 +60,31 @@ def test_trace_count_rounds_up():
 def test_trace_count_satisfies_the_inequality():
     n = trace_count(250, 0.35, 5 / 30, 114 / 13, 0.8)
     assert n * 0.35 * (1 - 5 / 30) * (114 / 13) * 0.8 >= 250
+
+
+def test_apply_margin_the_preregistered_case():
+    """D12: 157 -> ceil(1.2*157)=189 -> rounded up to ten = 190."""
+    assert apply_margin(157) == 190
+
+
+def test_apply_margin_leaves_an_exact_multiple_alone():
+    # 150 * 1.2 = 180 exactly, already a multiple of ten.
+    assert apply_margin(150) == 180
+
+
+def test_apply_margin_rounds_up_not_to_nearest():
+    # 101 * 1.2 = 121.2 -> 122 -> 130, not 120.
+    assert apply_margin(101) == 130
+
+
+def test_apply_margin_is_monotone():
+    values = [apply_margin(n) for n in range(100, 200)]
+    assert values == sorted(values)
+
+
+def test_apply_margin_never_shrinks():
+    for n in (1, 7, 100, 157, 999):
+        assert apply_margin(n) >= n
 
 
 def test_projected_validation_onsets():

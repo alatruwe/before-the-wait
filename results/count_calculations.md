@@ -9,12 +9,13 @@ number below is produced by a rule already written in
 | Quantity | Value | Rule |
 |---|---|---|
 | Minimum events m (δ = 0.05) | **338** per band | §11 |
-| Trace count N | **143** gsm8k traces | §4 |
-| Binding band | 11-20 | §4 |
+| Trace count from the rule, N_rule | **157** | §4 (all four bands) |
+| **Final trace count N** | **190** gsm8k traces | §4 / D12 (×1.2, up to the nearest 10) |
+| Binding band | 21-40 | §4 |
 | Split | **50 / 15 / 35** | §4 |
 | Quiet zone | **100 tokens** | §6 |
 | Matching kinds | **newline, period, comma, other_punct, digit, word, other** | §6 |
-| Projected generation | **0.9 h** | handoff |
+| Projected generation | **1.2 h** | handoff |
 
 ## Inputs
 
@@ -25,7 +26,8 @@ number below is produced by a rule already written in
 | ℓ | looped-trace share | 5/30 = 0.1667 | `c1_traces.csv` |
 | o (GSM8K) | onsets per non-looped trace | 114/13 = 8.7692 | `c1_onsets_paragraph.csv` |
 | o (MATH500) | onsets per non-looped trace | 175/12 = 14.5833 | `c1_onsets_paragraph.csv` |
-| cap | §4 cap on N | 1000 (**not set in the pre-registration**; stand-in per the handoff) | §4 `[DECIDE]` |
+| margin | D12 inflation on N_rule | ×1.2, rounded up to the nearest 10 | §4 / D12 |
+| cap | §4 cap on N | 1000 | §4 / D12 |
 
 ## 1. Minimum events m (§11)
 
@@ -70,8 +72,9 @@ number below is produced by a rule already written in
 ## 3. Trace count N (§4)
 
 > N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for
-> each of bands 2–5, 6–10 and 11–20. Band 21–40 is reported whatever its
-> count.
+> each of the four bands ... The final count is that N inflated by 20%
+> and rounded up to the nearest ten, because o is estimated from 13
+> pilot traces. Capped at 1,000. (D12)
 
 With m = 338, r = 0.35, ℓ = 0.1667, o = 8.7692 (GSM8K):
 
@@ -80,21 +83,32 @@ With m = 338, r = 0.35, ℓ = 0.1667, o = 8.7692 (GSM8K):
 | 2-5 | 1.0000 | 2.5577 | 133 | yes |
 | 6-10 | 0.9649 | 2.4679 | 137 | yes |
 | 11-20 | 0.9298 | 2.3782 | 143 | yes |
-| 21-40 | 0.8421 | 2.1538 | 157 | no (reported only) |
+| 21-40 | 0.8421 | 2.1538 | 157 | yes |
 
-**Binding band: 11-20 → N = 143 GSM8K traces.**
+**Binding band: 21-40 → N_rule = 157 GSM8K traces.**
+
+D12 margin: ceil(1.2 × 157) = 189, rounded up to the nearest 10 → **N = 190**.
 
 Switch rule: N ≤ cap (1000), so the MATH500 switch does not apply.
 
-For the record, the same computation on MATH500 (o = 14.5833) gives N = 85 at binding band 11-20.
+For the record, the same computation on MATH500 (o = 14.5833) gives N_rule = 96 at binding band 21-40, N = 120.
+
+Projected test-split onsets per band at the final N, against m:
+
+| band | projected test onsets at N | ≥ m? |
+|---|---|---|
+| 2-5 | 486.0 | yes |
+| 6-10 | 468.9 | yes |
+| 11-20 | 451.9 | yes |
+| 21-40 | 409.2 | yes |
 
 ## 4. Split (§4)
 
 > train / validation / test = 50 / 15 / 35, unless N × (1 − ℓ) × o × 0.15
 > < 100 projected validation onsets, in which case 45 / 20 / 35.
 
-- N × (1 − ℓ) × o × 0.15 = 143 × 0.8333 × 8.7692 × 0.15 = **156.8** projected validation onsets
-- 156.8 ≥ 100 → **50 / 15 / 35**
+- N × (1 − ℓ) × o × 0.15 = 190 × 0.8333 × 8.7692 × 0.15 = **208.3** projected validation onsets
+- 208.3 ≥ 100 → **50 / 15 / 35**
 
 ## 5. Positive positions by token kind (§6)
 
@@ -152,9 +166,9 @@ Kinds failing the test: none → **quiet zone = 100 tokens**.
 
 ## 8. Generation time projection
 
-- N = 143 traces
+- N = 190 traces
 - mean new tokens per non-looped gsm8k pilot trace = 1480.5
-- at 63 tokens/second → **0.9 hours** (56 minutes)
+- at 63 tokens/second → **1.2 hours** (74 minutes)
 
-Using the mean over all 25 non-looped pilot traces (2041.5 tokens) instead gives 1.3 hours.
+Using the mean over all 25 non-looped pilot traces (2041.5 tokens) instead gives 1.7 hours.
 

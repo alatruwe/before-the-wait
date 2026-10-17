@@ -17,8 +17,16 @@ BANDS: list[tuple[str, int, int]] = [
     ("11-20", 11, 20),
     ("21-40", 21, 40),
 ]
-# §4 requires N to satisfy these three; 21-40 is reported whatever its count.
-REQUIRED_BANDS = ("2-5", "6-10", "11-20")
+# §4 as amended by D12 (2026-10-17): all four bands must be satisfied. It
+# previously required only the first three, with 21-40 reported whatever its
+# count — which left that band unable to return a null.
+REQUIRED_BANDS = ("2-5", "6-10", "11-20", "21-40")
+
+# D12: the rule's N is inflated by this margin and rounded up to the nearest
+# ROUND_TO, because o is estimated from only 13 pilot traces.
+MARGIN = 1.2
+ROUND_TO = 10
+CAP = 1000
 
 
 def z_for_interval(interval: float = INTERVAL) -> float:
@@ -67,6 +75,16 @@ def trace_count(m: int, r: float, loop_share: float, onsets_per_trace: float,
     if per_trace <= 0:
         raise ValueError("non-positive onsets per trace")
     return math.ceil(m / per_trace)
+
+
+def apply_margin(n_rule: int, margin: float = MARGIN, round_to: int = ROUND_TO) -> int:
+    """§4/D12: ceil(margin * N_rule), then round up to the nearest `round_to`.
+
+    Both steps round up, so an exact multiple is left alone: 150 -> 180, not
+    190.
+    """
+    inflated = math.ceil(n_rule * margin)
+    return math.ceil(inflated / round_to) * round_to
 
 
 def projected_validation_onsets(n: int, loop_share: float, onsets_per_trace: float,

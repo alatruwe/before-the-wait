@@ -26,8 +26,12 @@ from transformers import AutoTokenizer  # noqa: E402
 
 from before_the_wait.counts import (  # noqa: E402
     BANDS,
+    CAP,
     INTERVAL,
+    MARGIN,
     REQUIRED_BANDS,
+    ROUND_TO,
+    apply_margin,
     hanley_mcneil_se,
     marker_token_span,
     minimum_events,
@@ -45,7 +49,6 @@ DELTA = 0.05
 DELTA_SECONDARY = (0.03, 0.08)
 TEST_SHARE = 0.35
 VALIDATION_SHARE = 0.15
-CAP = 1000  # §4 says "Capped at [DECIDE]"; not set, so this is the stated stand-in.
 GENERATION_RATE = 63.0  # tokens/second, from the handoff
 KIND_THRESHOLD = 20  # §6: a kind stands alone at >= 20 pilot positive positions
 
@@ -116,14 +119,19 @@ def main() -> None:
 
     n_gsm = per_band_n(o_gsm, elig["gsm8k"])
     binding_band = max(REQUIRED_BANDS, key=lambda b: n_gsm[b])
-    n_required = n_gsm[binding_band]
-    switched = n_required > CAP
+    n_rule_gsm = n_gsm[binding_band]
+    n_final_gsm = apply_margin(n_rule_gsm)
+
     n_math = per_band_n(o_math, elig["math500"])
     binding_math = max(REQUIRED_BANDS, key=lambda b: n_math[b])
+    n_rule_math = n_math[binding_math]
 
-    final_n = n_math[binding_math] if switched else n_required
+    switched = n_final_gsm > CAP
+    n_rule = n_rule_math if switched else n_rule_gsm
+    final_n = min(apply_margin(n_rule_math), CAP) if switched else n_final_gsm
     final_o = o_math if switched else o_gsm
     final_ds = "math500" if switched else "gsm8k"
+    binding = binding_math if switched else binding_band
 
     # ---------- 4. split ----------
     val_onsets = projected_validation_onsets(final_n, loop_share, final_o, VALIDATION_SHARE)
@@ -215,8 +223,10 @@ def main() -> None:
     w("| Quantity | Value | Rule |")
     w("|---|---|---|")
     w(f"| Minimum events m (δ = {DELTA}) | **{m_main}** per band | §11 |")
-    w(f"| Trace count N | **{final_n}** {final_ds} traces | §4 |")
-    w(f"| Binding band | {binding_math if switched else binding_band} | §4 |")
+    w(f"| Trace count from the rule, N_rule | **{n_rule}** | §4 (all four bands) |")
+    w(f"| **Final trace count N** | **{final_n}** {final_ds} traces | §4 / D12 "
+      f"(×{MARGIN}, up to the nearest {ROUND_TO}) |")
+    w(f"| Binding band | {binding} | §4 |")
     w(f"| Split | **{split}** | §4 |")
     w(f"| Quiet zone | **{quiet_zone} tokens** | §6 |")
     w(f"| Matching kinds | **{', '.join(final_kinds)}** | §6 |")
@@ -232,7 +242,8 @@ def main() -> None:
     w(f"| ℓ | looped-trace share | {len(looped)}/{len(trace_rows)} = {loop_share:.4f} | `c1_traces.csv` |")
     w(f"| o (GSM8K) | onsets per non-looped trace | {sum(len(onsets[k]) for k in kept if k[0] == 'gsm8k')}/{n_gsm_kept} = {o_gsm:.4f} | `c1_onsets_paragraph.csv` |")
     w(f"| o (MATH500) | onsets per non-looped trace | {sum(len(onsets[k]) for k in kept if k[0] == 'math500')}/{n_math_kept} = {o_math:.4f} | `c1_onsets_paragraph.csv` |")
-    w(f"| cap | §4 cap on N | {CAP} (**not set in the pre-registration**; stand-in per the handoff) | §4 `[DECIDE]` |")
+    w(f"| margin | D12 inflation on N_rule | ×{MARGIN}, rounded up to the nearest {ROUND_TO} | §4 / D12 |")
+    w(f"| cap | §4 cap on N | {CAP} | §4 / D12 |")
     w("")
 
     w("## 1. Minimum events m (§11)")
@@ -274,8 +285,9 @@ def main() -> None:
     w("## 3. Trace count N (§4)")
     w("")
     w("> N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for")
-    w("> each of bands 2–5, 6–10 and 11–20. Band 21–40 is reported whatever its")
-    w("> count.")
+    w("> each of the four bands ... The final count is that N inflated by 20%")
+    w("> and rounded up to the nearest ten, because o is estimated from 13")
+    w("> pilot traces. Capped at 1,000. (D12)")
     w("")
     w(f"With m = {m_main}, r = {TEST_SHARE}, ℓ = {loop_share:.4f}, o = {o_gsm:.4f} (GSM8K):")
     w("")
@@ -287,13 +299,25 @@ def main() -> None:
         req = "yes" if name in REQUIRED_BANDS else "no (reported only)"
         w(f"| {name} | {e:.4f} | {per:.4f} | {n_gsm[name]} | {req} |")
     w("")
-    w(f"**Binding band: {binding_band} → N = {n_required} GSM8K traces.**")
+    w(f"**Binding band: {binding_band} → N_rule = {n_rule_gsm} GSM8K traces.**")
+    w("")
+    w(f"D12 margin: ceil({MARGIN} × {n_rule_gsm}) = {__import__('math').ceil(MARGIN * n_rule_gsm)}, "
+      f"rounded up to the nearest {ROUND_TO} → **N = {n_final_gsm}**.")
     w("")
     w(f"Switch rule: N {'>' if switched else '≤'} cap ({CAP}), so the MATH500 switch "
       f"{'**applies**' if switched else 'does not apply'}.")
     w("")
     w(f"For the record, the same computation on MATH500 (o = {o_math:.4f}) gives "
-      f"N = {n_math[binding_math]} at binding band {binding_math}.")
+      f"N_rule = {n_rule_math} at binding band {binding_math}, N = {apply_margin(n_rule_math)}.")
+    w("")
+    w("Projected test-split onsets per band at the final N, against m:")
+    w("")
+    w("| band | projected test onsets at N | ≥ m? |")
+    w("|---|---|---|")
+    for name, _lo, hi in BANDS:
+        e = elig[final_ds][hi][0]
+        proj = final_n * TEST_SHARE * (1 - loop_share) * final_o * e
+        w(f"| {name} | {proj:.1f} | {'yes' if proj >= m_main else '**no**'} |")
     w("")
 
     w("## 4. Split (§4)")
