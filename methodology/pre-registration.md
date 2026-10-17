@@ -28,7 +28,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Scope.**
 - One model, one dataset.
-- The label set is the FrictionMap v1 marker lexicon (13 markers). It is expected to be mostly "wait" on this model: Zhu et al. report "wait" as 97.2% of hits on their own 17-keyword list (this model, MATH500, Appendix B), and that list shares only "wait" with the v1 lexicon. The actual share per marker is counted in the pilot and reported; it does not change the label set.
+- The label set is the FrictionMap v1 marker lexicon (13 markers). It is expected to be mostly "wait" on this model: Zhu et al. report "wait" as 97.2% of hits on their own 17-keyword list (this model, MATH500, Appendix B), and that list shares only "wait" with the v1 lexicon. The actual share per marker is counted in the pilot and reported; it does not change the label set. **Pilot (2026-10-16, 30 traces, 649 hits): "wait" 64.9%, "hmm" 12.2%, "let me think" 8.0%, "hold on" 5.5%, "no," 4.8%, "actually" 4.5%, "however" 0.2%; six markers never fired.**
 - Claims are about this model only.
 
 **Not tested here:**
@@ -66,12 +66,12 @@ Changes before freeze, including those prompted by feedback.
 
 | Setting | Value |
 |---|---|
-| Prompt and chat template | [DECIDE] |
-| Temperature | [DECIDE] |
-| Top-p | [DECIDE] |
-| Max new tokens | [DECIDE] |
-| Samples per problem | [DECIDE] |
-| Generation seed | [DECIDE] |
+| Prompt and chat template | No system prompt. User turn: `<problem>\nPlease reason step by step, and put your final answer within \boxed{}.` The tokenizer's chat template with `add_generation_prompt=True`; it appends `<｜Assistant｜><think>\n`, so generation starts inside the reasoning. (Adeline, 2026-10-16) |
+| Temperature | 0.6 (Adeline, 2026-10-16) |
+| Top-p | 0.95 (Adeline, 2026-10-16) |
+| Max new tokens | 4096 (Adeline, 2026-10-16) |
+| Samples per problem | 1 (Adeline, 2026-10-16) |
+| Generation seed | `torch.manual_seed` and `torch.mps.manual_seed` with 20261016 + i for the i-th problem in draw order. Reproducibility verified in the pilot (identical ids on a repeated problem). (Adeline, 2026-10-16) |
 
 **Activations.**
 - Extracted with a teacher-forced pass over the *generated token ids*, reused exactly. The text is never re-tokenized.
@@ -254,7 +254,7 @@ Anything like that is a new, separately pre-registered follow-up.
 
 | Date | What was touched | What was seen |
 |---|---|---|
-| | Pilot: 15 GSM8K + 15 MATH500 traces (planned) | |
+| 2026-10-16 | Pilot: 15 GSM8K + 15 MATH500 traces generated with the §4 settings; lexicon hits counted; traces read by eye. Commit `fef6791`. | Counts only (`results/c1_summary.md`): 649 hits, 10.1 per 1k reasoning tokens; 8 traces hit the 4096 cap, 5 loop; "wait" 64.9% of hits; 47% of hits paragraph-initial; 68% of gaps ≥ 20 tokens; negatives pool 25,867 at 100 tokens. No hidden states, no probes. |
 | | Pilot: extraction check + model's own odds at d = 1 (planned) | |
 
 ---
