@@ -4,6 +4,7 @@
 - **Feedback window:** opens when the design post is published on LessWrong, closes seven days later. Dates: [TBD at posting].
 - **Freeze:** happens when the window has closed, the pilot-count numbers are set, and no [DECIDE] slot is left. The freeze is a tagged commit (`prereg-freeze`). After it, changes go only to the deviations log (§16).
 - **Decision IDs** (F, D1, D2…) refer to `decisions.md`.
+- **Changelog** for the draft period: §17.
 
 **Slot legend**
 - **[DECIDE]**: open. Decided before freeze.
@@ -12,30 +13,13 @@
 
 ---
 
-## 0. Changelog (draft period)
-
-Changes before freeze, including those prompted by feedback.
-
-| Date | Section | Change | Raised by |
-|---|---|---|---|
-| 2026-10-16 | §1 | "Effectively 'wait'" reworded: Zhu's 97.2% is over Zhu's own 17-keyword list, not this lexicon; the share for these labels is measured in the pilot. | Claude Code review of handoff 01 |
-| 2026-10-16 | §4 | Generation settings recorded as decided (fixed by dispatching the pilot). | Adeline |
-| 2026-10-16 | §15 | Pilot data-contact row added. | Adeline |
-| 2026-10-17 | §4 | D10: looping traces excluded; truncated-but-not-looping traces kept and flagged. | Adeline |
-| 2026-10-17 | §5 | D11: onsets defined by the paragraph rule. | Adeline |
-| 2026-10-17 | §4, §5 | Pilot counts corrected before push: 4 truncated-without-looping (not 3); window-rule count stated with its exact definition (503 at ≤ 10, not 534). | Claude Code verification of handoff 03 |
-| 2026-10-17 | §5 | Window-rule onsets moved from a pre-declared sensitivity check to parked (not tested in this experiment). | Adeline |
-| 2026-10-17 | §11, §15 | Gate: pilot check recorded (model odds 0.962); probe margin set to 0.10 (was 0.05); c3 data-contact row added. | Adeline, after the c3 report |
-| 2026-10-17 | §4 | Trace-count rule now requires all four bands to reach the minimum (was three; band 21–40 fell 30 short at N = 143), adds a 20% margin rounded up to ten, and sets the cap at 1,000. N = 190. | Adeline, after the handoff 04 report |
-| 2026-10-17 | §6, §11 | Clarified after the count script: the minimum counts onsets, not positions (§3 already said so); band positions outside the reasoning span or inside a marker span are excluded; "largest band" named as 21–40. | Claude Code reading of handoff 04 |
-| 2026-10-17 | §4, §6, §11 | The rules that turn pilot counts into the trace count, split, quiet zone, matching kinds, gate-input set and minimum events written in; values to be computed by script. | Planning session (rules stated in chat before the pilot report) |
-| 2026-10-17 | §4 | Switch rule now reads "final N (after margin and rounding)" against the cap. | Claude Code reading of handoff 05 |
-
----
-
 ## 1. Question and scope
 
-**Question.** In DeepSeek-R1-Distill-Qwen-1.5B solving GSM8K problems, do the model's internals forecast a "wait" further ahead than everything visible from outside: the text so far, the model's visible uncertainty, and position? If so, at which distances? (F)
+**Question.** In DeepSeek-R1-Distill-Qwen-1.5B solving GSM8K problems, does a linear readout of the model's middle layers forecast a "wait" better than a stated outside reader: the text so far, the model's output distribution, and position? If so, at which distances? (F; Adeline, 2026-10-19)
+
+The residual stream at a token is a function of the tokens up to it, so the inside cannot hold information the text lacks; the test is whether a simple readout of the model's own computation beats a specified reader of the same text. (Adeline, 2026-10-19)
+
+**What's known.** Hidden states are known to carry information about tokens several steps ahead (Future Lens); whether that is pre-caching or breadcrumbs is open (Wu et al.). (Adeline, 2026-10-19)
 
 **Scope.**
 - One model, one dataset.
@@ -45,7 +29,7 @@ Changes before freeze, including those prompted by feedback.
 **Not tested here:**
 - Any closed model's internals.
 - Answer correctness (D5).
-- Whether "wait" marks genuine reconsideration. The primary label is marker *emission*; the audit in §12 measures the gap.
+- Whether "wait" marks genuine reconsideration. The primary label is marker *emission*; the audit, if run (§12), measures the gap.
 
 ---
 
@@ -57,7 +41,13 @@ Changes before freeze, including those prompted by feedback.
 - **H_b:** a linear probe on the residual stream separates "wait coming at distance b" from matched "no wait coming" positions better than the combined outside rival.
 - Each band gets its own verdict (§11). (D3, D4b)
 
-**Predictions, recorded before any data, not used in any decision:** [DECIDE]
+**Predictions.** Recorded 2026-10-18, after the pilot counts and the distance-1 gate check (c3: model odds 0.962; the marker readable in the model's own vocabulary only from layer ~23), before any probe or rival exists. Not used in any decision. (Adeline, 2026-10-18)
+- **2–5: positive.** The last few tokens before a "wait" close a reasoning step, and the inside should hold more about what comes next than the text does.
+- **6–10: positive**, with a smaller lift.
+- **11–20: inconclusive.**
+- **21–40: null.** At that distance the text, visible uncertainty and position carry whatever there is.
+- **Add-on (§12):** probe scores higher before real course-corrections than before false hits, with the largest difference in bands 2–5 and 6–10.
+- **Gate (§11):** passes.
 
 ---
 
@@ -71,7 +61,7 @@ Changes before freeze, including those prompted by feedback.
 
 ## 4. Model, generation, data
 
-**Model.** `deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B`, revision [pinned at setup], dtype [DECIDE], on an Apple M4 Pro (MPS).
+**Model.** `deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B`, revision [pinned at setup], dtype fp16 (the pilot's dtype; Adeline, 2026-10-18), on an Apple M4 Pro (MPS).
 
 **Generation.** These must be identical to the pilot's.
 
@@ -88,22 +78,22 @@ Changes before freeze, including those prompted by feedback.
 - Extracted with a teacher-forced pass over the *generated token ids*, reused exactly. The text is never re-tokenized.
 - Same weights and dtype as generation.
 
-**Dataset.** GSM8K (D2), split [DECIDE: test / train / both], problems drawn by seeded random sample.
-- **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of the four bands, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous onset (or the reasoning start, for a first onset) lies more than the band's upper bound tokens back (pilot gap distribution), and m the minimum events (§11). The final count is that N inflated by 20% and rounded up to the nearest ten, because o is estimated from 13 pilot traces. Capped at 1,000. (Adeline, 2026-10-17: all four bands required, since band 21–40 reached 308 of 338 at the three-band N of 143 and 14 more traces buy its null back; margin and cap set the same day.) **Computed (handoff 04 rerun): N_rule = 157, N = 190 GSM8K traces.**
+**Dataset.** GSM8K (D2), **test split** (1,319 problems; Adeline, 2026-10-18), problems drawn by seeded random sample (seed 20261018, §18).
+- **Trace count:** N = the smallest integer such that N × r × (1 − ℓ) × o × e_b ≥ m for each of the four bands, where r is the test share (§4 split), ℓ the looped-trace share (pilot: 5/30), o the mean paragraph-rule onsets per non-looped GSM8K trace (pilot: 114/13), e_b the share of GSM8K onsets whose previous lexicon hit of any kind, onset or merged (or the reasoning start, for a first hit), lies more than the band's upper bound tokens back (pilot gap distribution; measured from any hit since 2026-10-19, to match the band-positive rule in §5), and m the minimum events (§11). The final count is that N inflated by 20% and rounded up to the nearest ten, because o is estimated from 13 pilot traces. Capped at 1,000. (Adeline, 2026-10-17: all four bands required, since band 21–40 reached 308 of 338 at the three-band N of 143 and 14 more traces buy its null back; margin and cap set the same day.) **Computed (2026-10-19): m = 555, N_rule = 264 (binding band 21–40), N = 320 GSM8K traces.** Recomputed 2026-10-19 under the revised positive rule, m assumptions and 1:2 matching. (Was N_rule = 157, N = 190 in the handoff 04 rerun.)
 - **MATH500 switch:** if the final N (after margin and rounding) exceeds the cap, switch to MATH500 and recompute N with its pilot values (o = 175/12, its own e_b). (D2)
 - **Exclusions:**
-  - pilot problems: [DECIDE: exclude / include]
+  - pilot problems: **excluded** from the draw. (Adeline, 2026-10-18)
   - looping traces: **excluded.** A trace loops if any window of 30 consecutive generated token ids inside the reasoning span occurs 3 or more times verbatim. Their hits are near-duplicate examples. (Adeline, 2026-10-17. Pilot: 5 of 30; 4 of those also hit the length cap, 1 finished normally. Looping and truncation are independent flags.)
   - traces that hit the length cap without looping: **kept**, flagged `truncated`; positions without a full 100-token lookahead cannot be negatives (§6). (Adeline, 2026-10-17. Pilot: 4 of 30. In total 9 of 30 pilot traces are looped, truncated, or both.)
   - Every exclusion is counted and reported.
-- **Split by problem:** train / validation / test = 50 / 15 / 35, unless N × (1 − ℓ) × o × 0.15 < 100 projected validation onsets, in which case 45 / 20 / 35. Split seed [DECIDE]. (D4c-2)
+- **Split by problem:** train / validation / test = 50 / 15 / 35, unless N × (1 − ℓ) × o × 0.15 < 100 projected validation onsets, in which case 45 / 20 / 35. Split seed 20261019 (Adeline, 2026-10-18). (D4c-2)
 - **Accuracy:** the `\boxed{}` answer is checked against GSM8K's, per trace. Reported as context only. (D5)
 
 ---
 
 ## 5. Labels
 
-**Lexicon.** FrictionMap v1 `_LEXICON` (13 markers), verbatim, with the same regex semantics as `src/frictionmap/clusters.py` in github.com/alatruwe/frictionmap at commit [pinned at setup]. Applied to the reasoning text between `<think>` and `</think>`. Frozen; no additions. (D1) Other markers this model uses are counted in an exploratory appendix only.
+**Lexicon.** FrictionMap v1 `_LEXICON` (13 markers), verbatim, with the same regex semantics as `src/frictionmap/clusters.py` in github.com/alatruwe/frictionmap at commit [pinned at setup]. Applied to the reasoning text between `<think>` and `</think>`. Frozen; no additions. (D1) Other markers this model uses are not analysed here; the pilot's count of paragraph openers the lexicon does not match is in `results/c1_summary.md` §9.
 
 **Onset token.** The first generated token whose span covers the marker's first character.
 
@@ -112,6 +102,7 @@ Changes before freeze, including those prompted by feedback.
 - No position before a merged marker can be a negative (§6).
 
 **Distance.** For each token t, d(t) = (index of the next onset) − t. Tokens inside a marker span are excluded.
+- A position t is a band positive only if no lexicon hit of any kind, onset or merged, lies strictly between t and its onset. Each position belongs to at most one onset, the nearest. (Adeline, 2026-10-19)
 
 ---
 
@@ -125,11 +116,12 @@ Changes before freeze, including those prompted by feedback.
 | Excluded (gray zone) | d(t) ∈ 41–100 |
 | Excluded | positions outside the reasoning span (a band position before the reasoning start), and positions inside any marker span, onset or merged |
 
-- **Quiet-zone fallback:** 100 tokens, unless for any token kind the pilot count of negative positions (no marker in the next 100 tokens) is smaller than the pilot count of positive positions of that kind in band 21–40; then 60. Computed in the count handoff.
+- **Quiet-zone fallback:** 100 tokens, unless for any token kind the pilot count of negative positions (no marker in the next 100 tokens) is smaller than twice the pilot count of positive positions of that kind in band 21–40 (twice since 1:2 matching, 2026-10-19); then 60. Computed in the count handoff: 100 (no kind fails at 2×; `results/count_calculations.md` §6).
 - **Matching:**
   - Each positive is paired with a negative of the same token kind, the kind of the token *at* the position. Candidate kinds: newline, period, comma, other_punct, digit, word, other. A kind stands on its own if at least 20 pilot positive positions (across all bands) fall in it; rarer kinds merge into `other`. Computed in the count handoff.
-  - Ratio: [DECIDE]. Source: [DECIDE: same trace when available / any trace in the same split].
-- **End of reasoning:** tokens within 100 tokens of the end of reasoning are [DECIDE: negatives if the trace ended naturally / excluded].
+  - Ratio: **1:2**, two negatives per positive, of the same kind. No negative is reused within a band; reuse across bands is allowed, since each band is its own test with its own probe, and bands already share onsets and problems. (Adeline, 2026-10-19) Source: **the same trace when it has an unused negative of that kind; otherwise any trace in the same split.** (Adeline, 2026-10-18)
+  - The share of negatives drawn from a different trace is reported per band; a same-trace-only rerun is exploratory (§13). (Adeline, 2026-10-19)
+- **End of reasoning:** tokens without a full 100-token lookahead (within 100 tokens of the end of reasoning, or of the length cap) are **excluded** as negatives, whether or not the trace ended naturally. (Adeline, 2026-10-18)
 - **Same examples for everyone:** the probe and every rival use exactly the same examples.
 
 **Why matching:** positions right before a "wait" are mostly sentence ends and line breaks. With unmatched negatives, any method could win just by detecting the end of a sentence.
@@ -138,8 +130,8 @@ Changes before freeze, including those prompted by feedback.
 
 ## 7. Probe
 
-- **Input:** the residual stream (hidden-state output) of each of the 28 layers at token t.
-- **Model:** logistic regression with L2 regularization, one per layer per band. Standardization and regularization grid: §17.
+- **Input:** the residual stream of each of layers 1–27 at token t. Layer 28 (the post-final-norm state, which the output logits are a linear function of) belongs to the rival (§8). (Adeline, 2026-10-19)
+- **Model:** logistic regression with L2 regularization, one per layer per band. Standardization and regularization grid: §18.
 - **Training:** each band's positives plus its matched negatives from train problems.
 - **Layer selection:** per band, by validation AUROC. The chosen layer is scored on test **once**. (D4c-2)
 
@@ -147,12 +139,13 @@ Changes before freeze, including those prompted by feedback.
 
 ## 8. Outside rival: the primary comparison (D4b)
 
-One logistic regression on the combined features below, trained on the same train examples and tuned on the same validation set, with a grid of comparable size.
+One logistic regression on the combined features below, trained on the same train examples and tuned on the same validation set. Grid: text window {8, 16, 32, 64, 128, all} × n-gram range {1–2, 1–3} × C ∈ {1e-4, 1e-3, 1e-2, 1e-1, 1}, chosen on validation AUROC. The probe's grid is 27 layers × the same 5 C values. TF-IDF vocabulary and IDF weights are fit on train examples only. (Adeline, 2026-10-19)
 
 | Feature group | Content | Open |
 |---|---|---|
-| Text | TF-IDF over token-id n-grams of the preceding tokens | n-gram range [DECIDE]; window [DECIDE: fixed / tuned on validation from a stated set] |
-| Visible uncertainty | Entropy of the model's next-token distribution at t | Summaries over the previous w tokens [DECIDE: include, which] |
+| Text | TF-IDF over token-id n-grams of the preceding tokens | n-gram range and window from the grid above (Adeline, 2026-10-19) |
+| Visible uncertainty | Entropy of the model's next-token distribution at t | Three features: entropy at t, and the mean and the max of entropy over the previous 16 tokens (Adeline, 2026-10-18) |
+| Output state | The layer-28 (post-norm) hidden state at t, 1,536 features, standardized as in §18 | — (Adeline, 2026-10-19) |
 | Position | Token index t; tokens since the previous onset; tokens since the last paragraph break | — |
 
 **Causal-only rule.** Every rival feature uses tokens up to t only. Nothing that depends on later tokens: no trace length, no relative position.
@@ -160,7 +153,7 @@ One logistic regression on the combined features below, trained on the same trai
 **Exploratory:** each feature group alone against the probe.
 
 **Conditional stronger text rival** (built only for bands with a positive verdict):
-- Hidden states of [DECIDE: model] reading the same token ids, with the same probe recipe and layer-selection rule.
+- Hidden states of **deepseek-ai/DeepSeek-R1-Distill-Qwen-7B** reading the same token ids, same probe recipe and layer rule; token-id compatibility verified at setup (a first check on the 30 pilot traces: `results/tokenizer_compat.md`). (Adeline, 2026-10-19)
 - **Claim level 1:** beats the combined rival.
 - **Claim level 2:** also beats this one.
 
@@ -170,25 +163,27 @@ One logistic regression on the combined features below, trained on the same trai
 
 | Control | Expected | Keep? |
 |---|---|---|
-| Shuffled labels (train labels permuted within each band) | AUROC ≈ 0.5 | [DECIDE] |
-| Random direction | — | [DECIDE] |
+| Shuffled labels (train labels permuted within each band) | AUROC ≈ 0.5 | **Keep** (Adeline, 2026-10-18). Run per band at the chosen layer, scored on the same test examples as the probe. Point AUROC must lie within 0.5 ± 0.05; outside that, stop, fix, log in §16. (Adeline, 2026-10-19) |
+| Random direction | — | **Dropped** (Adeline, 2026-10-18). Matching by token kind already controls the obvious activation-size differences. Parked; see `decisions.md`. |
 
 ---
 
 ## 10. Metrics
 
 - **Primary:** AUROC per band on test examples. **Lift** = probe AUROC − combined-rival AUROC.
-- **Uncertainty:** bootstrap over whole test problems, resample count in §17, as a **98.75% interval** (95% with a 4-band correction). (D3, D4a)
-- **Also reported for every band:** counts of onsets, positives, negatives and problems; AUPRC [DECIDE: report / drop; with 1:1 matching the classes are balanced by construction].
+- **Uncertainty:** bootstrap over whole test problems, 10,000 resamples, paired (probe and rival scored on the same resampled problems), as a **98.75% interval** (95% with a 4-band correction). (D3, D4a; resamples and pairing: Adeline, 2026-10-19)
+- **Also reported for every band:** counts of onsets, positives, negatives and problems. AUPRC removed (Adeline, 2026-10-19).
+- The claim sentence for any positive band reports the point lift against δ. (Adeline, 2026-10-19)
 
 ---
 
 ## 11. Decision rules
 
 ### Gate (D4c-3)
-Run on [DECIDE: validation / test] problems at d = 1.
+Run on **validation** problems at d = 1 (Adeline, 2026-10-18; the gate is a wiring check and does not spend the test set).
 1. **The model's own odds separate the classes.** Score = the summed probability over the set of generated token ids that begin a lexicon-marker hit in the experiment's own traces (recomputed from the labels, not fixed from the pilot; the pilot set after D10/D11 was 12 ids). It must reach AUROC ≥ [DECIDE: final floor; provisional 0.75. Pilot check (c3, 2026-10-17): 0.962, 95% interval 0.947–0.977, on 289 paragraph-rule onsets with exact same-kind negatives].
 2. **The probe gets close.** Best-layer probe AUROC ≥ (model-odds AUROC − 0.10). (Adeline, 2026-10-17. The clause exists to catch wiring errors, which show as drops of 0.2 or more; with model odds at 0.96 on the pilot, a 0.05 margin would have demanded a 0.91 probe and invited tuning a merely-short probe until it passed.)
+3. **The probe does not overshoot.** Best-layer probe AUROC ≤ model-odds AUROC + 0.03; a probe above the model's own ceiling indicates a token-alignment error. (Adeline, 2026-10-19)
 
 **Failure:** stop, fix, log in §16, rerun. Nothing at d > 1 is computed until the gate passes.
 
@@ -201,25 +196,25 @@ Run on [DECIDE: validation / test] problems at d = 1.
 | Null | Upper end < δ (includes "real but under δ") |
 | Inconclusive | Lower end ≤ 0 **and** upper end ≥ δ |
 
-- **Minimum events:** m counts **onsets**, not positions: one onset contributes several positive positions to a band (4 in 2–5, 20 in 21–40), and those are near-duplicates that do not count separately. m = the smallest number of test-split onsets per band such that the half-width of the 98.75% interval on the lift is ≤ δ, using the Hanley–McNeil standard error of an AUROC of 0.70 on m positives and m matched negatives for each of the two AUROCs, combined with an assumed correlation of 0.5 between them (so SE_lift = SE of one AUROC). The assumed AUROC and correlation are stated, conservative, and fixed before any probe exists. Computed by script in the count handoff and recorded here.
+- **Minimum events:** m counts **onsets**, not positions: one onset contributes several positive positions to a band (4 in 2–5, 20 in 21–40), and those are near-duplicates that do not count separately. m = the smallest number of test-split onsets per band such that the half-width of the 98.75% interval on the lift is ≤ δ, using the Hanley–McNeil standard error of an AUROC of 0.60 on m positives and m matched negatives for each of the two AUROCs, combined with an assumed correlation of 0.30 between them. These are assumptions, stated before any probe exists. (Adeline, 2026-10-19) Computed by script in the count handoff and recorded here: **m = 555** at δ = 0.05 (1,540 at 0.03, 217 at 0.08; `results/count_calculations.md`, 2026-10-19).
   - A band below the minimum can only be positive or inconclusive, and the writeup says so.
 - **Secondary:** verdicts at δ = 0.03 and 0.08. Reported, never the headline.
 - **Claim:** the set of bands with a positive verdict. Every band's verdict and interval are reported.
 
 ---
 
-## 12. Hand audit and add-on (D1)
+## 12. Hand audit and add-on (D1). Conditional: run only if at least one band is positive.
 
-- **Sample:** 100 onsets, simple random draw (seed [DECIDE]) from test-split traces.
-- **Timing:** after freeze, before any probe score exists. Labels are committed and hashed before probe scoring.
-- **Question:** binary, real vs. false, where a real hit [DECIDE: *overturns* a prior statement / *re-examines* a prior statement].
+- **Sample:** 100 onsets, simple random draw (seed 20261020; Adeline, 2026-10-18) from test-split traces.
+- **Timing:** before any per-onset probe score is viewed; labels committed and hashed before the add-on runs. The auditor will know which bands were positive; this is logged as a limit (§14). (Adeline, 2026-10-19)
+- **Question:** binary, real vs. false, where a real hit **overturns a prior statement**: after the marker, the trace changes something it had stated (a value, a step, a reading of the problem). A re-check that confirms the prior statement ("Wait, let me double-check… yes, 12") is a false hit. (Adeline, 2026-10-18. Same binary as FrictionMap's Phase 5.)
 - **Output:**
   - Precision with a 95% interval.
   - A descriptive side-by-side with the lexicon's earlier precision on Claude coding sessions (FrictionMap). Not a test.
 - **Guard:** audit labels never change training or evaluation labels.
 - **Add-on (exploratory):**
-  - Compares probe scores before real vs. false hits, at [DECIDE: which band(s) or distances].
-  - Expected direction, stated in advance: [DECIDE].
+  - Compares probe scores before real vs. false hits at **all four bands**, reported together, no verdict (Adeline, 2026-10-18). Per hit and band: the mean probe score (chosen layer) over the band's usable positions. Real vs. false separated by AUROC with a 95% bootstrap interval over whole problems; n per band reported, since far bands lose positions whenever an earlier onset sits inside the band. Bands 2–5 and 6–10 are named in advance as where the difference is expected to be largest.
+  - Expected direction, stated in advance: probe scores higher before real hits than before false hits. (Adeline, 2026-10-18)
   - Runs only if both groups have at least 20 hits. Otherwise it's logged as not runnable.
 
 ---
@@ -230,11 +225,13 @@ No verdicts; labeled exploratory everywhere they appear.
 
 1. Exact-distance curve: probe AUROC and lift at every distance 1–40, every layer (D3).
 2. Each outside rival group alone vs. the probe (D4b).
-3. Per-trace plots: probe score token by token on 10 traces (seed [DECIDE]), with the text alongside. Done after the confirmatory results (D3).
+3. Per-trace plots: probe score token by token on 10 traces (seed 20261021; Adeline, 2026-10-18), with the text alongside. Done after the confirmatory results (D3).
 4. The add-on (§12).
 5. Where each band falls relative to paragraph breaks.
-6. Counts of other markers this model uses.
-7. Accuracy, as context (D5).
+6. Accuracy, as context (D5).
+7. Same-trace-only negatives: the confirmatory comparison rerun with every negative drawn from its positive's own trace (§6). (Adeline, 2026-10-19)
+
+Other markers this model uses are not an analysis here; the pilot's count of paragraph openers the lexicon does not match is in `results/c1_summary.md` §9. (Adeline, 2026-10-19)
 
 ---
 
@@ -249,6 +246,11 @@ No verdicts; labeled exploratory everywhere they appear.
 | All null | For this model, at 2–40 tokens, the text plus visible uncertainty plus position carry what the inside carries about an upcoming "wait" |
 | Mixed null / inconclusive | Each band reported as is; no pooling |
 | All inconclusive | Not enough data to tell; n reported |
+| Probe and rival both within 0.05 of chance in a band | Neither forecasts at that distance; the null says nothing about the inside. (Adeline, 2026-10-19) |
+
+**Limits.** (Adeline, 2026-10-19)
+- Lexicon recall is not measured; paragraphs opening with "but" or "alternatively" may be reconsiderations drawn as negatives.
+- If the audit runs (§12), the auditor will know which bands were positive.
 
 **Not allowed after seeing any test result:**
 - changing the bands, δ, the layer rule, the label set, the dataset or the rival features
@@ -279,15 +281,58 @@ Anything like that is a new, separately pre-registered follow-up.
 
 ---
 
-## 17. Technical settings
+## 17. Changelog (draft period)
+
+Changes before freeze, including those prompted by feedback.
+
+| Date | Section | Change | Raised by |
+|---|---|---|---|
+| 2026-10-16 | §1 | "Effectively 'wait'" reworded: Zhu's 97.2% is over Zhu's own 17-keyword list, not this lexicon; the share for these labels is measured in the pilot. | Claude Code review of handoff 01 |
+| 2026-10-16 | §4 | Generation settings recorded as decided (fixed by dispatching the pilot). | Adeline |
+| 2026-10-16 | §15 | Pilot data-contact row added. | Adeline |
+| 2026-10-17 | §4 | D10: looping traces excluded; truncated-but-not-looping traces kept and flagged. | Adeline |
+| 2026-10-17 | §5 | D11: onsets defined by the paragraph rule. | Adeline |
+| 2026-10-17 | §4, §5 | Pilot counts corrected before push: 4 truncated-without-looping (not 3); window-rule count stated with its exact definition (503 at ≤ 10, not 534). | Claude Code verification of handoff 03 |
+| 2026-10-17 | §5 | Window-rule onsets moved from a pre-declared sensitivity check to parked (not tested in this experiment). | Adeline |
+| 2026-10-17 | §11, §15 | Gate: pilot check recorded (model odds 0.962); probe margin set to 0.10 (was 0.05); c3 data-contact row added. | Adeline, after the c3 report |
+| 2026-10-17 | §4 | Trace-count rule now requires all four bands to reach the minimum (was three; band 21–40 fell 30 short at N = 143), adds a 20% margin rounded up to ten, and sets the cap at 1,000. N = 190. | Adeline, after the handoff 04 report |
+| 2026-10-17 | §6, §11 | Clarified after the count script: the minimum counts onsets, not positions (§3 already said so); band positions outside the reasoning span or inside a marker span are excluded; "largest band" named as 21–40. | Claude Code reading of handoff 04 |
+| 2026-10-17 | §4, §6, §11 | The rules that turn pilot counts into the trace count, split, quiet zone, matching kinds, gate-input set and minimum events written in; values to be computed by script. | Planning session (rules stated in chat before the pilot report) |
+| 2026-10-17 | §4 | Switch rule now reads "final N (after margin and rounding)" against the cap. | Claude Code reading of handoff 05 |
+| 2026-10-18 | §2 | Predictions recorded (band by band, add-on, gate). | Adeline |
+| 2026-10-18 | §4, §6, §8, §9, §10, §11, §12, §13, §18 | Every open slot except δ, the gate floor and the δ justification filled from the pre-post review: fp16; GSM8K test split, pilot problems excluded; 1:1 same-trace matching; positions without a full lookahead excluded; text rival n-grams 1–3 with the window tuned from {16, 64, all}; entropy at t plus mean and max over 16; shuffled-labels control kept, random-direction control dropped; AUPRC reported; gate on validation; audit question = overturns a prior statement; add-on at all four bands with the expected direction stated; standardization, grids, resamples, seeds. | Adeline, from recommendations in the planning session |
+| 2026-10-18 | §8 | Conditional stronger text rival named: Qwen2.5-Math-1.5B base, the distillation parent. | Adeline |
+| 2026-10-18 | §12 | Add-on scope: all four bands, reported together, no verdict. The planning recommendation had been the two near bands only; exploratory analyses look broadly and report everything looked at. | Adeline |
+| 2026-10-18 | §0 → §17 | Changelog moved after the deviations log, with a pointer at the top; technical settings renumbered §18. | Fresh-eyes read in the LessWrong post session |
+| 2026-10-18 | §12 | Hand audit made conditional on at least one positive band (written into the text on 2026-10-19, row A8). | Adeline |
+| 2026-10-19 | §1 | A1: question restated as a linear readout of the middle layers against a stated outside reader (text so far, output distribution, position); sentence added that the inside cannot hold information the text lacks. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §7 | A2: probe reads layers 1–27; layer 28 (post-final-norm, the logits' pre-image) goes to the rival. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §8, §18 | A3: output-state row (layer-28 hidden state) added to the rival; explicit rival grid (window × n-gram range × 5 C values) and probe grid (27 layers × the same C values); TF-IDF fit on train only; conditional stronger rival changed from Qwen2.5-Math-1.5B to DeepSeek-R1-Distill-Qwen-7B. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §4, §5, §6 | A4: band positive requires no lexicon hit of any kind strictly between the position and its onset; one onset per position, the nearest; matching 1:2; cross-trace negative share reported; same-trace-only rerun exploratory. Consequences: e_b measured from the previous hit of any kind; quiet-zone fallback compares against twice the band 21–40 positives. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §9 | A5: shuffled-labels control judged by point AUROC within 0.5 ± 0.05 (was: 95% interval includes 0.5). | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §10, §18 | A6: AUPRC removed; 10,000 paired bootstrap resamples (was 2,000); claim sentence reports the point lift against δ. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §11 | A7: gate made two-sided (probe ≤ model odds + 0.03); minimum events assume AUROC 0.60 and correlation 0.30 (were 0.70 and 0.5), "conservative" dropped. m = 555, N = 320. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §12, §14 | A8: audit and add-on conditional on at least one positive band; timing before any per-onset probe score is viewed; auditor's knowledge of the positive bands logged as a limit. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §13 | A9: other-marker counts removed from the exploratory list (pointer to `results/c1_summary.md` §9); same-trace-only negatives rerun added. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §14 | A10: outcome row for probe and rival both near chance; limits list added (lexicon recall not measured). | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §1, App. B | A11: Future Lens (Pal et al. 2023) and Wu, Morris & Levine 2024 cited; what's-known sentence in §1. | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §1 | New "What's known" paragraph in §1, created to hold the A11 sentence (§1 had none). | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §14 | New "Limits" list in §14, created for the A10 lexicon-recall limit and the A8 auditor limit (§14 had none). | Independent review session, 2026-10-18 (Claude); decided by Adeline |
+| 2026-10-19 | §6 | Negative reuse: none within a band, allowed across bands (each band is its own test; bands already share onsets and problems). The §6 quiet-zone check on band 21–40 is the right check under this reading. | Adeline, after the Claude Code report on the review fixes |
+| 2026-10-19 | §1, §5 | Leftover contradictions fixed: §1 says the audit measures the gap "if run"; §5 points to `results/c1_summary.md` §9 for other markers instead of an exploratory appendix. | Adeline, after the Claude Code report on the review fixes |
+| 2026-10-19 | §4 | Trace count recomputed under A4 and A7: m = 555, N_rule = 264, N = 320 (was 338, 157, 190). Double parenthesis in the dtype line fixed. | Claude Code count rerun, 2026-10-19 |
+
+---
+
+## 18. Technical settings
 
 | Setting | Value |
 |---|---|
-| Probe input standardization | [DECIDE] |
-| Probe regularization grid | [DECIDE] |
-| Rival regularization grid | [DECIDE] |
-| Bootstrap resamples | [DECIDE] |
-| Seeds: problem sample, split, audit, per-trace plots | [DECIDE] |
+| Probe input standardization | z-score per dimension; mean and SD from train examples only, applied unchanged to validation and test (Adeline, 2026-10-18) |
+| Probe regularization grid | L2, C ∈ {1e-4, 1e-3, 1e-2, 1e-1, 1}, chosen on validation AUROC per layer (1–27) per band (Adeline, 2026-10-19); was {0.01, 0.1, 1, 10} (Adeline, 2026-10-18) |
+| Rival regularization grid | The same C values, chosen on validation AUROC together with the text window and n-gram range (§8) (Adeline, 2026-10-19) |
+| Bootstrap resamples | 10,000, over whole test problems, paired between probe and rival (Adeline, 2026-10-19); was 2,000 (Adeline, 2026-10-18) |
+| Seeds: problem sample, split, audit, per-trace plots | 20261018, 20261019, 20261020, 20261021 (Adeline, 2026-10-18) |
 
 ---
 
@@ -310,3 +355,5 @@ Anything like that is a new, separately pre-registered follow-up.
 - Ward et al., arXiv 2507.12638
 - Yan et al. (ReflCtrl), arXiv 2512.13979
 - Yuan et al. (Hidden Error Awareness), arXiv 2605.09502
+- Pal et al. 2023, Future Lens, arXiv 2311.04897
+- Wu, Morris & Levine 2024, "Do language models plan ahead for future tokens?", arXiv 2404.00859

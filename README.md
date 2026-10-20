@@ -1,14 +1,16 @@
 # before-the-wait
 
-**Question.** In DeepSeek-R1-Distill-Qwen-1.5B solving GSM8K problems, do the model's internals forecast a "wait" further ahead than everything visible from outside: the text so far, the model's next-token entropy (how unsure it is about the next token), and position? If so, at which distances?
+**Question.** In DeepSeek-R1-Distill-Qwen-1.5B solving GSM8K problems, does a linear readout of the model's middle layers forecast a "wait" better than a stated outside reader: the text so far, the model's output distribution, and position? If so, at which distances?
+
+The residual stream at a token is a function of the tokens up to it, so the inside cannot hold information the text lacks; the test is whether a simple readout of the model's own computation beats a specified reader of the same text.
 
 The test compares linear probes on the residual stream (simple classifiers reading the model's internal activations) against a baseline: one classifier trained on all of those outside signals together. Each of four bands gets its own verdict: 2–5, 6–10, 11–20 and 21–40 tokens before the "wait".
 
 **Why it matters.** Reading a reasoning model's chain of thought is a leading proposal for monitoring it. That only works if the text keeps up with the process behind it; this project tests that for one behavior in one small model.
 
-**What's known, what's new.** On this same model, hidden states just before a reflection word like "wait" separate from matched tokens ([Zhu et al., 2025](https://arxiv.org/abs/2506.12217)). Steering along linear directions can induce backtracking ([Venhoff et al., 2025](https://arxiv.org/abs/2506.18167); [Ward et al., 2025](https://arxiv.org/abs/2507.12638)). To our knowledge, no one has tested how far ahead the internals forecast a "wait" against a text baseline; that is the contribution.
+**What's known, what's new.** On this same model, hidden states just before a reflection word like "wait" separate from matched tokens ([Zhu et al., 2025](https://arxiv.org/abs/2506.12217)). Steering along linear directions can induce backtracking ([Venhoff et al., 2025](https://arxiv.org/abs/2506.18167); [Ward et al., 2025](https://arxiv.org/abs/2507.12638)). Hidden states are known to carry information about tokens several steps ahead ([Pal et al., 2023](https://arxiv.org/abs/2311.04897)); whether that is pre-caching or breadcrumbs is open ([Wu, Morris & Levine, 2024](https://arxiv.org/abs/2404.00859)). To our knowledge, no one has tested how far ahead the internals forecast a "wait" against a text baseline; that is the contribution.
 
-**What the outcomes would mean.** A positive band means the internals run ahead of the text at that distance. A null means the text, next-token entropy and position already carry what the internals know about an upcoming "wait". Both are results; the design can produce a real null.
+**What the outcomes would mean.** A positive band means a simple readout of the model's middle layers beats the stated outside reader at that distance. A null means that reader, given the text, the model's output distribution and position, gets as much about an upcoming "wait" as the readout does. If the readout and the reader are both near chance in a band, neither forecasts at that distance, and the null says nothing about the inside. Both are results; the design can produce a real null.
 
 ## Status
 
@@ -16,7 +18,7 @@ The test compares linear probes on the residual stream (simple classifiers readi
 
 - [`methodology/pre-registration.md`](methodology/pre-registration.md): the full design.
 - [`methodology/decisions.md`](methodology/decisions.md): each design decision, with its date and reason.
-- [`results/count_calculations.md`](results/count_calculations.md): the pilot-derived numbers — N = 190 traces, m = 338 onsets per band.
+- [`results/count_calculations.md`](results/count_calculations.md): the pilot-derived numbers — N = 320 traces, m = 555 onsets per band.
 
 The design freezes at a tagged commit, `prereg-freeze`. After that, changes go only to the pre-registration's deviations log. A 30-trace pilot (c1) and a distance-1 check (c3) have run; no probe or rival has been trained, and every data contact before freeze is logged in §15 of the pre-registration.
 

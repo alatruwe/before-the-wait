@@ -52,18 +52,29 @@ def hanley_mcneil_se(auc: float, n_pos: int, n_neg: int) -> float:
     return math.sqrt(numerator / (n_pos * n_neg))
 
 
-def minimum_events(delta: float, auc: float = 0.70, interval: float = INTERVAL,
-                   max_m: int = 1_000_000) -> int:
+# §11 as revised 2026-10-19: the assumed AUROC and correlation behind m. They
+# were 0.70 and 0.5 (which made SE_lift equal one AUROC's SE).
+ASSUMED_AUC = 0.60
+ASSUMED_RHO = 0.30
+
+
+def lift_se(auc: float, n_pos: int, n_neg: int, rho: float = ASSUMED_RHO) -> float:
+    """SE of the difference of two AUROCs with equal variance and correlation rho.
+
+    Var(A-B) = Var(A) + Var(B) - 2*rho*SD(A)*SD(B) = 2*(1-rho)*Var(A).
+    """
+    return math.sqrt(2 * (1 - rho)) * hanley_mcneil_se(auc, n_pos, n_neg)
+
+
+def minimum_events(delta: float, auc: float = ASSUMED_AUC, rho: float = ASSUMED_RHO,
+                   interval: float = INTERVAL, max_m: int = 1_000_000) -> int:
     """§11: smallest m whose interval half-width on the lift is <= delta.
 
-    SE_lift = SE of one AUROC, which is what an assumed correlation of 0.5
-    between the probe's and the rival's AUROC gives:
-    Var(A-B) = Var(A) + Var(B) - 2*rho*SD(A)*SD(B) = Var(A) when the two have
-    equal variance and rho = 0.5.
+    Uses the Hanley-McNeil SE on m positives and m negatives for each AUROC.
     """
     z = z_for_interval(interval)
     for m in range(2, max_m):
-        if z * hanley_mcneil_se(auc, m, m) <= delta:
+        if z * lift_se(auc, m, m, rho) <= delta:
             return m
     raise ValueError(f"no m below {max_m} reaches delta={delta}")
 
@@ -91,6 +102,44 @@ def projected_validation_onsets(n: int, loop_share: float, onsets_per_trace: flo
                                 validation_share: float = 0.15) -> float:
     """§4 split rule: N * (1-l) * o * 0.15."""
     return n * (1 - loop_share) * onsets_per_trace * validation_share
+
+
+def gap_to_previous_hit(onset: int, hit_indices: list[int], reasoning_start: int) -> int:
+    """§4 e_b: tokens from the previous lexicon hit of any kind to the onset.
+
+    A merged hit counts as much as an onset (§5/§6 band-positive rule,
+    2026-10-19): no position before it can be a positive for a later onset.
+    The reasoning start stands in when there is no earlier hit.
+    """
+    prev = max((h for h in hit_indices if h < onset), default=reasoning_start)
+    return onset - prev
+
+
+def classify_band_position(pos: int, onset: int, hit_indices: list[int],
+                           spans: list[tuple[int, int]], reasoning_start: int) -> str | None:
+    """Why `pos` is not a band positive for `onset`, or None if it is one.
+
+    §5/§6 as revised 2026-10-19: a position is a band positive only if no
+    lexicon hit of any kind, onset or merged, lies strictly between it and its
+    onset. That also makes the onset the nearest one, so each position belongs
+    to at most one onset. Checked in order: before the reasoning start, inside a
+    marker span, a hit in between.
+    """
+    if pos < reasoning_start:
+        return "before_reasoning"
+    if any(s <= pos < e for s, e in spans):
+        return "in_marker"
+    if any(pos < h < onset for h in hit_indices):
+        return "hit_between"
+    return None
+
+
+def band_positives(onset: int, lo: int, hi: int, hit_indices: list[int],
+                   spans: list[tuple[int, int]], reasoning_start: int) -> list[int]:
+    """Positions at distances lo..hi before `onset` that are band positives."""
+    return [onset - d for d in range(lo, hi + 1)
+            if classify_band_position(onset - d, onset, hit_indices, spans,
+                                      reasoning_start) is None]
 
 
 def marker_token_span(tokenizer, ids: list[int], token_index: int,
