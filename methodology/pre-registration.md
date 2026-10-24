@@ -1,13 +1,11 @@
-# before-the-wait: pre-registration (DRAFT)
+# before-the-wait: pre-registration (FROZEN)
 
-**Status:** public DRAFT, open for feedback.
-- **Feedback window:** opens when the design post is published on LessWrong, closes seven days later. Dates: [TBD at posting].
-- **Freeze:** happens when the window has closed, the pilot-count numbers are set, and no [DECIDE] slot is left. The freeze is a tagged commit (`prereg-freeze`). After it, changes go only to the deviations log (§16).
+**Status:** FROZEN at tag `prereg-freeze`, 2026-10-24.
+- **Freeze:** happens when the pilot-count numbers are set and no DECIDE slot is left. The freeze is a tagged commit (`prereg-freeze`). After it, changes go only to the deviations log (§16).
 - **Decision IDs** (F, D1, D2…) refer to `decisions.md`.
 - **Changelog** for the draft period: §17.
 
 **Slot legend**
-- **[DECIDE]**: open. Decided before freeze.
 - **[FROM PILOT]**: computed by the stated rule from pilot counts only (30 pilot traces). No probe or rival output is involved.
 - **No marker:** already decided (see `decisions.md`), or a requirement that follows directly from a decision.
 
@@ -181,14 +179,14 @@ One logistic regression on the combined features below, trained on the same trai
 
 ### Gate (D4c-3)
 Run on **validation** problems at d = 1 (Adeline, 2026-10-18; the gate is a wiring check and does not spend the test set).
-1. **The model's own odds separate the classes.** Score = the summed probability over the set of generated token ids that begin a lexicon-marker hit in the experiment's own traces (recomputed from the labels, not fixed from the pilot; the pilot set after D10/D11 was 12 ids). It must reach AUROC ≥ [DECIDE: final floor; provisional 0.75. Pilot check (c3, 2026-10-17): 0.962, 95% interval 0.947–0.977, on 289 paragraph-rule onsets with exact same-kind negatives].
+1. **The model's own odds separate the classes.** Score = the summed probability over the set of generated token ids that begin a lexicon-marker hit in the experiment's own traces (recomputed from the labels, not fixed from the pilot; the pilot set after D10/D11 was 12 ids). It must reach AUROC ≥ 0.75 (Adeline, 2026-10-24; pilot check, c3: 0.962, 95% interval 0.947–0.977, on 289 paragraph-rule onsets).
 2. **The probe gets close.** Best-layer probe AUROC ≥ (model-odds AUROC − 0.10). (Adeline, 2026-10-17. The clause exists to catch wiring errors, which show as drops of 0.2 or more; with model odds at 0.96 on the pilot, a 0.05 margin would have demanded a 0.91 probe and invited tuning a merely-short probe until it passed.)
 3. **The probe does not overshoot.** Best-layer probe AUROC ≤ model-odds AUROC + 0.03; a probe above the model's own ceiling indicates a token-alignment error. (Adeline, 2026-10-19)
 
 **Failure:** stop, fix, log in §16, rerun. Nothing at d > 1 is computed until the gate passes.
 
 ### Per band (D4a)
-δ = [DECIDE: final value; provisional 0.05; anchors in Appendix A]. "Interval" means the 98.75% interval on the lift.
+δ = 0.05 (Adeline, 2026-10-24; Appendix A). "Interval" means the 98.75% interval on the lift.
 
 | Verdict | Condition |
 |---|---|
@@ -321,6 +319,9 @@ Changes before freeze, including those prompted by feedback.
 | 2026-10-19 | §6 | Negative reuse: none within a band, allowed across bands (each band is its own test; bands already share onsets and problems). The §6 quiet-zone check on band 21–40 is the right check under this reading. | Adeline, after the Claude Code report on the review fixes |
 | 2026-10-19 | §1, §5 | Leftover contradictions fixed: §1 says the audit measures the gap "if run"; §5 points to `results/c1_summary.md` §9 for other markers instead of an exploratory appendix. | Adeline, after the Claude Code report on the review fixes |
 | 2026-10-19 | §4 | Trace count recomputed under A4 and A7: m = 555, N_rule = 264, N = 320 (was 338, 157, 190). Double parenthesis in the dtype line fixed. | Claude Code count rerun, 2026-10-19 |
+| 2026-10-24 | header | Feedback window removed from the design (D6 revised). | Adeline |
+| 2026-10-24 | §11, Appendix A | δ = 0.05 and gate floor 0.75 finalized; justification written. | Adeline |
+| 2026-10-24 | header | Status FROZEN. | Adeline |
 
 ---
 
@@ -345,7 +346,7 @@ Changes before freeze, including those prompted by feedback.
 
 **Caveat.** HEA gives n = 200 in Table 5 and n = 89 in Table 4 for the same result, and doesn't state the text classifier's evaluation split.
 
-**Justification paragraph:** [DECIDE: written at freeze]
+**Justification paragraph:** δ is the smallest lift over the stated outside reader worth caring about. The HEA gap of 0.197 is the only published probe-vs-text gap, on a different target and against a weaker reader than here. Entropy alone sits at 0.61–0.64 AUROC in ReflCtrl. 0.05 is about a quarter of the published gap, here against a stronger reader, so a null at 0.05 means a lift smaller than anything in related work; the secondary verdicts at 0.03 and 0.08 bracket it. (Adeline, 2026-10-24)
 
 ## Appendix B: references
 

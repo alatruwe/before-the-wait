@@ -14,21 +14,21 @@ The test compares linear probes on the residual stream (simple classifiers readi
 
 ## Status
 
-**Pre-registration: public draft, open for feedback.**
+**Pre-registration: frozen at tag `prereg-freeze` (2026-10-24).**
 
 - [`methodology/pre-registration.md`](methodology/pre-registration.md): the full design.
 - [`methodology/decisions.md`](methodology/decisions.md): each design decision, with its date and reason.
 - [`results/count_calculations.md`](results/count_calculations.md): the pilot-derived numbers — N = 320 traces, m = 555 onsets per band.
 
-The design freezes at a tagged commit, `prereg-freeze`. After that, changes go only to the pre-registration's deviations log. A 30-trace pilot (c1) and a distance-1 check (c3) have run; no probe or rival has been trained, and every data contact before freeze is logged in §15 of the pre-registration.
+The design froze at tag prereg-freeze on 2026-10-24. Changes since then go only to the pre-registration's deviations log (§16). A 30-trace pilot (c1) and a distance-1 check (c3) have run; no probe or rival has been trained, and every data contact before freeze is logged in §15 of the pre-registration.
 
-Feedback is welcome: please open an issue. The window opens when the design post goes up on LessWrong and closes seven days later; the dates will be recorded here and in the pre-registration at posting.
+Issues are open.
 
 ## Scope
 
 - One model: `deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B`, run locally on an Apple M4 Pro (MPS).
 - One dataset: GSM8K, with MATH500 as a pre-specified fallback.
-- Labels: the FrictionMap v1 marker lexicon (13 markers), ported verbatim from [frictionmap](https://github.com/alatruwe/frictionmap). On this model it is probably mostly "wait": [Zhu et al.](https://arxiv.org/abs/2506.12217) report "wait" as 97.2% of hits on their own 17-keyword list (DeepSeek-R1-Distill-Qwen-1.5B on MATH500, their Appendix B). That list shares only "wait" with the FrictionMap lexicon, so the share for these labels is measured in the pilot and reported.
+- Labels: the FrictionMap v1 marker lexicon (13 markers), ported verbatim from [frictionmap](https://github.com/alatruwe/frictionmap). On this model it is mostly "wait": 64.9% of pilot hits and 72% of onsets under the paragraph rule ([results/c1_summary.md](results/c1_summary.md)). For comparison, [Zhu et al.](https://arxiv.org/abs/2506.12217) report "wait" as 97.2% of hits on their own 17-keyword list, which shares only "wait" with this lexicon.
 - Claims are about this model only.
 
 ## Layout
@@ -65,5 +65,5 @@ On its first run, the smoke test downloads the pinned model revision (about 3.6 
 
 - **Origin:** this project grew out of [FrictionMap](https://github.com/alatruwe/frictionmap), a tool that maps where AI coding sessions hit friction, partly from re-evaluation markers in the model's thinking. Its marker lexicon motivated the question and supplies the labels here. FrictionMap's pre-registered judge study is written up in [Validating an LLM judge for reasoning traces](https://thecognitivestack.substack.com/p/validating-an-llm-judge-for-reasoning).
 - **Author:** Adeline Latruwe.
-- **AI disclosure:** Claude (Anthropic) was the planning partner, and Claude Code wrote the setup code and drafted this README. The research decisions are Adeline's.
+- **AI disclosure:** Claude (Anthropic) was the planning partner, and Claude Code wrote the setup, pilot and count code and drafted this README. The research decisions are Adeline's.
 - **License:** [MIT](LICENSE).
