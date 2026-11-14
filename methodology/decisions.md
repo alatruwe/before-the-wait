@@ -25,6 +25,7 @@ Each design decision, with its date and the reason behind it. The rules themselv
 | D15 | Post-freeze data contact is recorded at the top of `results/run_summary.md`, not in the pre-registration's §15. | 2026-11-13 | §15 covers contact before freeze and §16 is for deviations; generating per §4 is neither. The frozen file stays untouched. |
 | D16 | The post-generation flag is per band: projected test onsets = 0.35 × eligible onsets in the run, against m = 555. The two older thresholds (onsets per non-looped trace < 7.0; looping share > 25%) are reported as a secondary line. | 2026-11-13 | The older thresholds can stay silent while band 21–40 falls below m, and neither looks at e_b. The thresholds were never in the pre-registration. |
 | D17 | No top-up. If a band is short, N stays 320, the shortfall gets a §16 row, and §11's clause applies (that band can only be positive or inconclusive). | 2026-11-13 | §4 fixes N and §14 is silent on a top-up before any probe exists. Decided before the run's counts existed, so the choice can't follow the numbers. |
+| D18 | If a token kind's negatives run out in a split, the unmatched positives of that kind are dropped, and the count is reported per distance set and split. | 2026-11-14 | §6 is silent on exhaustion. Dropping keeps kind matching, the no-reuse rule and the 100-token quiet zone intact. Decided before any count from the example-building step existed. |
 
 ## Parked, with revival conditions
 

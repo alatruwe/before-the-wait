@@ -1,5 +1,7 @@
 .venv/
 activations/
+# Example set (well over 1 MB), rebuilt by scripts/build_examples.py
+examples/
 __pycache__/
 *.pt
 *.safetensors
