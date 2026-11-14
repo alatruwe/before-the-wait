@@ -1,0 +1,329 @@
+draw: 320 indices, first 5 [415, 681, 131, 945, 1037]
+loading deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B @ ad9f0ae0864d7fbcd1cd905e3c6c5b069cc8b562
+W1113 16:00:27.646000 39109 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  76%|███████▌  | 256/339 [00:00<00:00, 2520.01it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 2582.92it/s]
+dtype torch.float16, device mps:0
+Using the latest cached version of the dataset since openai/gsm8k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'main' at /Users/alatruwe/projects/before-the-wait/.hf_cache/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866 (last modified on Fri Oct 16 19:00:25 2026).
+[  1/320] gsm8k_0415.json  seed=20261016  1888 tok    29.8s   63.3 tok/s  eos     complete=True
+[  2/320] gsm8k_0681.json  seed=20261017  1367 tok    21.3s   64.1 tok/s  eos     complete=True
+[  3/320] gsm8k_0131.json  seed=20261018  1125 tok    17.4s   64.6 tok/s  eos     complete=True
+[  4/320] gsm8k_0945.json  seed=20261019  2972 tok    47.5s   62.5 tok/s  eos     complete=True
+[  5/320] gsm8k_1037.json  seed=20261020   864 tok    13.4s   64.4 tok/s  eos     complete=True
+[  6/320] gsm8k_1129.json  seed=20261021  1329 tok    20.8s   64.0 tok/s  eos     complete=True
+[  7/320] gsm8k_0238.json  seed=20261022   817 tok    12.6s   64.8 tok/s  eos     complete=True
+[  8/320] gsm8k_0456.json  seed=20261023  1707 tok    26.7s   64.0 tok/s  eos     complete=True
+[  9/320] gsm8k_0115.json  seed=20261024  1533 tok    24.0s   63.9 tok/s  eos     complete=True
+[ 10/320] gsm8k_1279.json  seed=20261025   937 tok    14.6s   64.3 tok/s  eos     complete=True
+[ 11/320] gsm8k_0564.json  seed=20261026  2425 tok    38.5s   63.0 tok/s  eos     complete=True
+[ 12/320] gsm8k_0529.json  seed=20261027  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 13/320] gsm8k_1193.json  seed=20261028  4096 tok    66.8s   61.3 tok/s  length  complete=False
+[ 14/320] gsm8k_0384.json  seed=20261029   735 tok    11.5s   64.0 tok/s  eos     complete=True
+[ 15/320] gsm8k_1117.json  seed=20261030  1881 tok    29.8s   63.1 tok/s  eos     complete=True
+[ 16/320] gsm8k_1049.json  seed=20261031  1538 tok    24.2s   63.5 tok/s  eos     complete=True
+[ 17/320] gsm8k_0100.json  seed=20261032  1347 tok    21.2s   63.5 tok/s  eos     complete=True
+[ 18/320] gsm8k_0495.json  seed=20261033   726 tok    11.3s   64.3 tok/s  eos     complete=True
+[ 19/320] gsm8k_0260.json  seed=20261034  1186 tok    18.5s   64.1 tok/s  eos     complete=True
+[ 20/320] gsm8k_0229.json  seed=20261035  1513 tok    23.7s   63.7 tok/s  eos     complete=True
+[ 21/320] gsm8k_0156.json  seed=20261036  1881 tok    29.7s   63.4 tok/s  eos     complete=True
+[ 22/320] gsm8k_1220.json  seed=20261037  1235 tok    19.3s   64.0 tok/s  eos     complete=True
+[ 23/320] gsm8k_0459.json  seed=20261038  3146 tok    50.7s   62.1 tok/s  eos     complete=True
+[ 24/320] gsm8k_1257.json  seed=20261039   569 tok     8.8s   64.3 tok/s  eos     complete=True
+[ 25/320] gsm8k_0438.json  seed=20261040   770 tok    12.0s   64.1 tok/s  eos     complete=True
+[ 26/320] gsm8k_1134.json  seed=20261041   989 tok    15.4s   64.1 tok/s  eos     complete=True
+[ 27/320] gsm8k_1035.json  seed=20261042  1994 tok    31.7s   62.9 tok/s  eos     complete=True
+[ 28/320] gsm8k_0129.json  seed=20261043  1092 tok    17.1s   63.8 tok/s  eos     complete=True
+[ 29/320] gsm8k_0198.json  seed=20261044  1421 tok    22.3s   63.6 tok/s  eos     complete=True
+[ 30/320] gsm8k_1002.json  seed=20261045  2311 tok    36.7s   63.0 tok/s  eos     complete=True
+[ 31/320] gsm8k_0000.json  seed=20261046   816 tok    12.7s   64.3 tok/s  eos     complete=True
+[ 32/320] gsm8k_0159.json  seed=20261047   790 tok    12.2s   64.6 tok/s  eos     complete=True
+[ 33/320] gsm8k_1153.json  seed=20261048   830 tok    12.9s   64.4 tok/s  eos     complete=True
+[ 34/320] gsm8k_0211.json  seed=20261049  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 35/320] gsm8k_0353.json  seed=20261050  3697 tok    59.9s   61.7 tok/s  eos     complete=True
+[ 36/320] gsm8k_0186.json  seed=20261051  4096 tok    66.8s   61.3 tok/s  length  complete=False
+[ 37/320] gsm8k_1296.json  seed=20261052   884 tok    13.8s   64.1 tok/s  eos     complete=True
+[ 38/320] gsm8k_1208.json  seed=20261053  1076 tok    16.7s   64.3 tok/s  eos     complete=True
+[ 39/320] gsm8k_0087.json  seed=20261054  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 40/320] gsm8k_1177.json  seed=20261055   840 tok    13.1s   64.4 tok/s  eos     complete=True
+[ 41/320] gsm8k_0065.json  seed=20261056  1378 tok    21.6s   63.9 tok/s  eos     complete=True
+[ 42/320] gsm8k_0697.json  seed=20261057  3169 tok    50.9s   62.2 tok/s  eos     complete=True
+[ 43/320] gsm8k_0237.json  seed=20261058   740 tok    11.5s   64.4 tok/s  eos     complete=True
+[ 44/320] gsm8k_0609.json  seed=20261059  1007 tok    15.7s   64.1 tok/s  eos     complete=True
+[ 45/320] gsm8k_0200.json  seed=20261060   981 tok    15.3s   64.3 tok/s  eos     complete=True
+[ 46/320] gsm8k_1170.json  seed=20261061   825 tok    12.8s   64.4 tok/s  eos     complete=True
+[ 47/320] gsm8k_0119.json  seed=20261062  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[ 48/320] gsm8k_0163.json  seed=20261063  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 49/320] gsm8k_0950.json  seed=20261064  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 50/320] gsm8k_1070.json  seed=20261065  3478 tok    55.9s   62.3 tok/s  eos     complete=True
+[ 51/320] gsm8k_0471.json  seed=20261066  2485 tok    39.6s   62.7 tok/s  eos     complete=True
+[ 52/320] gsm8k_0978.json  seed=20261067  1626 tok    25.5s   63.7 tok/s  eos     complete=True
+[ 53/320] gsm8k_1014.json  seed=20261068  1648 tok    26.0s   63.5 tok/s  eos     complete=True
+[ 54/320] gsm8k_1059.json  seed=20261069   826 tok    12.8s   64.5 tok/s  eos     complete=True
+[ 55/320] gsm8k_0890.json  seed=20261070  2604 tok    41.5s   62.8 tok/s  eos     complete=True
+[ 56/320] gsm8k_1073.json  seed=20261071  3884 tok    62.9s   61.8 tok/s  eos     complete=True
+[ 57/320] gsm8k_0408.json  seed=20261072  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[ 58/320] gsm8k_0061.json  seed=20261073   700 tok    10.9s   64.1 tok/s  eos     complete=True
+[ 59/320] gsm8k_1026.json  seed=20261074  2861 tok    45.8s   62.5 tok/s  eos     complete=True
+[ 60/320] gsm8k_1185.json  seed=20261075  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 61/320] gsm8k_0413.json  seed=20261076   902 tok    14.1s   64.2 tok/s  eos     complete=True
+[ 62/320] gsm8k_0044.json  seed=20261077  2228 tok    35.4s   63.0 tok/s  eos     complete=True
+[ 63/320] gsm8k_0276.json  seed=20261078  2797 tok    44.7s   62.6 tok/s  eos     complete=True
+[ 64/320] gsm8k_1083.json  seed=20261079  1659 tok    26.1s   63.6 tok/s  eos     complete=True
+[ 65/320] gsm8k_0243.json  seed=20261080  1155 tok    18.0s   64.0 tok/s  eos     complete=True
+[ 66/320] gsm8k_0633.json  seed=20261081  1015 tok    15.8s   64.4 tok/s  eos     complete=True
+[ 67/320] gsm8k_0835.json  seed=20261082  1696 tok    26.7s   63.6 tok/s  eos     complete=True
+[ 68/320] gsm8k_0077.json  seed=20261083   916 tok    14.3s   64.3 tok/s  eos     complete=True
+[ 69/320] gsm8k_0016.json  seed=20261084   766 tok    11.9s   64.5 tok/s  eos     complete=True
+[ 70/320] gsm8k_0773.json  seed=20261085  1030 tok    16.0s   64.3 tok/s  eos     complete=True
+[ 71/320] gsm8k_0772.json  seed=20261086   822 tok    12.8s   64.3 tok/s  eos     complete=True
+[ 72/320] gsm8k_0923.json  seed=20261087  1581 tok    24.8s   63.6 tok/s  eos     complete=True
+[ 73/320] gsm8k_0421.json  seed=20261088   939 tok    14.6s   64.3 tok/s  eos     complete=True
+[ 74/320] gsm8k_0239.json  seed=20261089  1963 tok    31.0s   63.2 tok/s  eos     complete=True
+[ 75/320] gsm8k_1221.json  seed=20261090  1656 tok    26.1s   63.5 tok/s  eos     complete=True
+[ 76/320] gsm8k_0157.json  seed=20261091  2547 tok    40.7s   62.6 tok/s  eos     complete=True
+[ 77/320] gsm8k_1288.json  seed=20261092  2057 tok    32.5s   63.2 tok/s  eos     complete=True
+[ 78/320] gsm8k_0479.json  seed=20261093  1966 tok    31.1s   63.3 tok/s  eos     complete=True
+[ 79/320] gsm8k_0311.json  seed=20261094  1734 tok    27.3s   63.5 tok/s  eos     complete=True
+[ 80/320] gsm8k_0390.json  seed=20261095  2305 tok    36.6s   62.9 tok/s  eos     complete=True
+[ 81/320] gsm8k_1045.json  seed=20261096  1485 tok    23.3s   63.8 tok/s  eos     complete=True
+[ 82/320] gsm8k_1267.json  seed=20261097  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 83/320] gsm8k_0164.json  seed=20261098  3238 tok    52.1s   62.2 tok/s  eos     complete=True
+[ 84/320] gsm8k_0742.json  seed=20261099  2168 tok    34.4s   63.1 tok/s  eos     complete=True
+[ 85/320] gsm8k_1179.json  seed=20261100  1361 tok    21.3s   64.0 tok/s  eos     complete=True
+[ 86/320] gsm8k_0449.json  seed=20261101  1656 tok    26.0s   63.6 tok/s  eos     complete=True
+[ 87/320] gsm8k_0847.json  seed=20261102  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 88/320] gsm8k_1052.json  seed=20261103  1218 tok    19.1s   63.8 tok/s  eos     complete=True
+[ 89/320] gsm8k_0825.json  seed=20261104  1149 tok    17.9s   64.0 tok/s  eos     complete=True
+[ 90/320] gsm8k_0364.json  seed=20261105  2843 tok    45.4s   62.6 tok/s  eos     complete=True
+[ 91/320] gsm8k_1237.json  seed=20261106  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[ 92/320] gsm8k_0941.json  seed=20261107  1322 tok    20.8s   63.7 tok/s  eos     complete=True
+[ 93/320] gsm8k_0921.json  seed=20261108  1081 tok    16.8s   64.2 tok/s  eos     complete=True
+[ 94/320] gsm8k_0388.json  seed=20261109  1019 tok    15.9s   64.3 tok/s  eos     complete=True
+[ 95/320] gsm8k_1142.json  seed=20261110   809 tok    12.6s   64.4 tok/s  eos     complete=True
+[ 96/320] gsm8k_0530.json  seed=20261111  2020 tok    31.9s   63.2 tok/s  eos     complete=True
+[ 97/320] gsm8k_0785.json  seed=20261112  2569 tok    40.9s   62.8 tok/s  eos     complete=True
+[ 98/320] gsm8k_0970.json  seed=20261113  2063 tok    32.6s   63.2 tok/s  eos     complete=True
+[ 99/320] gsm8k_0662.json  seed=20261114   984 tok    15.3s   64.1 tok/s  eos     complete=True
+[100/320] gsm8k_0160.json  seed=20261115  1426 tok    22.4s   63.8 tok/s  eos     complete=True
+[101/320] gsm8k_0477.json  seed=20261116  1274 tok    19.9s   63.9 tok/s  eos     complete=True
+[102/320] gsm8k_0489.json  seed=20261117   988 tok    15.4s   64.2 tok/s  eos     complete=True
+[103/320] gsm8k_0086.json  seed=20261118  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[104/320] gsm8k_1061.json  seed=20261119  1577 tok    24.8s   63.6 tok/s  eos     complete=True
+[105/320] gsm8k_1189.json  seed=20261120   623 tok     9.7s   64.5 tok/s  eos     complete=True
+[106/320] gsm8k_1147.json  seed=20261121  2602 tok    41.5s   62.7 tok/s  eos     complete=True
+[107/320] gsm8k_0663.json  seed=20261122  1819 tok    28.7s   63.4 tok/s  eos     complete=True
+[108/320] gsm8k_0277.json  seed=20261123  1628 tok    25.6s   63.6 tok/s  eos     complete=True
+[109/320] gsm8k_0559.json  seed=20261124  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[110/320] gsm8k_0791.json  seed=20261125   800 tok    12.5s   64.3 tok/s  eos     complete=True
+[111/320] gsm8k_0092.json  seed=20261126  1049 tok    16.3s   64.2 tok/s  eos     complete=True
+[112/320] gsm8k_1032.json  seed=20261127  3195 tok    51.3s   62.2 tok/s  eos     complete=True
+[113/320] gsm8k_1109.json  seed=20261128   980 tok    15.2s   64.3 tok/s  eos     complete=True
+[114/320] gsm8k_0818.json  seed=20261129  1678 tok    26.4s   63.6 tok/s  eos     complete=True
+[115/320] gsm8k_1105.json  seed=20261130  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[116/320] gsm8k_0842.json  seed=20261131   927 tok    14.4s   64.2 tok/s  eos     complete=True
+[117/320] gsm8k_0780.json  seed=20261132  1840 tok    29.1s   63.3 tok/s  eos     complete=True
+[118/320] gsm8k_1042.json  seed=20261133  1227 tok    19.2s   63.9 tok/s  eos     complete=True
+[119/320] gsm8k_0484.json  seed=20261134  1158 tok    18.1s   63.9 tok/s  eos     complete=True
+[120/320] gsm8k_0719.json  seed=20261135   612 tok     9.5s   64.6 tok/s  eos     complete=True
+[121/320] gsm8k_0220.json  seed=20261136  1218 tok    19.0s   64.0 tok/s  eos     complete=True
+[122/320] gsm8k_0462.json  seed=20261137   437 tok     6.8s   64.7 tok/s  eos     complete=True
+[123/320] gsm8k_0320.json  seed=20261138  1567 tok    24.6s   63.7 tok/s  eos     complete=True
+[124/320] gsm8k_0286.json  seed=20261139  1004 tok    15.6s   64.3 tok/s  eos     complete=True
+[125/320] gsm8k_0212.json  seed=20261140   843 tok    13.1s   64.4 tok/s  eos     complete=True
+[126/320] gsm8k_0881.json  seed=20261141  2504 tok    39.8s   62.9 tok/s  eos     complete=True
+[127/320] gsm8k_0418.json  seed=20261142  1371 tok    21.5s   63.9 tok/s  eos     complete=True
+[128/320] gsm8k_0299.json  seed=20261143  3706 tok    59.9s   61.9 tok/s  eos     complete=True
+[129/320] gsm8k_0346.json  seed=20261144   634 tok     9.9s   64.2 tok/s  eos     complete=True
+[130/320] gsm8k_1269.json  seed=20261145  1135 tok    17.7s   64.2 tok/s  eos     complete=True
+[131/320] gsm8k_0064.json  seed=20261146   745 tok    11.6s   64.3 tok/s  eos     complete=True
+[132/320] gsm8k_1230.json  seed=20261147  1381 tok    21.7s   63.7 tok/s  eos     complete=True
+[133/320] gsm8k_0099.json  seed=20261148  1809 tok    28.5s   63.4 tok/s  eos     complete=True
+[134/320] gsm8k_1247.json  seed=20261149  3993 tok    64.8s   61.6 tok/s  eos     complete=True
+[135/320] gsm8k_0819.json  seed=20261150  1165 tok    18.2s   63.9 tok/s  eos     complete=True
+[136/320] gsm8k_0341.json  seed=20261151  1846 tok    29.1s   63.4 tok/s  eos     complete=True
+[137/320] gsm8k_0572.json  seed=20261152  1836 tok    29.0s   63.4 tok/s  eos     complete=True
+[138/320] gsm8k_1277.json  seed=20261153   911 tok    14.2s   64.4 tok/s  eos     complete=True
+[139/320] gsm8k_1264.json  seed=20261154  4068 tok    66.2s   61.5 tok/s  eos     complete=True
+[140/320] gsm8k_0520.json  seed=20261155  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[141/320] gsm8k_1282.json  seed=20261156   806 tok    12.6s   64.2 tok/s  eos     complete=True
+[142/320] gsm8k_0789.json  seed=20261157  1869 tok    29.5s   63.3 tok/s  eos     complete=True
+[143/320] gsm8k_0578.json  seed=20261158  3331 tok    53.6s   62.2 tok/s  eos     complete=True
+[144/320] gsm8k_0790.json  seed=20261159  2701 tok    43.2s   62.6 tok/s  eos     complete=True
+[145/320] gsm8k_0706.json  seed=20261160  1177 tok    18.4s   64.0 tok/s  eos     complete=True
+[146/320] gsm8k_1196.json  seed=20261161  1279 tok    20.0s   64.1 tok/s  eos     complete=True
+[147/320] gsm8k_0416.json  seed=20261162  1898 tok    30.0s   63.4 tok/s  eos     complete=True
+[148/320] gsm8k_0116.json  seed=20261163  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[149/320] gsm8k_1192.json  seed=20261164  1446 tok    22.7s   63.6 tok/s  eos     complete=True
+[150/320] gsm8k_1169.json  seed=20261165   953 tok    14.8s   64.3 tok/s  eos     complete=True
+[151/320] gsm8k_1278.json  seed=20261166  1058 tok    16.5s   64.2 tok/s  eos     complete=True
+[152/320] gsm8k_0655.json  seed=20261167  1368 tok    21.4s   63.9 tok/s  eos     complete=True
+[153/320] gsm8k_1291.json  seed=20261168   505 tok     7.8s   64.5 tok/s  eos     complete=True
+[154/320] gsm8k_0606.json  seed=20261169  4096 tok    66.4s   61.6 tok/s  length  complete=False
+[155/320] gsm8k_0080.json  seed=20261170  1703 tok    26.8s   63.5 tok/s  eos     complete=True
+[156/320] gsm8k_1084.json  seed=20261171  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[157/320] gsm8k_0664.json  seed=20261172   952 tok    14.8s   64.1 tok/s  eos     complete=True
+[158/320] gsm8k_0105.json  seed=20261173   574 tok     8.9s   64.7 tok/s  eos     complete=True
+[159/320] gsm8k_0942.json  seed=20261174  1354 tok    21.2s   63.9 tok/s  eos     complete=True
+[160/320] gsm8k_0419.json  seed=20261175  2440 tok    38.9s   62.7 tok/s  eos     complete=True
+[161/320] gsm8k_0433.json  seed=20261176  1197 tok    18.7s   64.1 tok/s  eos     complete=True
+[162/320] gsm8k_0482.json  seed=20261177   733 tok    11.4s   64.5 tok/s  eos     complete=True
+[163/320] gsm8k_1218.json  seed=20261178  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[164/320] gsm8k_0737.json  seed=20261179  1880 tok    29.7s   63.2 tok/s  eos     complete=True
+[165/320] gsm8k_0816.json  seed=20261180  2352 tok    37.3s   63.0 tok/s  eos     complete=True
+[166/320] gsm8k_0111.json  seed=20261181  4096 tok    66.5s   61.6 tok/s  length  complete=True
+[167/320] gsm8k_0310.json  seed=20261182  1720 tok    27.2s   63.3 tok/s  eos     complete=True
+[168/320] gsm8k_0532.json  seed=20261183   749 tok    11.6s   64.5 tok/s  eos     complete=True
+[169/320] gsm8k_0561.json  seed=20261184  1083 tok    16.8s   64.3 tok/s  eos     complete=True
+[170/320] gsm8k_0650.json  seed=20261185  1114 tok    17.4s   64.0 tok/s  eos     complete=True
+[171/320] gsm8k_0631.json  seed=20261186   885 tok    13.7s   64.4 tok/s  eos     complete=True
+[172/320] gsm8k_0928.json  seed=20261187  1313 tok    20.6s   63.8 tok/s  eos     complete=True
+[173/320] gsm8k_0127.json  seed=20261188   792 tok    12.3s   64.5 tok/s  eos     complete=True
+[174/320] gsm8k_0531.json  seed=20261189  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[175/320] gsm8k_1122.json  seed=20261190  1210 tok    19.0s   63.7 tok/s  eos     complete=True
+[176/320] gsm8k_0059.json  seed=20261191  1612 tok    25.3s   63.7 tok/s  eos     complete=True
+[177/320] gsm8k_0302.json  seed=20261192   448 tok     6.9s   64.5 tok/s  eos     complete=True
+[178/320] gsm8k_0113.json  seed=20261193   877 tok    13.6s   64.5 tok/s  eos     complete=True
+[179/320] gsm8k_0069.json  seed=20261194  1411 tok    22.1s   63.8 tok/s  eos     complete=True
+[180/320] gsm8k_1188.json  seed=20261195  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[181/320] gsm8k_0179.json  seed=20261196   976 tok    15.2s   64.2 tok/s  eos     complete=True
+[182/320] gsm8k_0008.json  seed=20261197  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[183/320] gsm8k_1251.json  seed=20261198  2559 tok    40.8s   62.7 tok/s  eos     complete=True
+[184/320] gsm8k_1082.json  seed=20261199  3598 tok    58.0s   62.0 tok/s  eos     complete=True
+[185/320] gsm8k_0563.json  seed=20261200   712 tok    11.1s   64.1 tok/s  eos     complete=True
+[186/320] gsm8k_0528.json  seed=20261201  4096 tok    66.4s   61.6 tok/s  length  complete=False
+[187/320] gsm8k_0270.json  seed=20261202   913 tok    14.3s   64.0 tok/s  eos     complete=True
+[188/320] gsm8k_0784.json  seed=20261203   758 tok    11.8s   64.4 tok/s  eos     complete=True
+[189/320] gsm8k_1241.json  seed=20261204  1468 tok    23.0s   63.9 tok/s  eos     complete=True
+[190/320] gsm8k_0815.json  seed=20261205  1908 tok    30.2s   63.2 tok/s  eos     complete=True
+[191/320] gsm8k_0827.json  seed=20261206  1677 tok    26.4s   63.4 tok/s  eos     complete=True
+[192/320] gsm8k_0355.json  seed=20261207  2008 tok    31.8s   63.2 tok/s  eos     complete=True
+[193/320] gsm8k_0317.json  seed=20261208   879 tok    13.7s   64.4 tok/s  eos     complete=True
+[194/320] gsm8k_0444.json  seed=20261209  1922 tok    30.3s   63.4 tok/s  eos     complete=True
+[195/320] gsm8k_1101.json  seed=20261210   858 tok    13.3s   64.4 tok/s  eos     complete=True
+[196/320] gsm8k_0805.json  seed=20261211  1040 tok    16.2s   64.2 tok/s  eos     complete=True
+[197/320] gsm8k_0383.json  seed=20261212  1610 tok    25.3s   63.5 tok/s  eos     complete=True
+[198/320] gsm8k_1143.json  seed=20261213   839 tok    13.0s   64.5 tok/s  eos     complete=True
+[199/320] gsm8k_1297.json  seed=20261214  1155 tok    18.1s   63.9 tok/s  eos     complete=True
+[200/320] gsm8k_1260.json  seed=20261215  1655 tok    26.1s   63.5 tok/s  eos     complete=True
+[201/320] gsm8k_0278.json  seed=20261216   974 tok    15.2s   64.3 tok/s  eos     complete=True
+[202/320] gsm8k_1314.json  seed=20261217  1690 tok    26.6s   63.5 tok/s  eos     complete=True
+[203/320] gsm8k_0041.json  seed=20261218  4096 tok    66.7s   61.5 tok/s  length  complete=True
+[204/320] gsm8k_0216.json  seed=20261219  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[205/320] gsm8k_1301.json  seed=20261220  1237 tok    19.4s   63.8 tok/s  eos     complete=True
+[206/320] gsm8k_1008.json  seed=20261221  1223 tok    19.1s   64.1 tok/s  eos     complete=True
+[207/320] gsm8k_0083.json  seed=20261222   956 tok    14.8s   64.5 tok/s  eos     complete=True
+[208/320] gsm8k_0250.json  seed=20261223  1038 tok    16.2s   64.3 tok/s  eos     complete=True
+[209/320] gsm8k_0749.json  seed=20261224  2512 tok    39.9s   62.9 tok/s  eos     complete=True
+[210/320] gsm8k_0358.json  seed=20261225   756 tok    11.7s   64.4 tok/s  eos     complete=True
+[211/320] gsm8k_0227.json  seed=20261226  1510 tok    23.8s   63.5 tok/s  eos     complete=True
+[212/320] gsm8k_0739.json  seed=20261227  1017 tok    15.8s   64.2 tok/s  eos     complete=True
+[213/320] gsm8k_0640.json  seed=20261228  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[214/320] gsm8k_0764.json  seed=20261229   689 tok    10.8s   64.1 tok/s  eos     complete=True
+[215/320] gsm8k_0205.json  seed=20261230  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[216/320] gsm8k_0911.json  seed=20261231  1369 tok    21.5s   63.7 tok/s  eos     complete=True
+[217/320] gsm8k_0892.json  seed=20261232   800 tok    12.4s   64.4 tok/s  eos     complete=True
+[218/320] gsm8k_0032.json  seed=20261233  1528 tok    24.0s   63.8 tok/s  eos     complete=True
+[219/320] gsm8k_1007.json  seed=20261234  1159 tok    18.1s   64.0 tok/s  eos     complete=True
+[220/320] gsm8k_0400.json  seed=20261235   858 tok    13.3s   64.5 tok/s  eos     complete=True
+[221/320] gsm8k_0517.json  seed=20261236  1189 tok    18.6s   64.1 tok/s  eos     complete=True
+[222/320] gsm8k_1284.json  seed=20261237  2605 tok    41.6s   62.7 tok/s  eos     complete=True
+[223/320] gsm8k_0294.json  seed=20261238  1321 tok    20.7s   63.9 tok/s  eos     complete=True
+[224/320] gsm8k_0599.json  seed=20261239  1347 tok    21.1s   63.9 tok/s  eos     complete=True
+[225/320] gsm8k_0668.json  seed=20261240  1798 tok    28.3s   63.5 tok/s  eos     complete=True
+[226/320] gsm8k_1280.json  seed=20261241   742 tok    11.5s   64.4 tok/s  eos     complete=True
+[227/320] gsm8k_0332.json  seed=20261242  1327 tok    20.7s   64.0 tok/s  eos     complete=True
+[228/320] gsm8k_0382.json  seed=20261243  1518 tok    23.8s   63.7 tok/s  eos     complete=True
+[229/320] gsm8k_0011.json  seed=20261244  1192 tok    18.6s   64.0 tok/s  eos     complete=True
+[230/320] gsm8k_0197.json  seed=20261245  1086 tok    16.9s   64.2 tok/s  eos     complete=True
+[231/320] gsm8k_0797.json  seed=20261246  1043 tok    16.2s   64.2 tok/s  eos     complete=True
+[232/320] gsm8k_1276.json  seed=20261247  1072 tok    16.7s   64.2 tok/s  eos     complete=True
+[233/320] gsm8k_0082.json  seed=20261248  1127 tok    17.5s   64.2 tok/s  eos     complete=True
+[234/320] gsm8k_0338.json  seed=20261249   781 tok    12.1s   64.4 tok/s  eos     complete=True
+[235/320] gsm8k_0555.json  seed=20261250  1108 tok    17.3s   64.2 tok/s  eos     complete=True
+[236/320] gsm8k_0314.json  seed=20261251  1516 tok    23.8s   63.8 tok/s  eos     complete=True
+[237/320] gsm8k_0917.json  seed=20261252   672 tok    10.4s   64.6 tok/s  eos     complete=True
+[238/320] gsm8k_0194.json  seed=20261253  1233 tok    19.2s   64.1 tok/s  eos     complete=True
+[239/320] gsm8k_0225.json  seed=20261254  1139 tok    17.8s   64.1 tok/s  eos     complete=True
+[240/320] gsm8k_1078.json  seed=20261255  1720 tok    27.1s   63.4 tok/s  eos     complete=True
+[241/320] gsm8k_0760.json  seed=20261256  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[242/320] gsm8k_0443.json  seed=20261257  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[243/320] gsm8k_0025.json  seed=20261258  1044 tok    16.3s   64.0 tok/s  eos     complete=True
+[244/320] gsm8k_0616.json  seed=20261259  3585 tok    57.8s   62.0 tok/s  eos     complete=True
+[245/320] gsm8k_0905.json  seed=20261260  1379 tok    21.6s   63.8 tok/s  eos     complete=True
+[246/320] gsm8k_0057.json  seed=20261261  1309 tok    20.5s   63.8 tok/s  eos     complete=True
+[247/320] gsm8k_1202.json  seed=20261262   737 tok    11.4s   64.4 tok/s  eos     complete=True
+[248/320] gsm8k_0912.json  seed=20261263  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[249/320] gsm8k_0022.json  seed=20261264  1319 tok    20.7s   63.8 tok/s  eos     complete=True
+[250/320] gsm8k_0297.json  seed=20261265  3376 tok    54.4s   62.1 tok/s  eos     complete=True
+[251/320] gsm8k_1114.json  seed=20261266  1480 tok    23.2s   63.8 tok/s  eos     complete=True
+[252/320] gsm8k_0714.json  seed=20261267  1018 tok    15.8s   64.2 tok/s  eos     complete=True
+[253/320] gsm8k_0328.json  seed=20261268  1770 tok    27.8s   63.6 tok/s  eos     complete=True
+[254/320] gsm8k_0836.json  seed=20261269   719 tok    11.2s   64.3 tok/s  eos     complete=True
+[255/320] gsm8k_0329.json  seed=20261270  1236 tok    19.3s   64.1 tok/s  eos     complete=True
+[256/320] gsm8k_0594.json  seed=20261271   996 tok    15.5s   64.2 tok/s  eos     complete=True
+[257/320] gsm8k_0933.json  seed=20261272  1707 tok    26.9s   63.5 tok/s  eos     complete=True
+[258/320] gsm8k_0792.json  seed=20261273  1138 tok    17.8s   64.0 tok/s  eos     complete=True
+[259/320] gsm8k_0126.json  seed=20261274   736 tok    11.4s   64.5 tok/s  eos     complete=True
+[260/320] gsm8k_0788.json  seed=20261275  1602 tok    25.2s   63.6 tok/s  eos     complete=True
+[261/320] gsm8k_0632.json  seed=20261276   830 tok    12.9s   64.2 tok/s  eos     complete=True
+[262/320] gsm8k_0192.json  seed=20261277  1485 tok    23.3s   63.7 tok/s  eos     complete=True
+[263/320] gsm8k_0638.json  seed=20261278  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[264/320] gsm8k_0556.json  seed=20261279  1159 tok    18.1s   64.0 tok/s  eos     complete=True
+[265/320] gsm8k_0972.json  seed=20261280   886 tok    13.8s   64.4 tok/s  eos     complete=True
+[266/320] gsm8k_0005.json  seed=20261281  3016 tok    48.3s   62.4 tok/s  eos     complete=True
+[267/320] gsm8k_0612.json  seed=20261282  1037 tok    16.2s   64.1 tok/s  eos     complete=True
+[268/320] gsm8k_0312.json  seed=20261283  1623 tok    25.5s   63.7 tok/s  eos     complete=True
+[269/320] gsm8k_1128.json  seed=20261284  1446 tok    22.7s   63.8 tok/s  eos     complete=True
+[270/320] gsm8k_0544.json  seed=20261285  1260 tok    19.7s   64.0 tok/s  eos     complete=True
+[271/320] gsm8k_0700.json  seed=20261286  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[272/320] gsm8k_0420.json  seed=20261287  1052 tok    16.4s   64.0 tok/s  eos     complete=True
+[273/320] gsm8k_0845.json  seed=20261288  4096 tok    66.4s   61.7 tok/s  length  complete=False
+[274/320] gsm8k_1295.json  seed=20261289  1291 tok    20.2s   63.8 tok/s  eos     complete=True
+[275/320] gsm8k_1102.json  seed=20261290  1507 tok    23.7s   63.6 tok/s  eos     complete=True
+[276/320] gsm8k_0460.json  seed=20261291   895 tok    13.9s   64.4 tok/s  eos     complete=True
+[277/320] gsm8k_1183.json  seed=20261292  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[278/320] gsm8k_1256.json  seed=20261293  1006 tok    15.7s   63.9 tok/s  eos     complete=True
+[279/320] gsm8k_0904.json  seed=20261294  1241 tok    19.4s   64.1 tok/s  eos     complete=True
+[280/320] gsm8k_0432.json  seed=20261295   851 tok    13.3s   64.2 tok/s  eos     complete=True
+[281/320] gsm8k_0147.json  seed=20261296  2903 tok    46.5s   62.4 tok/s  eos     complete=True
+[282/320] gsm8k_1029.json  seed=20261297  1543 tok    24.3s   63.4 tok/s  eos     complete=True
+[283/320] gsm8k_1162.json  seed=20261298   761 tok    11.9s   64.2 tok/s  eos     complete=True
+[284/320] gsm8k_0786.json  seed=20261299   962 tok    15.0s   64.3 tok/s  eos     complete=True
+[285/320] gsm8k_1265.json  seed=20261300  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[286/320] gsm8k_0465.json  seed=20261301  1022 tok    16.0s   64.0 tok/s  eos     complete=True
+[287/320] gsm8k_0979.json  seed=20261302  2537 tok    40.4s   62.8 tok/s  eos     complete=True
+[288/320] gsm8k_0868.json  seed=20261303  1113 tok    17.4s   64.0 tok/s  eos     complete=True
+[289/320] gsm8k_0590.json  seed=20261304  3786 tok    61.3s   61.8 tok/s  eos     complete=True
+[290/320] gsm8k_0903.json  seed=20261305   929 tok    14.5s   64.2 tok/s  eos     complete=True
+[291/320] gsm8k_0386.json  seed=20261306  1698 tok    26.7s   63.5 tok/s  eos     complete=True
+[292/320] gsm8k_0676.json  seed=20261307   970 tok    15.1s   64.2 tok/s  eos     complete=True
+[293/320] gsm8k_0753.json  seed=20261308   701 tok    10.9s   64.5 tok/s  eos     complete=True
+[294/320] gsm8k_0615.json  seed=20261309  1225 tok    19.2s   63.9 tok/s  eos     complete=True
+[295/320] gsm8k_0488.json  seed=20261310  1726 tok    27.1s   63.6 tok/s  eos     complete=True
+[296/320] gsm8k_0036.json  seed=20261311  1632 tok    25.6s   63.6 tok/s  eos     complete=True
+[297/320] gsm8k_0853.json  seed=20261312  1820 tok    28.7s   63.5 tok/s  eos     complete=True
+[298/320] gsm8k_0794.json  seed=20261313   941 tok    14.6s   64.3 tok/s  eos     complete=True
+[299/320] gsm8k_0266.json  seed=20261314  3786 tok    61.3s   61.8 tok/s  eos     complete=True
+[300/320] gsm8k_0814.json  seed=20261315  4096 tok    66.5s   61.6 tok/s  length  complete=False
+[301/320] gsm8k_0966.json  seed=20261316  1745 tok    27.6s   63.2 tok/s  eos     complete=True
+[302/320] gsm8k_0557.json  seed=20261317   891 tok    13.8s   64.5 tok/s  eos     complete=True
+[303/320] gsm8k_0741.json  seed=20261318   704 tok    10.9s   64.5 tok/s  eos     complete=True
+[304/320] gsm8k_1093.json  seed=20261319  1489 tok    23.4s   63.7 tok/s  eos     complete=True
+[305/320] gsm8k_0004.json  seed=20261320  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[306/320] gsm8k_1030.json  seed=20261321  4096 tok    66.6s   61.5 tok/s  length  complete=False
+[307/320] gsm8k_0430.json  seed=20261322  1126 tok    17.6s   63.9 tok/s  eos     complete=True
+[308/320] gsm8k_0300.json  seed=20261323   645 tok    10.0s   64.6 tok/s  eos     complete=True
+[309/320] gsm8k_0506.json  seed=20261324   776 tok    12.0s   64.5 tok/s  eos     complete=True
+[310/320] gsm8k_0525.json  seed=20261325   976 tok    15.2s   64.2 tok/s  eos     complete=True
+[311/320] gsm8k_0024.json  seed=20261326  1056 tok    16.4s   64.3 tok/s  eos     complete=True
+[312/320] gsm8k_0140.json  seed=20261327  1077 tok    16.8s   64.3 tok/s  eos     complete=True
+[313/320] gsm8k_1046.json  seed=20261328  1899 tok    29.9s   63.4 tok/s  eos     complete=True
+[314/320] gsm8k_0051.json  seed=20261329   722 tok    11.2s   64.4 tok/s  eos     complete=True
+[315/320] gsm8k_0653.json  seed=20261330  1204 tok    18.8s   64.0 tok/s  eos     complete=True
+[316/320] gsm8k_0682.json  seed=20261331  1362 tok    21.3s   63.9 tok/s  eos     complete=True
+[317/320] gsm8k_1107.json  seed=20261332   942 tok    14.6s   64.4 tok/s  eos     complete=True
+[318/320] gsm8k_0665.json  seed=20261333   703 tok    10.9s   64.5 tok/s  eos     complete=True
+[319/320] gsm8k_0455.json  seed=20261334  1066 tok    16.6s   64.2 tok/s  eos     complete=True
+[320/320] gsm8k_0810.json  seed=20261335  2753 tok    44.0s   62.6 tok/s  eos     complete=True
+
+done; total 9319s
