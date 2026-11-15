@@ -2,6 +2,8 @@
 activations/
 # Example set (well over 1 MB), rebuilt by scripts/build_examples.py
 examples/
+# Frozen rivals (each over 1 MB), rebuilt by scripts/run_rival.py; sha256 in results/rival.md
+rival/
 __pycache__/
 *.pt
 *.safetensors
