@@ -1,0 +1,511 @@
+{
+ "seed": 20261020,
+ "population_rule": "rows of results/run_onsets_paragraph.csv with empty merged_into whose index is in the chosen split of results/split.json, sorted ascending by (int(index), int(token_index)); split = test",
+ "sample_call": "random.Random(20261020).sample(population, 100)",
+ "python_version": "3.14.6",
+ "population_count": 806,
+ "sha256_run_onsets_paragraph_csv": "306950e2cff4413052b747efa26b8bb8fc325cbc6c004e78c7f82d2ed9af7df7",
+ "sha256_split_json": "dc9192df4b16f86055d4ecf8eade38c951e289c536cccc8a7e959456f6a4dea9",
+ "items": [
+  {
+   "item": "001",
+   "index": 1276,
+   "token_index": 613
+  },
+  {
+   "item": "002",
+   "index": 773,
+   "token_index": 748
+  },
+  {
+   "item": "003",
+   "index": 1265,
+   "token_index": 342
+  },
+  {
+   "item": "004",
+   "index": 1192,
+   "token_index": 581
+  },
+  {
+   "item": "005",
+   "index": 578,
+   "token_index": 601
+  },
+  {
+   "item": "006",
+   "index": 328,
+   "token_index": 1344
+  },
+  {
+   "item": "007",
+   "index": 810,
+   "token_index": 104
+  },
+  {
+   "item": "008",
+   "index": 51,
+   "token_index": 184
+  },
+  {
+   "item": "009",
+   "index": 1192,
+   "token_index": 490
+  },
+  {
+   "item": "010",
+   "index": 818,
+   "token_index": 597
+  },
+  {
+   "item": "011",
+   "index": 65,
+   "token_index": 933
+  },
+  {
+   "item": "012",
+   "index": 179,
+   "token_index": 592
+  },
+  {
+   "item": "013",
+   "index": 41,
+   "token_index": 1425
+  },
+  {
+   "item": "014",
+   "index": 578,
+   "token_index": 2141
+  },
+  {
+   "item": "015",
+   "index": 835,
+   "token_index": 1161
+  },
+  {
+   "item": "016",
+   "index": 310,
+   "token_index": 1191
+  },
+  {
+   "item": "017",
+   "index": 59,
+   "token_index": 444
+  },
+  {
+   "item": "018",
+   "index": 386,
+   "token_index": 614
+  },
+  {
+   "item": "019",
+   "index": 662,
+   "token_index": 675
+  },
+  {
+   "item": "020",
+   "index": 99,
+   "token_index": 369
+  },
+  {
+   "item": "021",
+   "index": 1002,
+   "token_index": 1774
+  },
+  {
+   "item": "022",
+   "index": 346,
+   "token_index": 333
+  },
+  {
+   "item": "023",
+   "index": 1105,
+   "token_index": 3432
+  },
+  {
+   "item": "024",
+   "index": 1218,
+   "token_index": 1601
+  },
+  {
+   "item": "025",
+   "index": 890,
+   "token_index": 1565
+  },
+  {
+   "item": "026",
+   "index": 329,
+   "token_index": 314
+  },
+  {
+   "item": "027",
+   "index": 220,
+   "token_index": 925
+  },
+  {
+   "item": "028",
+   "index": 41,
+   "token_index": 3162
+  },
+  {
+   "item": "029",
+   "index": 41,
+   "token_index": 2256
+  },
+  {
+   "item": "030",
+   "index": 270,
+   "token_index": 25
+  },
+  {
+   "item": "031",
+   "index": 160,
+   "token_index": 830
+  },
+  {
+   "item": "032",
+   "index": 1265,
+   "token_index": 112
+  },
+  {
+   "item": "033",
+   "index": 1265,
+   "token_index": 923
+  },
+  {
+   "item": "034",
+   "index": 418,
+   "token_index": 811
+  },
+  {
+   "item": "035",
+   "index": 786,
+   "token_index": 361
+  },
+  {
+   "item": "036",
+   "index": 612,
+   "token_index": 605
+  },
+  {
+   "item": "037",
+   "index": 444,
+   "token_index": 488
+  },
+  {
+   "item": "038",
+   "index": 328,
+   "token_index": 455
+  },
+  {
+   "item": "039",
+   "index": 1218,
+   "token_index": 2943
+  },
+  {
+   "item": "040",
+   "index": 739,
+   "token_index": 381
+  },
+  {
+   "item": "041",
+   "index": 1237,
+   "token_index": 117
+  },
+  {
+   "item": "042",
+   "index": 1237,
+   "token_index": 2065
+  },
+  {
+   "item": "043",
+   "index": 1276,
+   "token_index": 51
+  },
+  {
+   "item": "044",
+   "index": 578,
+   "token_index": 1400
+  },
+  {
+   "item": "045",
+   "index": 328,
+   "token_index": 71
+  },
+  {
+   "item": "046",
+   "index": 99,
+   "token_index": 621
+  },
+  {
+   "item": "047",
+   "index": 1265,
+   "token_index": 561
+  },
+  {
+   "item": "048",
+   "index": 1046,
+   "token_index": 391
+  },
+  {
+   "item": "049",
+   "index": 1046,
+   "token_index": 576
+  },
+  {
+   "item": "050",
+   "index": 41,
+   "token_index": 3072
+  },
+  {
+   "item": "051",
+   "index": 835,
+   "token_index": 811
+  },
+  {
+   "item": "052",
+   "index": 1265,
+   "token_index": 1010
+  },
+  {
+   "item": "053",
+   "index": 773,
+   "token_index": 468
+  },
+  {
+   "item": "054",
+   "index": 329,
+   "token_index": 563
+  },
+  {
+   "item": "055",
+   "index": 1265,
+   "token_index": 1429
+  },
+  {
+   "item": "056",
+   "index": 578,
+   "token_index": 1776
+  },
+  {
+   "item": "057",
+   "index": 276,
+   "token_index": 1923
+  },
+  {
+   "item": "058",
+   "index": 578,
+   "token_index": 402
+  },
+  {
+   "item": "059",
+   "index": 1029,
+   "token_index": 973
+  },
+  {
+   "item": "060",
+   "index": 1105,
+   "token_index": 221
+  },
+  {
+   "item": "061",
+   "index": 163,
+   "token_index": 3700
+  },
+  {
+   "item": "062",
+   "index": 1265,
+   "token_index": 1908
+  },
+  {
+   "item": "063",
+   "index": 41,
+   "token_index": 2961
+  },
+  {
+   "item": "064",
+   "index": 606,
+   "token_index": 2352
+  },
+  {
+   "item": "065",
+   "index": 99,
+   "token_index": 895
+  },
+  {
+   "item": "066",
+   "index": 294,
+   "token_index": 624
+  },
+  {
+   "item": "067",
+   "index": 1218,
+   "token_index": 2166
+  },
+  {
+   "item": "068",
+   "index": 99,
+   "token_index": 604
+  },
+  {
+   "item": "069",
+   "index": 609,
+   "token_index": 187
+  },
+  {
+   "item": "070",
+   "index": 1218,
+   "token_index": 3495
+  },
+  {
+   "item": "071",
+   "index": 294,
+   "token_index": 500
+  },
+  {
+   "item": "072",
+   "index": 5,
+   "token_index": 584
+  },
+  {
+   "item": "073",
+   "index": 1002,
+   "token_index": 787
+  },
+  {
+   "item": "074",
+   "index": 612,
+   "token_index": 89
+  },
+  {
+   "item": "075",
+   "index": 928,
+   "token_index": 620
+  },
+  {
+   "item": "076",
+   "index": 1142,
+   "token_index": 63
+  },
+  {
+   "item": "077",
+   "index": 835,
+   "token_index": 587
+  },
+  {
+   "item": "078",
+   "index": 1237,
+   "token_index": 230
+  },
+  {
+   "item": "079",
+   "index": 1105,
+   "token_index": 1529
+  },
+  {
+   "item": "080",
+   "index": 163,
+   "token_index": 1872
+  },
+  {
+   "item": "081",
+   "index": 1218,
+   "token_index": 1714
+  },
+  {
+   "item": "082",
+   "index": 237,
+   "token_index": 187
+  },
+  {
+   "item": "083",
+   "index": 609,
+   "token_index": 529
+  },
+  {
+   "item": "084",
+   "index": 606,
+   "token_index": 3971
+  },
+  {
+   "item": "085",
+   "index": 328,
+   "token_index": 854
+  },
+  {
+   "item": "086",
+   "index": 1295,
+   "token_index": 538
+  },
+  {
+   "item": "087",
+   "index": 277,
+   "token_index": 1021
+  },
+  {
+   "item": "088",
+   "index": 489,
+   "token_index": 280
+  },
+  {
+   "item": "089",
+   "index": 805,
+   "token_index": 376
+  },
+  {
+   "item": "090",
+   "index": 599,
+   "token_index": 722
+  },
+  {
+   "item": "091",
+   "index": 773,
+   "token_index": 21
+  },
+  {
+   "item": "092",
+   "index": 655,
+   "token_index": 591
+  },
+  {
+   "item": "093",
+   "index": 1301,
+   "token_index": 16
+  },
+  {
+   "item": "094",
+   "index": 1265,
+   "token_index": 646
+  },
+  {
+   "item": "095",
+   "index": 382,
+   "token_index": 552
+  },
+  {
+   "item": "096",
+   "index": 329,
+   "token_index": 624
+  },
+  {
+   "item": "097",
+   "index": 5,
+   "token_index": 2238
+  },
+  {
+   "item": "098",
+   "index": 5,
+   "token_index": 2318
+  },
+  {
+   "item": "099",
+   "index": 890,
+   "token_index": 533
+  },
+  {
+   "item": "100",
+   "index": 302,
+   "token_index": 14
+  }
+ ]
+}
