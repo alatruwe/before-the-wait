@@ -1,0 +1,2 @@
+band,n_problems,onsets,positives,negatives,probe_auroc,reader_auroc,lift,interval_low,interval_high,verdict_0.05,verdict_0.03,verdict_0.08,claim_level_2,dropped_resamples
+6-10,102,762,3861,7722,0.8683752768186852,0.8706123991024277,-0.0022371222837425098,-0.010017304180754596,0.006206386144384495,null,null,null,False,0
