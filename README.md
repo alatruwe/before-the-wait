@@ -14,9 +14,9 @@ The test compares linear probes on the residual stream (simple classifiers readi
 
 ## Status
 
-**Pre-registration frozen at tag `prereg-freeze` (2026-10-24). Confirmatory run complete: the test split was scored once, on 2026-11-15.**
+**Pre-registration frozen at tag `prereg-freeze` (2026-10-24). Every registered step has run: the confirmatory verdicts (2026-11-15), the hand audit and the stronger reader (2026-11-21), and the exploratory analyses (2026-11-21). The write-up is in progress.**
 
-At 6–10 tokens before a "wait", the probe forecast it better than the outside reader, by +0.045 AUROC against a pre-registered bar of 0.05: a positive verdict, with the estimate just under the bar. At 2–5 tokens the probe also leads, by too little to count. At 11–20 and 21–40 tokens the result is inconclusive.
+**Against the outside reader.** At 6–10 tokens before a "wait", the probe forecast it better than the outside reader, by +0.045 AUROC against a pre-registered bar of 0.05: a positive verdict, with the estimate just under the bar. At 2–5 tokens the probe also leads, by too little to count. At 11–20 and 21–40 tokens the result is inconclusive.
 
 | Band (tokens before the "wait") | Probe AUROC | Rival AUROC | Lift | 98.75% interval | Verdict at δ = 0.05 |
 |---|---|---|---|---|---|
@@ -27,18 +27,23 @@ At 6–10 tokens before a "wait", the probe forecast it better than the outside 
 
 Full table, counts, controls and secondary verdicts: [`results/verdicts.md`](results/verdicts.md).
 
-No deviation is logged in §16. Procedural choices made after the freeze are in [`methodology/decisions.md`](methodology/decisions.md) (D15–D22), each dated before the data it concerns.
+**Against a stronger reader.** The positive band triggered a second, registered test (§8): the same kind of probe on a larger sibling model, DeepSeek-R1-Distill-Qwen-7B, reading the same tokens. At 6–10 tokens the two are level: lift −0.002, 98.75% interval −0.010 to +0.006, a null. The probe beats the hand-built outside reader and does not beat this one. Details: [`results/stronger_rival.md`](results/stronger_rival.md).
+
+**What the label is.** A hand audit of 100 test onsets (§12) asked whether the trace changes what it held just before the marker. In 13 it did: precision 0.13, 95% interval 0.05 to 0.22. The probe forecasts the marker, and the marker is rarely an overturn. The registered follow-up comparing real and false markers needed 20 real ones and was not run. Details: [`results/audit.md`](results/audit.md).
+
+**Exploratory analyses** (§13, no verdicts): [`results/exploratory/summary.md`](results/exploratory/summary.md).
+
+No deviation is logged in §16. Procedural choices made after the freeze are in [`methodology/decisions.md`](methodology/decisions.md) (D15–D25), each dated before the data it concerns. The test split was scored once for the verdicts, once more for band 6–10 in the stronger-reader test, and read again for the exploratory analyses; nothing was chosen or tuned on it.
 
 **Still to come**
-- The hand audit and its add-on (§12) and the stronger rival for band 6–10 (§8). Both were conditional on a positive band.
-- The exploratory analyses (§13).
 - The write-up.
 
 **Documents**
 - [`methodology/pre-registration.md`](methodology/pre-registration.md): the full design, frozen.
 - [`methodology/decisions.md`](methodology/decisions.md): each decision, with its date and reason.
 - [`results/count_calculations.md`](results/count_calculations.md): the pilot-derived numbers, N = 320 traces and m = 555 onsets per band.
-- Results, in the order they were produced: [`run_summary.md`](results/run_summary.md), [`examples_summary.md`](results/examples_summary.md), [`extraction_summary.md`](results/extraction_summary.md), [`gate.md`](results/gate.md), [`probes.md`](results/probes.md), [`rival.md`](results/rival.md), [`verdicts.md`](results/verdicts.md).
+- Results, in the order they were produced: [`run_summary.md`](results/run_summary.md), [`examples_summary.md`](results/examples_summary.md), [`extraction_summary.md`](results/extraction_summary.md), [`gate.md`](results/gate.md), [`probes.md`](results/probes.md), [`rival.md`](results/rival.md), [`verdicts.md`](results/verdicts.md), [`audit.md`](results/audit.md), [`stronger_rival.md`](results/stronger_rival.md), [`exploratory/summary.md`](results/exploratory/summary.md).
+- [`audit/`](audit/): the draw, the sheet the labeler read, and the labels.
 
 Issues are open.
 
@@ -55,15 +60,17 @@ Issues are open.
 |---|---|
 | `methodology/` | Pre-registration (frozen) and design decisions |
 | `src/before_the_wait/` | Package code. `lexicon.py` is the marker lexicon, copied verbatim from frictionmap at a pinned commit |
-| `scripts/` | One script per step: generation, counts, example building, extraction, gate, probes, rival, verdicts. `smoke_test.py` checks the environment |
+| `scripts/` | One script per step: generation, counts, example building, extraction, gate, probes, rival, verdicts, audit, stronger reader, exploratory analyses. `smoke_test.py` checks the environment |
 | `tests/` | `pytest` tests |
 | `notes/` | Working notes. `environment.md` records the machine, package versions and pinned hashes |
 | `notebooks/` | Analysis notebooks |
-| `results/` | Pilot results (`c1_*`, `c3_*`, `count_calculations.md`) and the run's results: one summary per step, with the CSVs behind them |
+| `results/` | Pilot results (`c1_*`, `c3_*`, `count_calculations.md`) and the run's results: one summary per step, with the CSVs behind them. `results/exploratory/` holds the exploratory analyses |
+| `audit/` | The hand audit: the seeded draw, the sheet and the labels |
 | `probes/` | The four frozen probes, one per band |
+| `rival_7b/` | The frozen 7B reader for band 6–10 |
 | `traces/` | Generated reasoning traces: `traces/pilot/` holds the 30 pilot traces, `traces/run/` the 320 traces of the run |
 
-Model weights, the Hugging Face cache and the activations (about 18 GB) are never committed. The example set and the four frozen rivals are not committed either: the scripts rebuild them, and their sha256 hashes are in `results/examples_summary.md` and `results/rival.md`.
+Model weights, the Hugging Face cache and the activations (about 24 GB) are never committed. The example set and the four frozen rivals are not committed either: the scripts rebuild them, and their sha256 hashes are in `results/examples_summary.md` and `results/rival.md`.
 
 ## Setup
 
@@ -84,5 +91,5 @@ On its first run, the smoke test downloads the pinned model revision (about 3.6 
 
 - **Origin:** this project grew out of [FrictionMap](https://github.com/alatruwe/frictionmap), a tool that maps where AI coding sessions hit friction, partly from re-evaluation markers in the model's thinking. Its marker lexicon motivated the question and supplies the labels here. FrictionMap's pre-registered judge study is written up in [Validating an LLM judge for reasoning traces](https://thecognitivestack.substack.com/p/validating-an-llm-judge-for-reasoning).
 - **Author:** Adeline Latruwe.
-- **AI disclosure:** Claude (Anthropic) was the planning partner. It wrote the task specification for each step and proposed the procedural details the pre-registration left open; Adeline reviewed and approved each one before the data it concerns (D15–D22). Claude Code wrote the code for every step. This README was drafted by Claude and edited by Adeline. The research question, the design decisions and the reading of the results are Adeline's.
+- **AI disclosure:** Claude (Anthropic) was the planning partner. It wrote the task specification for each step and proposed the procedural details the pre-registration left open; Adeline reviewed and approved each one before the data it concerns (D15–D25). Claude Code wrote the code for every step. This README was drafted by Claude and edited by Adeline. The research question, the design decisions and the reading of the results are Adeline's.
 - **License:** [MIT](LICENSE).
