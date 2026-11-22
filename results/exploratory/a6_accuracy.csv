@@ -1,0 +1,5 @@
+split,kept_traces,correct,accuracy,at_length_cap
+all,292,241,0.8253,20
+train,146,121,0.8288,11
+validation,44,37,0.8409,2
+test,102,83,0.8137,7
