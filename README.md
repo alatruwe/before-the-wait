@@ -12,7 +12,7 @@ The test compares linear probes on the residual stream (simple classifiers readi
 
 ## Status
 
-Every registered step has run. The write-up is in progress. Issues are open.
+Every registered step has run. The write-up is in progress: a draft of the report is at [`report/before-the-wait.md`](report/before-the-wait.md). Issues are open.
 
 ## Results
 
@@ -67,6 +67,7 @@ Full table, counts, controls and secondary verdicts: [`results/verdicts.md`](res
 | `audit/` | The hand audit: the seeded draw, the sheet the labeler read, and the labels |
 | `probes/` | The four frozen probes, one per band |
 | `rival_7b/` | The frozen 7B reader for band 6–10 |
+| `report/` | The report (draft in progress) and its figures; `scripts/make_report_figures.py` redraws them |
 | `viz/` | Data for an illustration, from exploratory analysis 1: per-event test scores (a gzipped sample of 200 events) and their means. Not a result |
 | `traces/` | Generated reasoning traces: `traces/pilot/` holds the 30 pilot traces, `traces/run/` the 320 traces of the run |
 
